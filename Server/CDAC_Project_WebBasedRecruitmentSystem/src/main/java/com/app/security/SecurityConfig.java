@@ -39,7 +39,7 @@ public class SecurityConfig {
 		http.cors()
 		.and().
 		//disable CSRF token generation n verification
-		csrf()	.disable()
+		csrf().disable()
 		.exceptionHandling().authenticationEntryPoint(authEntry).
 		and().
 		authorizeRequests()
@@ -47,15 +47,15 @@ public class SecurityConfig {
 				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
-		.antMatchers("/users/test").hasRole("APPLICANT")
-		.antMatchers("/users/test").hasRole("ADMIN")
+//		.antMatchers("/users/test").hasRole("APPLICANT")
+//		.antMatchers("/users/test").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
-		//to tell spring sec : not to use HttpSession to store user's auth details
+		//to tell spring security : not to use HttpSession to store user's auth details
 		.sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).
 		and()
-		//inserting jwt filter before sec filter
+		//inserting jwt filter before security filter
 		.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 	
 		return http.build();
