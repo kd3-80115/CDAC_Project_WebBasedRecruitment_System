@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -27,7 +29,12 @@ public class ExamEntity extends BaseEntity{
 	private LocalDate createdDate;
 	private int duration;
 	
-	@ManyToMany(mappedBy = "exam")
+	 // Many-to-Many Relationship with QuestionEntity
+	@ManyToMany
+	@JoinTable(
+	  name = "exam_question", 
+	  joinColumns = @JoinColumn(name="exam_id"), 
+	  inverseJoinColumns = @JoinColumn(name="question_id"))
 	Set<QuestionEntity> question=new HashSet<QuestionEntity>();
 
 	

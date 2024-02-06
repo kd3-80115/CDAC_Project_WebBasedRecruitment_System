@@ -50,11 +50,7 @@ public class QuestionEntity extends BaseEntity{
 	}
 	
 	
-	@ManyToMany
-	@JoinTable(
-	  name = "exam_question", 
-	  joinColumns = @JoinColumn(name="quetion_id"), 
-	  inverseJoinColumns = @JoinColumn(name="exam_id"))
+	@ManyToMany(mappedBy = "question")
 	Set<ExamEntity> exam=new HashSet<ExamEntity>();
 
 	@Override
