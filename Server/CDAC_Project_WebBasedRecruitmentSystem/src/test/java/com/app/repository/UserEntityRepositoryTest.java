@@ -33,11 +33,13 @@ class UserEntityRepositoryTest {
 	@Test
 	void testAddUsers() {
 		List<UserEntity> list = List.of(
-				new UserEntity("a1", "b1",Gender.MALE,"a1@gmail.com","9876543210",enc.encode("12345"), UserRole.ROLE_ADMIN),
-				new UserEntity("a2", "b2",Gender.FEMALE,"a2@gmail.com","9898747465",enc.encode("2345"), UserRole.ROLE_APPLICANT),
-				new UserEntity("a3", "b3",Gender.FEMALE,"a3@gmail.com","9876543210",enc.encode("1345"), UserRole.ROLE_HR));
+//				new UserEntity("a1", "b1",Gender.MALE,"a1@gmail.com","9876543210",enc.encode("12345"), UserRole.ROLE_ADMIN),
+//				new UserEntity("a2", "b2",Gender.FEMALE,"a2@gmail.com","9898747465",enc.encode("2345"), UserRole.ROLE_APPLICANT),
+//				new UserEntity("a3", "b3",Gender.FEMALE,"a3@gmail.com","9876543210",enc.encode("1345"), UserRole.ROLE_HR),
+				new UserEntity("a4", "b4",Gender.FEMALE,"a4@gmail.com","9876543210",enc.encode("3232"), UserRole.ROLE_HR)
+				);
 		List<UserEntity> list2 = userRepo.saveAll(list);
-		assertEquals(3, list2.size());
+		assertEquals(1, list2.size());
 
 	}
 

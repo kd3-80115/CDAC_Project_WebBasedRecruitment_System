@@ -25,7 +25,7 @@ public class HREntity extends BaseEntity{
 	@Column(length = 60,nullable = false)
 	private String officeLocation;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,columnDefinition = "boolean")
 	private boolean activeStatus;
 	
 	@Column(length = 60,nullable = false)
