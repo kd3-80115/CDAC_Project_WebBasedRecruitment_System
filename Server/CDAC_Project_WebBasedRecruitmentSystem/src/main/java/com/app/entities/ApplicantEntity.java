@@ -1,7 +1,9 @@
 package com.app.entities;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -113,9 +116,14 @@ public class ApplicantEntity {
 	// one applicant can have multiple jobs saved as well as applied
 	@ManyToMany(mappedBy = "applicant")
 	private Set<JobInfoEntity> job=new HashSet<JobInfoEntity>();
-	
-	
-	
-	
-	
+		
+	// Mapping a many to many relation between applicant and jobs using third
+	// table applied job
+    @OneToMany(
+        mappedBy = "applicant",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private Set<AppliedJob> appliedJobs = new HashSet<>();
+
 }

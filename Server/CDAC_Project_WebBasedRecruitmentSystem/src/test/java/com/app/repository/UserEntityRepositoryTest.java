@@ -58,5 +58,5 @@ class UserEntityRepositoryTest {
 		assertEquals(4, list2.size());
 
 	}
-
+	
 }
