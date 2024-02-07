@@ -27,7 +27,7 @@ public class HRRepositoryTest {
 	@Test
 	void addHrTest()
 	{
-		UserEntity user=userRepo.findById(6L).orElseThrow(
+		UserEntity user=userRepo.findById(3L).orElseThrow(
 				()->new ResourceNotFoundException("User", "id", 6L));
 		HREntity hr=new HREntity("BBA","Bengaluru",false,"Finance",null,user);
 		

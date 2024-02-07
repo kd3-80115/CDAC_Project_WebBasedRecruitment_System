@@ -33,9 +33,9 @@ public class ScheduledExamRepositoryTest {
 	@Test
 	void scheduledTest()
 	{
-		ApplicantEntity applicant1=applicantRepo.findById(1L).orElseThrow();
-		ApplicantEntity applicant2=applicantRepo.findById(2L).orElseThrow();
-		ApplicantEntity applicant3=applicantRepo.findById(3L).orElseThrow();
+		ApplicantEntity applicant1=applicantRepo.findById(4L).orElseThrow();
+		ApplicantEntity applicant2=applicantRepo.findById(5L).orElseThrow();
+		ApplicantEntity applicant3=applicantRepo.findById(6L).orElseThrow();
 		ExamEntity exam=examRepo.findById(1L).orElseThrow();
 		
 		List<ScheduledExamEntity> schList=List.of(
