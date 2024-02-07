@@ -29,7 +29,7 @@ public class EducationEntityRepositoryTest {
 	private EducationEntityRepository educationRepo;
 	
 	@Test
-	void testAddApplicants() {
+	void testAddEducation() {
 		
 		ApplicantEntity applicant1= applicantRepo.findById(1l).orElseThrow();
 		ApplicantEntity applicant2= applicantRepo.findById(2l).orElseThrow();

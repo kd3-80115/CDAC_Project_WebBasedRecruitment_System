@@ -1,10 +1,19 @@
 package com.app.entities;
 
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,7 +29,11 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class ApplicantEntity extends BaseEntity {
+public class ApplicantEntity {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long applicantId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	
@@ -47,12 +60,18 @@ public class ApplicantEntity extends BaseEntity {
 	@Column(length = 10)
 	private String maritalStatus;
 	
-//	@OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-//	private List<EducationEntity> education=new ArrayList<EducationEntity>();
+	@ManyToMany
+    @JoinTable(name = "applicant_skill",
+               joinColumns = @JoinColumn(name = "applicant_id"),
+               inverseJoinColumns = @JoinColumn(name = "skill_id"))
+    private Set<SkillEntity> skills = new HashSet<>();
+
+	
+
 
 	public ApplicantEntity(UserEntity user, boolean emailIdVerifyStatus, boolean mobileNumVerifyStatus,
 			String resumeHeadLine, String profileSummary, String maritalStatus) {
-		super();
+		
 		this.user = user;
 		this.emailIdVerifyStatus = emailIdVerifyStatus;
 		this.mobileNumVerifyStatus = mobileNumVerifyStatus;
@@ -60,6 +79,37 @@ public class ApplicantEntity extends BaseEntity {
 		this.profileSummary = profileSummary;
 		this.maritalStatus = maritalStatus;
 	}
+	
+	public void addSkill(SkillEntity skill) {
+		
+		skills.add(skill);
+		skill.getApplicants().add(this);
+	}
+	
+	public void removeSkill(SkillEntity skill) {
+		
+		skills.remove(skill);
+		skill.getApplicants().remove(this);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(applicantId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ApplicantEntity other = (ApplicantEntity) obj;
+		return Objects.equals(applicantId, other.applicantId);
+	}
+	
+	
 	
 	
 	

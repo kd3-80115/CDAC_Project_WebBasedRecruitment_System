@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 
 import com.app.entities.ApplicantEntity;
 import com.app.entities.Gender;
+import com.app.entities.SkillEntity;
 import com.app.entities.UserEntity;
 import com.app.entities.UserRole;
 
@@ -27,6 +28,9 @@ public class ApplicantEntityRepositoryTest {
 	
 	@Autowired
 	private ApplicantRepository applicantRepo;
+	
+	@Autowired
+	private SkillEntityRepository skillRepo;
 	
 	@Test
 	void testAddApplicants() {
@@ -46,4 +50,27 @@ public class ApplicantEntityRepositoryTest {
 		assertEquals(4, list2.size());
 
 	}
+	
+	@Test
+	void testAddApplicantSkill() {
+		
+		SkillEntity skill1= skillRepo.findById(1l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		SkillEntity skill2= skillRepo.findById(2l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		SkillEntity skill3= skillRepo.findById(3l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		SkillEntity skill4= skillRepo.findById(4l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		
+
+		ApplicantEntity applicant1= applicantRepo.findById(1l).orElseThrow();
+		ApplicantEntity applicant2= applicantRepo.findById(2l).orElseThrow();
+		ApplicantEntity applicant3= applicantRepo.findById(3l).orElseThrow();
+		ApplicantEntity applicant4= applicantRepo.findById(4l).orElseThrow();
+		
+		applicant1.addSkill(skill1);
+		applicant2.addSkill(skill2);
+		applicant3.addSkill(skill3);
+		applicant4.addSkill(skill4);
+		
+
+	}
 }
+

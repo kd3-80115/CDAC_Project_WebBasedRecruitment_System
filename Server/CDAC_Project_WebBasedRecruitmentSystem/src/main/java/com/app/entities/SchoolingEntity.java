@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 public class SchoolingEntity extends BaseEntity {
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL,orphanRemoval =true)
 	private ApplicantEntity applicant;
 	
 	@Column(name = "class_10_board", length = 100)
