@@ -1,6 +1,9 @@
 package com.app.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,17 +13,26 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name="job_info")
+@Setter @Getter @NoArgsConstructor 
 public class JobInfoEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name="job_id")
+	private Long jobId;
 	
 	@Column(name="job_title",length=30)
 	private String jobTitle;
@@ -46,10 +58,67 @@ public class JobInfoEntity {
 	
 	private String qualification;
 	
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	private HREntity hr;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL,optional = false)
 	private DepartmentEntity department;
+
 	
+	@ManyToMany
+	@JoinTable(
+	  name = "saved_job", 
+	  joinColumns = @JoinColumn(name="job_id"), 
+	  inverseJoinColumns = @JoinColumn(name="applicant_id"))
+	private Set<ApplicantEntity> applicant=new HashSet<ApplicantEntity>();
+	
+	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(jobId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JobInfoEntity other = (JobInfoEntity) obj;
+		return Objects.equals(jobId, other.jobId);
+	}
+	
+	
+	public void addApplicant(ApplicantEntity applicant)
+	{
+		this.applicant.add(applicant);
+		applicant.getJob().add(this);
+	}
+
+	public void removeApplicant(ApplicantEntity applicant)
+	{
+		this.applicant.remove(applicant);
+		applicant.getJob().remove(this);
+	}
+
+	public JobInfoEntity(String jobTitle, int experienceRequired, WorkSchedule workSchedule, int salary,
+			LocalDate applicationDeadline, String location, LocalDate jobCreatedDate, String qualification, HREntity hr,
+			DepartmentEntity department) {
+		super();
+		this.jobTitle = jobTitle;
+		this.experienceRequired = experienceRequired;
+		this.workSchedule = workSchedule;
+		this.salary = salary;
+		this.applicationDeadline = applicationDeadline;
+		this.location = location;
+		this.jobCreatedDate = jobCreatedDate;
+		this.qualification = qualification;
+		this.hr = hr;
+		this.department = department;
+	}
+
+
 }
