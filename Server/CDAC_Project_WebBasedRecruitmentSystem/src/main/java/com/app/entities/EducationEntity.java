@@ -30,7 +30,7 @@ public class EducationEntity extends BaseEntity{
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
 	private ApplicantEntity applicant;
-	
+
 	@Column(name = "education_type", length = 30)
 	private String educationType;
 	
