@@ -109,8 +109,10 @@ public class ApplicantEntity {
 		return Objects.equals(applicantId, other.applicantId);
 	}
 	
-	
-	
+	// Many to many relation with job
+	// one applicant can have multiple jobs saved as well as applied
+	@ManyToMany(mappedBy = "applicant")
+	private Set<JobInfoEntity> job=new HashSet<JobInfoEntity>();
 	
 	
 	
