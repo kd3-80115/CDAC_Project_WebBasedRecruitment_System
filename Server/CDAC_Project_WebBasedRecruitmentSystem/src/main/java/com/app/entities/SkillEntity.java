@@ -33,6 +33,10 @@ public class SkillEntity{
 	@ManyToMany(mappedBy = "skills")
     private Set<ApplicantEntity> applicants = new HashSet<>();
 
+	@ManyToMany(mappedBy = "JobSkills")
+    private Set<JobInfoEntity> jobInfo = new HashSet<>();
+
+	
 	public SkillEntity(String name) {
 		
 		this.name = name;

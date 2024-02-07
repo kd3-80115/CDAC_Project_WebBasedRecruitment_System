@@ -133,4 +133,21 @@ public class JobInfoEntity {
 	    )
 	    private Set<AppliedJob> appliedJobs = new HashSet<>();
 
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "job_skill",
+               joinColumns = @JoinColumn(name = "job_id"),
+               inverseJoinColumns = @JoinColumn(name = "skill_id"))
+    private Set<SkillEntity> JobSkills = new HashSet<>();
+	
+	public void addSkill(SkillEntity jobSkill)
+	{
+		this.JobSkills.add(jobSkill);
+		jobSkill.getJobInfo().add(this);
+	}
+	
+	public void removeSkill(SkillEntity jobSkill)
+	{
+		this.JobSkills.remove(jobSkill);
+		jobSkill.getJobInfo().remove(this);
+	}
 }
