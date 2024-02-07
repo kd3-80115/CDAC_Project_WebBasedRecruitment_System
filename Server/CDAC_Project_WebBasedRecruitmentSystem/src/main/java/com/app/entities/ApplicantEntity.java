@@ -63,7 +63,12 @@ public class ApplicantEntity extends BaseEntity{
                inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private Set<SkillEntity> skills = new HashSet<>();
 
-	
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "applicant_language",
+               joinColumns = @JoinColumn(name = "applicant_id"),
+               inverseJoinColumns = @JoinColumn(name = "language_id"))
+    private Set<LanguageEntity> languages = new HashSet<>();
+
 	
 	
 	public ApplicantEntity(UserEntity user, boolean emailIdVerifyStatus, boolean mobileNumVerifyStatus,
@@ -119,5 +124,18 @@ public class ApplicantEntity extends BaseEntity{
         orphanRemoval = true
     )
     private Set<AppliedJob> appliedJobs = new HashSet<>();
+    
+    
+    public void addLanguage(LanguageEntity language) {
+		
+		languages.add(language);
+		language.getApplicants().add(this);
+	}
+	
+    public void removeLanguage(LanguageEntity language) {
+		
+		languages.remove(language);
+		language.getApplicants().remove(this);
+	}
 
 }

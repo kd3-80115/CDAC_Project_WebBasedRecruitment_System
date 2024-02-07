@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 
 import com.app.entities.ApplicantEntity;
 import com.app.entities.Gender;
+import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
 import com.app.entities.UserEntity;
 import com.app.entities.UserRole;
@@ -31,6 +32,9 @@ public class ApplicantEntityRepositoryTest {
 	
 	@Autowired
 	private SkillEntityRepository skillRepo;
+	
+	@Autowired
+	private LanguageEntityRepository languageRepo;
 	
 	@Test
 	void testAddApplicants() {
@@ -72,5 +76,30 @@ public class ApplicantEntityRepositoryTest {
 		
 
 	}
+	
+	@Test
+	void testAddApplicantLanguage() {
+		
+		LanguageEntity lang1= languageRepo.findById(1l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		LanguageEntity lang2= languageRepo.findById(4l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		LanguageEntity lang3= languageRepo.findById(7l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		LanguageEntity lang4= languageRepo.findById(10l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		
+
+		ApplicantEntity applicant1= applicantRepo.findById(4l).orElseThrow();
+		ApplicantEntity applicant2= applicantRepo.findById(5l).orElseThrow();
+		ApplicantEntity applicant3= applicantRepo.findById(6l).orElseThrow();
+		ApplicantEntity applicant4= applicantRepo.findById(7l).orElseThrow();
+		
+		applicant1.addLanguage(lang1);
+		applicant2.addLanguage(lang2);
+		applicant3.addLanguage(lang3);
+		applicant4.addLanguage(lang4);
+		
+		
+
+	}
+	
+	
 }
 
