@@ -1,7 +1,9 @@
 package com.app.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -61,7 +64,7 @@ public class JobInfoEntity {
 	@ManyToOne(optional = false)
 	private HREntity hr;
 	
-	@OneToOne(cascade = CascadeType.ALL,optional = false)
+	@OneToOne(cascade = CascadeType.ALL)
 	private DepartmentEntity department;
 
 	
@@ -120,5 +123,14 @@ public class JobInfoEntity {
 		this.department = department;
 	}
 
+
+	// mapping a many to many relation between applicant and jobs using third
+	// table applied job
+	@OneToMany(
+	        mappedBy = "job",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true
+	    )
+	    private Set<AppliedJob> appliedJobs = new HashSet<>();
 
 }
