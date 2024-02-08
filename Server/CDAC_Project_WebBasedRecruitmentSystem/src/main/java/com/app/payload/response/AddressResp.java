@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class GetAddressResp {
+public class AddressResp {
 	
 	private String permanentAddress;
 	private String pincode;

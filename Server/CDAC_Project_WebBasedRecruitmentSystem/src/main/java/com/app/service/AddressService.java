@@ -1,9 +1,9 @@
 package com.app.service;
 
-import com.app.payload.response.GetAddressResp;
+import com.app.payload.response.AddressResp;
 
 public interface AddressService {
 
-	GetAddressResp getAddress(Long applicantId);
+	AddressResp getAddress(Long applicantId);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.entities.UserEntity;
 import com.app.payload.request.Signup;
+import com.app.payload.response.UserDetailsResp;
 import com.app.repository.UserEntityRepository;
 
 @Service
@@ -31,4 +32,11 @@ public class UserServiceImpl implements UserService {
 		return mapper.map(userDao.save(user), Signup.class);
 	}
 
+	@Override
+	public UserDetailsResp getBasicDetail(Long applicantId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }

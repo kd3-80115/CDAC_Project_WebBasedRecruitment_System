@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.entities.AddressEntity;
 import com.app.exception.ResourceNotFoundException;
-import com.app.payload.response.GetAddressResp;
+import com.app.payload.response.AddressResp;
 import com.app.repository.AddressRepository;
 
 @Service
@@ -21,7 +21,7 @@ public class AddressServiceImpl implements AddressService {
 	private ModelMapper mapper;
 	
 	@Override 
-	public GetAddressResp getAddress(Long applicantId) {
+	public AddressResp getAddress(Long applicantId) {
 		
 		AddressEntity address= addressRepo.findById(applicantId)
 				// Returns the value in case of non empty Optional
@@ -29,7 +29,7 @@ public class AddressServiceImpl implements AddressService {
 				.orElseThrow(()-> new ResourceNotFoundException
 						("Address", "Applicant ID", applicantId));
 		
-		return mapper.map(address, GetAddressResp.class);
+		return mapper.map(address, AddressResp.class);
 	}
 
 }

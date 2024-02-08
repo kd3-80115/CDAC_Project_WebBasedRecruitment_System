@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.entities.AddressEntity;
 import com.app.entities.ApplicantEntity;
-import com.app.payload.response.GetAddressResp;
+import com.app.entities.UserEntity;
+import com.app.payload.response.AddressResp;
+import com.app.payload.response.UserDetailsResp;
 import com.app.repository.AddressRepository;
 import com.app.service.AddressService;
+import com.app.service.ApplicantService;
+import com.app.service.UserService;
 
 @RestController
 @RequestMapping("/applicant")
@@ -21,8 +25,11 @@ public class ApplicantController {
 	@Autowired
 	private AddressService addressService;
 
-//	@Autowired
-//	private ApplicantService applicantService;
+	@Autowired
+	private ApplicantService applicantService;
+	
+	@Autowired
+	private UserService userService;
 	
 	public ApplicantController() {
 		
@@ -37,26 +44,26 @@ public class ApplicantController {
 		
 		System.out.println("Inside applicant address endpoint with applicant ID : "+applicantId);
 		
-		GetAddressResp addressDTO = addressService.getAddress(applicantId);
+		AddressResp addressDTO = addressService.getAddress(applicantId);
 		
 		return new ResponseEntity<>(addressDTO,HttpStatus.OK);
 		
 	}
 	
-	//Rest API end point
-		//URL : http://localhost:7878/applicant/basicDetail
+		//Rest API end point
+		//URL : http://localhost:7878/applicant/userDetail
 		//Method : GET
-		//Res : GetAddressResp
-//		@GetMapping("/basicDetail/{applicantId}")
-//		public ResponseEntity<?> getApplicantBasicDetails(@PathVariable Long applicantId){
-//			
-//			System.out.println("Inside applicant BasicDeatil endpoint with applicant ID : "+applicantId);
-//			
-//			GetAddressResp addressDTO = addressService.getBasicDetail(applicantId);
-//			
-//			return new ResponseEntity<>(addressDTO,HttpStatus.OK);
-//			
-//		}
+		//Res : BasicDetailResp
+		@GetMapping("/userDetail/{applicantId}")
+		public ResponseEntity<?> getBasicDetail(@PathVariable Long applicantId){
+			
+			System.out.println("Inside applicant userDetail endpoint with applicant ID : "+applicantId);
+			
+			UserDetailsResp userDetailsResp = userService.getBasicDetail(applicantId);
+			
+			return new ResponseEntity<>(userDetailsResp,HttpStatus.OK);
+			
+		}
 	
 	
 	
