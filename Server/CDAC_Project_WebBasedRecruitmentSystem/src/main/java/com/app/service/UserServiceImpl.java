@@ -6,9 +6,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.entities.AddressEntity;
+import com.app.entities.ApplicantEntity;
 import com.app.entities.UserEntity;
+import com.app.exception.ResourceNotFoundException;
 import com.app.payload.request.Signup;
+import com.app.payload.response.AddressResp;
 import com.app.payload.response.UserDetailsResp;
+import com.app.repository.ApplicantRepository;
 import com.app.repository.UserEntityRepository;
 
 @Service
@@ -34,9 +39,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetailsResp getBasicDetail(Long applicantId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		ApplicantEntity applicant=applicantRepo.findById(applicantId).
+				orElseThrow(()-> new ResourceNotFoundException
+						("Applicant", "Applicant ID", applicantId));
+		
+		
+		
+		UserEntity user = applicant.getUser();
+		//dto <-- entity
+		return mapper.map(user, UserDetailsResp.class);
 	}
+	@Autowired
+	private ApplicantRepository applicantRepo;
 	
 	
 }
