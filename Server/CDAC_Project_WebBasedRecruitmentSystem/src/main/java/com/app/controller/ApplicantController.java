@@ -25,8 +25,8 @@ public class ApplicantController {
 	@Autowired
 	private AddressService addressService;
 
-	@Autowired
-	private ApplicantService applicantService;
+//	@Autowired
+//	private ApplicantService applicantService;
 	
 	@Autowired
 	private UserService userService;
