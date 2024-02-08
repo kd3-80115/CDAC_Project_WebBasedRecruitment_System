@@ -1,4 +1,4 @@
-package com.app.dto;
+package com.app.payload.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -6,8 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.app.dto.Signup;
 import com.app.entities.UserEntity;
+import com.app.payload.request.Signup;
 import com.app.repository.UserEntityRepository;
 
 @Service

@@ -1,4 +1,4 @@
-package com.app.dto;
+package com.app.payload.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

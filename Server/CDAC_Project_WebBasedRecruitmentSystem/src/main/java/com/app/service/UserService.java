@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.dto.Signup;
+import com.app.payload.request.Signup;
 
 public interface UserService {
 //sign up

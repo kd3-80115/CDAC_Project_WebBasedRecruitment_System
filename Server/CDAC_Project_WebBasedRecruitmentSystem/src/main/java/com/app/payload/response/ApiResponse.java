@@ -1,4 +1,4 @@
-package com.app.dto;
+package com.app.payload.response;
 
 import java.time.LocalDateTime;
 
