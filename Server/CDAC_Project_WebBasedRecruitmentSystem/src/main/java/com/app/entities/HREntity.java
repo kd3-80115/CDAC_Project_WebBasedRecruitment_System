@@ -1,8 +1,11 @@
 package com.app.entities;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,7 +35,8 @@ public class HREntity extends BaseEntity{
 	private String department;
 	
 	private String imageURL;
-	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="hr_id",nullable = false)
+	@MapsId	
 	private UserEntity user;
 }

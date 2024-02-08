@@ -32,6 +32,6 @@ public class HRRepositoryTest {
 		HREntity hr=new HREntity("BBA","Bengaluru",false,"Finance",null,user);
 		
 		HREntity getHr=hrRepo.save(hr);
-		assertEquals(7, getHr.getId());
+		assertEquals(3, getHr.getId());
 	}
 }

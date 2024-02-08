@@ -40,14 +40,14 @@ public class JobInfoRepositoryTest {
 	{
 		DepartmentEntity depart1= depRepo.findById(1l).orElseThrow();
 		DepartmentEntity depart2= depRepo.findById(2l).orElseThrow();
-		HREntity hr=hrRepo.findById(1L).orElseThrow();
+		HREntity hr=hrRepo.findById(3L).orElseThrow();
 		
 		List<JobInfoEntity> jobList = List.of(
 			    new JobInfoEntity("Software Engineer", 2, WorkSchedule.FULL_TIME, 80000, LocalDate.now().plusMonths(1), "Remote", LocalDate.now(), "Bachelor's in Computer Science",hr,depart1),
 			    new JobInfoEntity("Data Scientist", 3, WorkSchedule.FULL_TIME, 85000, LocalDate.now().plusMonths(1), "Office", LocalDate.now(), "Master's in Data Science",hr,depart2)
 			);
 		List<JobInfoEntity> jobListTest=jobRepo.saveAll(jobList);
-		assertEquals(4,jobListTest.size());
+		assertEquals(2,jobListTest.size());
 	}
 	
 	@Test
