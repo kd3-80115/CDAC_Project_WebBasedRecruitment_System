@@ -59,4 +59,9 @@ public class JobInfoRepositoryTest {
 		
 	}
 	
+	@Test
+	public void totalJobsAndActiveJob()
+	{
+		System.out.println(jobRepo.count()+"::"+jobRepo.countActiveJobs());
+	}
 }

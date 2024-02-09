@@ -22,5 +22,5 @@ public class UserDetailsResp {
 	private Gender gender;
 	private String email;
 	private String phoneNumber;
-	private LocalDate dateOfBirth; 
+	private LocalDate dob; 
 }
