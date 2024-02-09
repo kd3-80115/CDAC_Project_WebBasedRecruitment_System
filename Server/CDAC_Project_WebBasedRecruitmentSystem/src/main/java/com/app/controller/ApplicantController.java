@@ -13,10 +13,12 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.UserEntity;
 import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApplicantResponse;
+import com.app.payload.response.EdcuationResponse;
 import com.app.payload.response.UserDetailsResp;
 import com.app.repository.AddressRepository;
 import com.app.service.AddressService;
 import com.app.service.ApplicantService;
+import com.app.service.EducationService;
 import com.app.service.UserService;
 
 @RestController
@@ -34,6 +36,10 @@ public class ApplicantController {
 	
 	@Autowired
 	private ApplicantService applicantService;
+	
+
+	@Autowired
+	private EducationService educationService;
 	
 	public ApplicantController() {
 		
@@ -80,10 +86,26 @@ public class ApplicantController {
 		System.out.println("Inside applicant getPRofileInfo endpoint with applicant ID : "+applicantId);
 		
 		ApplicantResponse applicantResponse = applicantService.getProfileInfo(applicantId);
-			System.out.println("Applican response : "+ applicantResponse);
+	
 		return new ResponseEntity<>(applicantResponse,HttpStatus.OK);
 		//send response as applicant details to be displayed on profile section of applicant
-	}	
+	}
+	
+	
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/educationDetails
+	//Method : GET
+	//Res : EdcuationResponse
+	@GetMapping("/educationDetails/{applicantId}")
+	public ResponseEntity<?> getEducationDetails(@PathVariable Long applicantId){
+			
+		System.out.println("Inside applicant getEducationDetails endpoint with applicant ID : "+applicantId);
+		
+		EdcuationResponse educationResponse = educationService.getEducationDetail(applicantId);
+		
+		return new ResponseEntity<>(educationResponse,HttpStatus.OK);
+		//send response as applicant details to be displayed on profile section of applicant
+	}
 		
 	
 	
