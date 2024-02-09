@@ -40,4 +40,6 @@ public class HREntity extends BaseEntity{
 	@JoinColumn(name="hr_id",nullable = false)
 	@MapsId	
 	private UserEntity user;
+	
+	
 }

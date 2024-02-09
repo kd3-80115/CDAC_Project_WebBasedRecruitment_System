@@ -2,11 +2,13 @@ package com.app.payload.response;
 
 import com.app.entities.Gender;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class HrDetailsResponse {
 
 	public Long id;

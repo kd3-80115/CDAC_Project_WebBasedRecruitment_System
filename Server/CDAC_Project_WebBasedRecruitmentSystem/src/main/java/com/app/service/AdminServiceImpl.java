@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.app.entities.HREntity;
 import com.app.entities.UserEntity;
+import com.app.exception.ResourceNotFoundException;
 import com.app.payload.request.HrRegistrationDetailsRequest;
 import com.app.payload.response.AnalysisResponseAdmin;
+import com.app.payload.response.ApiResponse;
 import com.app.payload.response.HrDetailsResponse;
 import com.app.payload.response.JobDetailsResponse;
 import com.app.repository.HREntityRepository;
+import com.app.repository.JobInfoRepository;
 import com.app.repository.UserEntityRepository;
 
 @Service
@@ -34,9 +37,12 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private HREntityRepository hrRepo;
 	
+	@Autowired
+	private JobInfoRepository jobRepo;
+	
 	@Override
 	@Transactional
-	public String registerHr(HrRegistrationDetailsRequest hr) {
+	public ApiResponse registerHr(HrRegistrationDetailsRequest hr) {
 		String message = "something bad happened";
 		
 		// Create and save the user entity
@@ -55,37 +61,41 @@ public class AdminServiceImpl implements AdminService {
 	    if (savedHr.getUser().getId() > 0) {
 	        message = "HR registered successfully";
 	    }
-	    return message;
+	    ApiResponse res=new ApiResponse(message);
+	    return res;
 	}
+
 
 	@Override
 	public List<HrDetailsResponse> getAllHr() {
-		// TODO Auto-generated method stub
-		return null;
+		List<HrDetailsResponse> list=userDao.findUserAndHrInfo();
+		return list;
 	}
 
 	@Override
 	public List<JobDetailsResponse> getAllJobs() {
-		// TODO Auto-generated method stub
-		return null;
+		List<JobDetailsResponse> jobList=jobRepo.findAllJobs();
+		return jobList;
+	}
+
+	
+	@Override
+	public ApiResponse deactivateHrById(Long hrId) {
+		HREntity hr=hrRepo.findById(hrId).orElseThrow(()->
+				new ResourceNotFoundException("HR", "id", hrId));
+		hr.setActiveStatus(false);
+		hrRepo.save(hr);
+		return new ApiResponse("HR with id "+hrId+" deactivated");
 	}
 
 	@Override
-	public String deleteHrById(Long hrId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deactivateHrById(Long hrId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<AnalysisResponseAdmin> getReport() {
-		// TODO Auto-generated method stub
-		return null;
+	public AnalysisResponseAdmin getReport() {
+		Long activeHr=hrRepo.countActiveUser();
+		Long totalHr=hrRepo.count();
+		Long totalJobs=jobRepo.count();
+		Long activeJobs=jobRepo.countActiveJobs();
+		AnalysisResponseAdmin response=new AnalysisResponseAdmin(totalHr,activeHr,totalJobs,activeJobs);
+		return response;
 	}
 
 }
