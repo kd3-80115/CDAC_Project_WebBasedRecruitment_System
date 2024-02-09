@@ -16,14 +16,20 @@ import com.app.entities.UserEntity;
 import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.EducationResponse;
+import com.app.payload.response.EmploymentResponse;
+import com.app.payload.response.LanguageResponse;
 import com.app.payload.response.ProjectResponse;
+import com.app.payload.response.SchoolingResponse;
 import com.app.payload.response.SkillResponse;
 import com.app.payload.response.UserDetailsResp;
 import com.app.repository.AddressRepository;
 import com.app.service.AddressService;
 import com.app.service.ApplicantService;
 import com.app.service.EducationService;
+import com.app.service.EmploymentService;
+import com.app.service.EmploymentServiceImpl;
 import com.app.service.ProjectService;
+import com.app.service.SchoolingService;
 import com.app.service.SkillService;
 import com.app.service.UserService;
 
@@ -47,7 +53,11 @@ public class ApplicantController {
 	@Autowired
 	private ProjectService projectService;
 	
+	@Autowired
+	private SchoolingService schoolingService;
 	
+	@Autowired
+	private EmploymentService employmentService;
 	
 	public ApplicantController() {
 		
@@ -150,5 +160,53 @@ public class ApplicantController {
 	}
 	
 	
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/languages
+	//Method : GET
+	//Res : LanguagesResponse
+	@GetMapping("/languages/{applicantId}")
+	public ResponseEntity<?> getLanguages(@PathVariable Long applicantId){
+			
+		System.out.println("Inside applicant getLanguages endpoint with applicant ID : "+applicantId);
+		
+		List<LanguageResponse> LanguageResponseList = applicantService.getAllLanguages(applicantId);
+		
+		return new ResponseEntity<>(LanguageResponseList,HttpStatus.OK);
+		//send response as skill list to be displayed on profile section of applicant
+	}
+	
+	
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/schooling
+	//Method : GET
+	//Res : SchoolingResponse
+	@GetMapping("/schooling/{applicantId}")
+	public ResponseEntity<?> getSchoolingDetails(@PathVariable Long applicantId){
+		
+		System.out.println("Inside applicant getSchoolingDetails endpoint with applicant ID : "+applicantId);
+		
+		SchoolingResponse schoolingResponse = schoolingService.getSchooling(applicantId);
+		
+		return new ResponseEntity<>(schoolingResponse,HttpStatus.OK);
+		//send response as schooling details to be displayed on profile section of applicant
+	}
+	
+	
+	
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/employment
+	//Method : GET
+	//Res : EmploymentResponse
+	@GetMapping("/employment/{applicantId}")
+	public ResponseEntity<?> getEmployment(@PathVariable Long applicantId){
+			
+		System.out.println("Inside applicant getEmployment endpoint with applicant ID : "+applicantId);
+		
+		List<EmploymentResponse> EmploymentResponseList = employmentService.getAllEmployment(applicantId);
+		
+		return new ResponseEntity<>(EmploymentResponseList,HttpStatus.OK);
+		//send response as skill list to be displayed on profile section of applicant
+	}
+		
 	
 }
