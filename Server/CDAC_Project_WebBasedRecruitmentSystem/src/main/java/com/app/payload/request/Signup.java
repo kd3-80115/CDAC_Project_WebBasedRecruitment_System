@@ -14,10 +14,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Signup {
 	@JsonProperty(access = Access.READ_ONLY) // this property only used during ser.
 	private Long id;
