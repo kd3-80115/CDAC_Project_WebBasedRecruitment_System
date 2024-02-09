@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +15,16 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.UserEntity;
 import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApplicantResponse;
-import com.app.payload.response.EdcuationResponse;
+import com.app.payload.response.EducationResponse;
+import com.app.payload.response.ProjectResponse;
+import com.app.payload.response.SkillResponse;
 import com.app.payload.response.UserDetailsResp;
 import com.app.repository.AddressRepository;
 import com.app.service.AddressService;
 import com.app.service.ApplicantService;
 import com.app.service.EducationService;
+import com.app.service.ProjectService;
+import com.app.service.SkillService;
 import com.app.service.UserService;
 
 @RestController
@@ -27,9 +33,6 @@ public class ApplicantController {
 	
 	@Autowired
 	private AddressService addressService;
-
-//	@Autowired
-//	private ApplicantService applicantService;
 	
 	@Autowired
 	private UserService userService;
@@ -40,6 +43,11 @@ public class ApplicantController {
 
 	@Autowired
 	private EducationService educationService;
+	
+	@Autowired
+	private ProjectService projectService;
+	
+	
 	
 	public ApplicantController() {
 		
@@ -101,13 +109,45 @@ public class ApplicantController {
 			
 		System.out.println("Inside applicant getEducationDetails endpoint with applicant ID : "+applicantId);
 		
-		EdcuationResponse educationResponse = educationService.getEducationDetail(applicantId);
+		List<EducationResponse> educationResponseList = educationService.getEducationDetail(applicantId);
 		
-		return new ResponseEntity<>(educationResponse,HttpStatus.OK);
-		//send response as applicant details to be displayed on profile section of applicant
+		return new ResponseEntity<>(educationResponseList,HttpStatus.OK);
+		//send response as education details to be displayed on profile section of applicant
 	}
-		
 	
+	
+		
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/projectDetails
+	//Method : GET
+	//Res : projectResponse
+	@GetMapping("/projectDetails/{applicantId}")
+	public ResponseEntity<?> getProjectDetails(@PathVariable Long applicantId){
+			
+		System.out.println("Inside applicant getProjectDetails endpoint with applicant ID : "+applicantId);
+		
+		List<ProjectResponse> projectResponseList = projectService.getProjectDetail(applicantId);
+		
+		return new ResponseEntity<>(projectResponseList,HttpStatus.OK);
+		//send response as project details to be displayed on profile section of applicant
+	}
+	
+	
+	
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/skills
+	//Method : GET
+	//Res : SkillResponse
+	@GetMapping("/skills/{applicantId}")
+	public ResponseEntity<?> getSkills(@PathVariable Long applicantId){
+			
+		System.out.println("Inside applicant getSkills endpoint with applicant ID : "+applicantId);
+		
+		List<SkillResponse> skillResponseList = applicantService.getAllSkills(applicantId);
+		
+		return new ResponseEntity<>(skillResponseList,HttpStatus.OK);
+		//send response as skill list to be displayed on profile section of applicant
+	}
 	
 	
 	

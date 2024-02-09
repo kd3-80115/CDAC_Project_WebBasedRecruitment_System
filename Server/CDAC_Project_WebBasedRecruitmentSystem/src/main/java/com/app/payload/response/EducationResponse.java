@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class EdcuationResponse {
+public class EducationResponse {
 	
 	private String educationType;
 	private String course;

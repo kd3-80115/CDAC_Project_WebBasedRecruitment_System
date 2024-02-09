@@ -9,48 +9,45 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.entities.ApplicantEntity;
-import com.app.entities.SkillEntity;
+import com.app.entities.ProjectEntity;
 import com.app.exception.ResourceNotFoundException;
-
-import com.app.payload.response.ApplicantResponse;
-import com.app.payload.response.SkillResponse;
+import com.app.payload.response.EducationResponse;
+import com.app.payload.response.ProjectResponse;
 import com.app.repository.ApplicantRepository;
+import com.app.repository.ProjectEntityRepository;
 
 @Service
 @Transactional
-public class ApplicantServiceImpl implements ApplicantService {
+public class ProjectServiceImpl implements ProjectService {
+	
+	@Autowired
+	private ProjectEntityRepository projectRepo;
 	
 	@Autowired
 	private ApplicantRepository applicantRepo;
 	
 	@Autowired //To map entity with the DTO 
 	private ModelMapper mapper;
-	
-	
+
 	@Override
-	public ApplicantResponse getProfileInfo(Long applicantId) {
+	public List<ProjectResponse> getProjectDetail(Long applicantId) {
 		
 		ApplicantEntity applicant=applicantRepo.findById(applicantId).
 				orElseThrow(()-> new ResourceNotFoundException
-						("profile", "Applicant ID", applicantId));
+						("profile in project service", "Applicant ID", applicantId));
+		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
-
-		return mapper.map(applicant, ApplicantResponse.class);
-	}
-	
-	@Override
-	public List<SkillResponse> getAllSkills(Long applicantId) {
-		ApplicantEntity applicant=applicantRepo.findById(applicantId).
-				orElseThrow(()-> new ResourceNotFoundException
-						("Applicant", "Applicant ID", applicantId));
-		List<SkillEntity> skillList=applicant.getSkills().stream().collect(Collectors.toList());
 		
-		return skillList.stream().
-				map(skill -> mapper.map(skill, SkillResponse.class)).
+		List<ProjectEntity> projectList =projectRepo.findAllByApplicant(applicant).
+				orElseThrow(()-> new ResourceNotFoundException
+						("project in project service", "Applicant ID", applicantId));
+		
+		return  projectList.stream().
+				map(project -> mapper.map(project, ProjectResponse.class)).
 				collect(Collectors.toList());
 	}
 	
-	
-	
+
+
 }

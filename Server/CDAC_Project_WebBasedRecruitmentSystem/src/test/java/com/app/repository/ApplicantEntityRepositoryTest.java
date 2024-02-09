@@ -64,12 +64,14 @@ public class ApplicantEntityRepositoryTest {
 		SkillEntity skill4= skillRepo.findById(4l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
 		
 
-		ApplicantEntity applicant1= applicantRepo.findById(1l).orElseThrow();
-		ApplicantEntity applicant2= applicantRepo.findById(2l).orElseThrow();
-		ApplicantEntity applicant3= applicantRepo.findById(3l).orElseThrow();
-		ApplicantEntity applicant4= applicantRepo.findById(4l).orElseThrow();
+		ApplicantEntity applicant1= applicantRepo.findById(4l).orElseThrow();
+		ApplicantEntity applicant2= applicantRepo.findById(5l).orElseThrow();
+		ApplicantEntity applicant3= applicantRepo.findById(6l).orElseThrow();
+		ApplicantEntity applicant4= applicantRepo.findById(7l).orElseThrow();
 		
 		applicant1.addSkill(skill1);
+		applicant1.addSkill(skill2);
+		applicant1.addSkill(skill3);
 		applicant2.addSkill(skill2);
 		applicant3.addSkill(skill3);
 		applicant4.addSkill(skill4);

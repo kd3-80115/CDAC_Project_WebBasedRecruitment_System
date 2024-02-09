@@ -1,10 +1,12 @@
 package com.app.service;
 
-import com.app.payload.response.EdcuationResponse;
+import java.util.List;
+
+import com.app.payload.response.EducationResponse;
 
 public interface EducationService {
 
 	
-	EdcuationResponse getEducationDetail(Long applicantId);
+	List<EducationResponse> getEducationDetail(Long applicantId);
 
 }
