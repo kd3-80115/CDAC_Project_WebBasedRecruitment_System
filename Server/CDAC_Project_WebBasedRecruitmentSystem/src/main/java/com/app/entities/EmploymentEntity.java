@@ -1,6 +1,6 @@
 package com.app.entities;
 
-import java.util.Set;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class EmploymentEntity extends BaseEntity{
 	@Column(length = 30)
 	private String previousDesignation;
 	
-	private int noticePeriod;
+	
 	
 	@Column(columnDefinition = "TEXT")
 	private String jobProfile;
@@ -57,7 +57,7 @@ public class EmploymentEntity extends BaseEntity{
 
 	public EmploymentEntity(ApplicantEntity applicant, boolean currentlyEmployed, String employementType,
 			int experienceYears, int experienceMonths, String currentCompanyName, String previousCompanyName,
-			String currentDesignation, String previousDesignation, int noticePeriod, String jobProfile,
+			String currentDesignation, String previousDesignation,String jobProfile,
 			String department, int currentSalary) {
 		
 		this.applicant = applicant;
@@ -69,7 +69,7 @@ public class EmploymentEntity extends BaseEntity{
 		this.previousCompanyName = previousCompanyName;
 		this.currentDesignation = currentDesignation;
 		this.previousDesignation = previousDesignation;
-		this.noticePeriod = noticePeriod;
+		
 		this.jobProfile = jobProfile;
 		this.department = department;
 		this.currentSalary = currentSalary;

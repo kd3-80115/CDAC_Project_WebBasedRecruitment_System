@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,7 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-
+@AllArgsConstructor()
 public class ApplicantEntity extends BaseEntity{
 
 	@OneToOne(fetch=FetchType.LAZY)
@@ -57,6 +59,9 @@ public class ApplicantEntity extends BaseEntity{
 	@Column(length = 10)
 	private String maritalStatus;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(length = 30)//enum
+	private NoticePeriod noticePeriod;
 	
 	//list of skills that applicant has
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -72,10 +77,9 @@ public class ApplicantEntity extends BaseEntity{
                inverseJoinColumns = @JoinColumn(name = "language_id"))
     private Set<LanguageEntity> languages = new HashSet<>();
 
-	
-	
+
 	public ApplicantEntity(UserEntity user, boolean emailIdVerifyStatus, boolean mobileNumVerifyStatus,
-			String resumeHeadLine, String profileSummary, String maritalStatus) {
+			String resumeHeadLine, String profileSummary, String maritalStatus, NoticePeriod noticePeriod) {
 		
 		this.user = user;
 		this.emailIdVerifyStatus = emailIdVerifyStatus;
@@ -83,7 +87,10 @@ public class ApplicantEntity extends BaseEntity{
 		this.resumeHeadLine = resumeHeadLine;
 		this.profileSummary = profileSummary;
 		this.maritalStatus = maritalStatus;
+		this.noticePeriod = noticePeriod;
 	}
+	
+	
 	
 	//adds skills to the skills list of applicant
 	public void addSkill(SkillEntity skill) {
@@ -143,6 +150,9 @@ public class ApplicantEntity extends BaseEntity{
 		languages.remove(language);
 		language.getApplicants().remove(this);
 	}
+
+
+	
     
     
 
