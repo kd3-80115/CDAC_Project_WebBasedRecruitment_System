@@ -57,12 +57,15 @@ public class ApplicantEntity extends BaseEntity{
 	@Column(length = 10)
 	private String maritalStatus;
 	
+	
+	//list of skills that applicant has
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "applicant_skill",
                joinColumns = @JoinColumn(name = "applicant_id"),
                inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private Set<SkillEntity> skills = new HashSet<>();
-
+	
+	//list of languages applicant can speak
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "applicant_language",
                joinColumns = @JoinColumn(name = "applicant_id"),
@@ -82,12 +85,15 @@ public class ApplicantEntity extends BaseEntity{
 		this.maritalStatus = maritalStatus;
 	}
 	
+	//adds skills to the skills list of applicant
 	public void addSkill(SkillEntity skill) {
 		
 		skills.add(skill);
 		skill.getApplicants().add(this);
 	}
 	
+	
+	//removes skills to the skills list of applicant
 	public void removeSkill(SkillEntity skill) {
 		
 		skills.remove(skill);
@@ -125,17 +131,19 @@ public class ApplicantEntity extends BaseEntity{
     )
     private Set<AppliedJob> appliedJobs = new HashSet<>();
     
-    
+    //adds languages in the applicant profile
     public void addLanguage(LanguageEntity language) {
 		
 		languages.add(language);
 		language.getApplicants().add(this);
 	}
-	
+    //removes languages in the applicant profile
     public void removeLanguage(LanguageEntity language) {
 		
 		languages.remove(language);
 		language.getApplicants().remove(this);
 	}
+    
+    
 
 }

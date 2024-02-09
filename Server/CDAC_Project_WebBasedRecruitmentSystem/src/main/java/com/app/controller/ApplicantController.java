@@ -12,6 +12,7 @@ import com.app.entities.AddressEntity;
 import com.app.entities.ApplicantEntity;
 import com.app.entities.UserEntity;
 import com.app.payload.response.AddressResp;
+import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.UserDetailsResp;
 import com.app.repository.AddressRepository;
 import com.app.service.AddressService;
@@ -31,6 +32,9 @@ public class ApplicantController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ApplicantService applicantService;
+	
 	public ApplicantController() {
 		
 	}
@@ -47,23 +51,40 @@ public class ApplicantController {
 		AddressResp addressDTO = addressService.getAddress(applicantId);
 		
 		return new ResponseEntity<>(addressDTO,HttpStatus.OK);
-		
+		//send response as address details to be displayed on profile section of applicant
 	}
 	
-		//Rest API end point
-		//URL : http://localhost:7878/applicant/userDetail
-		//Method : GET
-		//Res : BasicDetailResp
-		@GetMapping("/userDetail/{applicantId}")
-		public ResponseEntity<?> getBasicDetail(@PathVariable Long applicantId){
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/userDetail
+	//Method : GET
+	//Res : userDetailsResp
+	@GetMapping("/userDetail/{applicantId}")
+	public ResponseEntity<?> getBasicDetail(@PathVariable Long applicantId){
+		
+		System.out.println("Inside applicant userDetail endpoint with applicant ID : "+applicantId);
+		
+		UserDetailsResp userDetailsResp = userService.getBasicDetail(applicantId);
 			
-			System.out.println("Inside applicant userDetail endpoint with applicant ID : "+applicantId);
+		return new ResponseEntity<>(userDetailsResp,HttpStatus.OK);
+		//send response as user details to be displayed on profile section of applicant
+	}
+	
+	
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/profileInfo
+	//Method : GET
+	//Res : ApplicantResponse
+	@GetMapping("/profileInfo/{applicantId}")
+	public ResponseEntity<?> getProfileInfo(@PathVariable Long applicantId){
 			
-			UserDetailsResp userDetailsResp = userService.getBasicDetail(applicantId);
-			
-			return new ResponseEntity<>(userDetailsResp,HttpStatus.OK);
-			
-		}
+		System.out.println("Inside applicant getPRofileInfo endpoint with applicant ID : "+applicantId);
+		
+		ApplicantResponse applicantResponse = applicantService.getProfileInfo(applicantId);
+			System.out.println("Applican response : "+ applicantResponse);
+		return new ResponseEntity<>(applicantResponse,HttpStatus.OK);
+		//send response as applicant details to be displayed on profile section of applicant
+	}	
+		
 	
 	
 	
