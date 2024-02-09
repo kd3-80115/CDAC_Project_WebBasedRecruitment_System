@@ -36,10 +36,10 @@ public class EmploymentEntityRepositoryTest {
 		ApplicantEntity applicant4= applicantRepo.findById(7l).orElseThrow();
 		
 		List<EmploymentEntity> list = List.of(
-				new EmploymentEntity(applicant1,true, "fulltime",4,4,"infosys","tcs","senior1","junior1",4,"JobProfile1","Department1",20000),
-				new EmploymentEntity(applicant2,false, "parttime",2,2,"Beeta","Digit","senior2","junior2",2,"JobProfile2","Department2",60000),
-				new EmploymentEntity(applicant3,false, "parttime",1,5,"Gama","Boom","senior3","junior3",1,"JobProfile3","Department3",210000),
-				new EmploymentEntity(applicant4,true, "fulltime",6,1,"Alpha","Zeta","senior4","junior4",5,"JobProfile4","Department4",30000)
+				new EmploymentEntity(applicant1,true, "fulltime",4,4,"infosys","tcs","senior1","junior1","JobProfile1","Department1",20000),
+				new EmploymentEntity(applicant2,false, "parttime",2,2,"Beeta","Digit","senior2","junior2","JobProfile2","Department2",60000),
+				new EmploymentEntity(applicant3,false, "parttime",1,5,"Gama","Boom","senior3","junior3","JobProfile3","Department3",210000),
+				new EmploymentEntity(applicant4,true, "fulltime",6,1,"Alpha","Zeta","senior4","junior4","JobProfile4","Department4",30000)
 				);
 		List<EmploymentEntity> list2 = employmentRepo.saveAll(list);
 		assertEquals(4, list2.size());

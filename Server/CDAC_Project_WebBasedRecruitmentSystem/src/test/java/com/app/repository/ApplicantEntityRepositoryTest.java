@@ -15,6 +15,7 @@ import org.springframework.test.annotation.Rollback;
 import com.app.entities.ApplicantEntity;
 import com.app.entities.Gender;
 import com.app.entities.LanguageEntity;
+import com.app.entities.NoticePeriod;
 import com.app.entities.SkillEntity;
 import com.app.entities.UserEntity;
 import com.app.entities.UserRole;
@@ -39,19 +40,19 @@ public class ApplicantEntityRepositoryTest {
 	@Test
 	void testAddApplicants() {
 		
-		UserEntity user1= userRepo.findById(4l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
-		UserEntity user2= userRepo.findById(5l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
-		UserEntity user3= userRepo.findById(6l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
-		UserEntity user4= userRepo.findById(7l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		UserEntity user1= userRepo.findById(1l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		UserEntity user2= userRepo.findById(2l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		UserEntity user3= userRepo.findById(3l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		
 		
 		List<ApplicantEntity> list = List.of(
-				new ApplicantEntity(user1, false, false, "Headline1", "Profile Summary1", "Single"),
-				new ApplicantEntity(user2, false, false, "Headline1", "Profile Summary1", "Single"),
-				new ApplicantEntity(user3, false, false, "Headline1", "Profile Summary1", "Single"),
-				new ApplicantEntity(user4, false, false, "Headline1", "Profile Summary1", "Single")
+				new ApplicantEntity(user1, false, false, "Headline1", "Profile Summary1", "Single",NoticePeriod.FIFTEEN_DAYS_OR_LESS),
+				new ApplicantEntity(user2, false, false, "Headline1", "Profile Summary1", "Married",NoticePeriod.TWO_MONTHS),
+				new ApplicantEntity(user3, false, false, "Headline1", "Profile Summary1", "Devorced",NoticePeriod.THREE_MONTHS)
+		
 				);
 		List<ApplicantEntity> list2 = applicantRepo.saveAll(list);
-		assertEquals(4, list2.size());
+		assertEquals(3, list2.size());
 
 	}
 	

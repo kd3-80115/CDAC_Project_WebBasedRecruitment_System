@@ -2,18 +2,24 @@ package com.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.entities.AddressEntity;
 import com.app.entities.ApplicantEntity;
 import com.app.entities.UserEntity;
+import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.response.AddressResp;
+import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.EducationResponse;
 import com.app.payload.response.EmploymentResponse;
@@ -207,6 +213,15 @@ public class ApplicantController {
 		return new ResponseEntity<>(EmploymentResponseList,HttpStatus.OK);
 		//send response as skill list to be displayed on profile section of applicant
 	}
-		
+	
+	//Rest API end point
+	//URL : http://localhost:7878/applicant/basicDetails
+	//Method : PUT
+	//Res : BasicDetailRequest
+//	@PutMapping("/basicDetails/{applicantId}")
+//	public ResponseEntity<ApiResponse> updateBasicDetails(@PathVariable Long applicantId,@RequestBody @Valid BasicDetailRequest basicDetails ) {
+//		ApiResponse apiResponse=
+//		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+//	}
 	
 }
