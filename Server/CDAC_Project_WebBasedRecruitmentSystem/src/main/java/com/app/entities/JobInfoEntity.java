@@ -67,6 +67,8 @@ public class JobInfoEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	private DepartmentEntity department;
 
+	@Column(name="vacancies")
+	private int vacancies;
 	
 	@ManyToMany
 	@JoinTable(

@@ -15,10 +15,8 @@ public interface JobInfoRepository extends JpaRepository<JobInfoEntity, Long>{
 	/**
 	 * Using a custom query to retrieve job details along with user information
 	 * */
-	@Query("SELECT new com.app.payload.response.JobDetailsResponse(j.jobId, "
-	        + "j.jobTitle, u.firstName, u.lastName, j.jobCreatedDate, j.jobCreatedDate, j.location) "
-	        + "FROM UserEntity u JOIN JobInfoEntity j "
-	        + "ON u.id = j.hr.id")
+	@Query("SELECT new com.app.payload.response.JobDetailsResponse(j.jobId, j.jobTitle, u.firstName, u.lastName, j.jobCreatedDate, j.applicationDeadline, j.location, j.vacancies) "
+			+ "FROM UserEntity u JOIN JobInfoEntity j ON u.id = j.hr.id")
 	List<JobDetailsResponse> findAllJobs();
 	
 	/**
