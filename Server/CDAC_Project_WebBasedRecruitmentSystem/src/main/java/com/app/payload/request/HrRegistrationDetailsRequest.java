@@ -1,5 +1,7 @@
 package com.app.payload.request;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,12 +15,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class HrRegistrationDetailsRequest {
 
 	@NotBlank
@@ -40,6 +44,9 @@ public class HrRegistrationDetailsRequest {
 	@Size(min = 8,max = 13,message = "password is not valid")
 	// TODO:implement the password regex
 	private String password;
+	
+	@NotNull
+	private LocalDate dob;
 	
 	@JsonProperty(access = Access.READ_ONLY) 
 	private UserRole role=UserRole.ROLE_HR;

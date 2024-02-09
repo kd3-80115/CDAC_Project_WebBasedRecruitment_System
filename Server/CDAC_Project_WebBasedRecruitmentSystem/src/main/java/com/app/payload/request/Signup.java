@@ -1,5 +1,7 @@
 package com.app.payload.request;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -29,18 +31,20 @@ public class Signup {
 	
 	private String phoneNumber;
 	
+	private LocalDate dob;
 	@JsonProperty(access = Access.READ_ONLY) 
 	private UserRole role=UserRole.ROLE_APPLICANT;
 	
 	private Gender gender;
 	public Signup(String firstName, String lastName,
-			String email, String password, Gender gender) {
+			String email, String password, Gender gender,LocalDate dob) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.gender = gender;
+		this.dob=dob;
 	}
 	
 	

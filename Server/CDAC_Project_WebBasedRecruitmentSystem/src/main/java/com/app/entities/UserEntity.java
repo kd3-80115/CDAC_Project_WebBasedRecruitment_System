@@ -1,5 +1,7 @@
 package com.app.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,6 +42,10 @@ public class UserEntity extends BaseEntity {
 	
 	@Column(length = 300, nullable = false)
 	private String password;
+	
+	@Column(nullable = false)
+	private LocalDate dob;
+	
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)

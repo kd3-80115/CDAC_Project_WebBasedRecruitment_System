@@ -2,6 +2,8 @@ package com.app.payload.response;
 
 
 
+import java.time.LocalDate;
+
 import com.app.entities.Gender;
 
 import lombok.Getter;
@@ -20,5 +22,5 @@ public class UserDetailsResp {
 	private Gender gender;
 	private String email;
 	private String phoneNumber;
-	
+	private LocalDate dateOfBirth; 
 }

@@ -15,7 +15,6 @@ public class HrDetailsResponse {
 	public Gender gender;
 	public String email;
 	public String phoneNumber;
-	public int yearOfExperience;
 	public String qualification;
 	public boolean status;
 }
