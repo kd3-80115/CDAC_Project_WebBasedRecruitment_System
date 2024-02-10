@@ -1,13 +1,13 @@
 package com.app.service;
 
-import static com.app.utils.UserHelper.findUserByEmail;
 import static com.app.utils.ApplicantHelper.findApplicantByUser;
+import static com.app.utils.UserHelper.findUserById;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +15,12 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
 import com.app.entities.UserEntity;
-import com.app.exception.ResourceNotFoundException;
-
 import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.LanguageResponse;
 import com.app.payload.response.SkillResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -34,16 +33,20 @@ public class ApplicantServiceImpl implements ApplicantService {
 	private ModelMapper mapper;
 	
 	@Autowired
+	private FindAuthenticationDetails findUser;
+	
+	@Autowired
 	private UserEntityRepository userRepo;
+	
 	@Override
-	public ApplicantResponse getProfileInfo(Authentication  auth) {
+	public ApplicantResponse getProfileInfo() {
 		
-		String email=(String)auth.getPrincipal();
+		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object		
-		UserEntity user=findUserByEmail(email, userRepo);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		//statically imported method from ApplicantHelper class
 		//to find persistent ApplicantEntity by User
@@ -56,14 +59,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 	
 	@Override
-	public List<SkillResponse> getAllSkills(Authentication auth) {
+	public List<SkillResponse> getAllSkills() {
 		
-		String email=(String)auth.getPrincipal();
+		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object		
-		UserEntity user=findUserByEmail(email, userRepo);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		//statically imported method from ApplicantHelper class
 		//to find persistent ApplicantEntity by User
@@ -79,14 +82,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 	
 	@Override
-	public List<LanguageResponse> getAllLanguages(Authentication auth) {
+	public List<LanguageResponse> getAllLanguages() {
 		
-		String email=(String)auth.getPrincipal();
+		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object		
-		UserEntity user=findUserByEmail(email, userRepo);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		//statically imported method from ApplicantHelper class
 		//to find persistent ApplicantEntity by User

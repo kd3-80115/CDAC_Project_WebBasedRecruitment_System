@@ -1,23 +1,20 @@
 package com.app.service;
-import static com.app.utils.UserHelper.findUserByEmail; 
+import static com.app.utils.UserHelper.findUserById;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.app.entities.AddressEntity;
-import com.app.entities.ApplicantEntity;
 import com.app.entities.UserEntity;
-import com.app.exception.ResourceNotFoundException;
 import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.request.Signup;
-import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.UserDetailsResp;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -31,8 +28,10 @@ public class UserServiceImpl implements UserService {
 	//dep 
 	@Autowired
 	private PasswordEncoder encoder;
-	//dep
 	
+	//dep
+	@Autowired
+	private FindAuthenticationDetails findUser;
 	
 	@Override
 	public Signup userRegistration(Signup reqDTO) {
@@ -44,15 +43,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDetailsResp getBasicDetail(Authentication auth) {
+	public UserDetailsResp getBasicDetail() {
 		
-		String email=(String)auth.getPrincipal();
-		
+		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object
-		UserEntity user=findUserByEmail(email, userDao);
+				
+		UserEntity user=findUserById(userId, userDao);
 		
 		//dto <-- entity
 		return mapper.map(user, UserDetailsResp.class);

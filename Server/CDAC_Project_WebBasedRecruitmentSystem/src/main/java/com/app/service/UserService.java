@@ -13,7 +13,7 @@ public interface UserService {
 //sign up
 	Signup userRegistration(Signup reqDTO);
 
-	UserDetailsResp getBasicDetail(Authentication auth);
+	UserDetailsResp getBasicDetail();
 	
 	ApiResponse updateBasicDetails(BasicDetailRequest basicDetails,Long applicantId);
 }

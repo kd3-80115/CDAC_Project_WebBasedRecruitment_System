@@ -9,6 +9,6 @@ import com.app.payload.response.EducationResponse;
 public interface EducationService {
 
 	
-	List<EducationResponse> getEducationDetail(Authentication auth);
+	List<EducationResponse> getEducationDetail(	);
 
 }

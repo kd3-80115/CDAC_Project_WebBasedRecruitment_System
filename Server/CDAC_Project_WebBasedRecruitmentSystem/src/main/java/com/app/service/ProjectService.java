@@ -8,6 +8,6 @@ import com.app.payload.response.ProjectResponse;
 
 public interface ProjectService {
 
-	List<ProjectResponse> getProjectDetail(Authentication auth);
+	List<ProjectResponse> getProjectDetail();
 
 }

@@ -1,7 +1,7 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUser;
-import static com.app.utils.UserHelper.findUserByEmail;
+import static com.app.utils.UserHelper.findUserById;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +21,7 @@ import com.app.payload.response.EducationResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.EducationEntityRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -38,16 +39,19 @@ public class EducationServiceImpl implements EducationService {
 	@Autowired
 	private  UserEntityRepository userRepo;
 	
+	@Autowired
+	private FindAuthenticationDetails findUser;
+	
 	@Override
-	public List<EducationResponse> getEducationDetail(Authentication auth) {
+	public List<EducationResponse> getEducationDetail() {
 		
-		String email=(String)auth.getPrincipal();
+		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object
 				
-		UserEntity user=findUserByEmail(email, userRepo);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		
 		//statically imported method from ApplicantHelper class
@@ -58,7 +62,7 @@ public class EducationServiceImpl implements EducationService {
 		
 		List<EducationEntity> educationList =EducationRepo.findAllByApplicant(applicant).
 				orElseThrow(()-> new ResourceNotFoundException
-						("Education in education service", "Email ID", email));
+						("Education in education service", "Applicant ID", applicant.getId()));
 		return educationList.stream().
 				map(education -> mapper.map(education, EducationResponse.class)).
 				collect(Collectors.toList());

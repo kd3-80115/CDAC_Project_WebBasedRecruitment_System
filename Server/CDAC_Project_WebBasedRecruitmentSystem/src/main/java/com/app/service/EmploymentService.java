@@ -8,6 +8,6 @@ import com.app.payload.response.EmploymentResponse;
 
 public interface EmploymentService {
 
-	List<EmploymentResponse> getAllEmployment(Authentication auth);
+	List<EmploymentResponse> getAllEmployment();
 	
 }

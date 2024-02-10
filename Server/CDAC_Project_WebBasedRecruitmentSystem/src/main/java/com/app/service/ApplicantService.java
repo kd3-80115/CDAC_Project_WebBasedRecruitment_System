@@ -10,10 +10,10 @@ import com.app.payload.response.SkillResponse;
 
 public interface ApplicantService {
 
-	ApplicantResponse getProfileInfo(Authentication  auth);
+	ApplicantResponse getProfileInfo();
 	
-	List<SkillResponse> getAllSkills(Authentication auth);
+	List<SkillResponse> getAllSkills();
 	
-	List<LanguageResponse> getAllLanguages(Authentication auth);
+	List<LanguageResponse> getAllLanguages();
 
 }

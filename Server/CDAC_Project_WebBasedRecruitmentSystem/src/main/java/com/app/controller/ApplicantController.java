@@ -63,11 +63,11 @@ public class ApplicantController {
 	// Method : GET
 	// Res : AddressResDTO
 	@GetMapping("/address")
-	public ResponseEntity<?> getAddressDetails(Authentication auth) {
+	public ResponseEntity<?> getAddressDetails() {
 
-		System.out.println("inside address endpoint with email : "+(String)auth.getPrincipal());
+		System.out.println("inside address endpoint");
 
-		AddressResp addressDTO = addressService.getAddress(auth);
+		AddressResp addressDTO = addressService.getAddress();
 
 		return new ResponseEntity<>(addressDTO, HttpStatus.OK);
 		// send response as address details to be displayed on profile section of
@@ -80,15 +80,10 @@ public class ApplicantController {
 	// Res : userDetailsResp
 	
 	@GetMapping("/userDetail")
-	public ResponseEntity<?> getBasicDetail(Authentication auth) {
-		String email =(String)auth.getPrincipal();
+	public ResponseEntity<?> getBasicDetail() {
+		System.out.println("inside profileInfo endpoint");
 		
-		System.out.println("inside userDetail endpoint with email : "+email);
-
-
-		
-
-		UserDetailsResp userDetailsResp = userService.getBasicDetail(auth);
+		UserDetailsResp userDetailsResp = userService.getBasicDetail();
 		
 		return new ResponseEntity<>(userDetailsResp, HttpStatus.OK);
 		// send response as user details to be displayed on profile section of applicant
@@ -99,12 +94,11 @@ public class ApplicantController {
 	// Method : GET
 	// Res : ApplicantResponse
 	@GetMapping("/profileInfo")
-	public ResponseEntity<?> getProfileInfo(Authentication auth) {
+	public ResponseEntity<?> getProfileInfo() {
 
-		System.out.println("inside profileInfo endpoint with email : "+(String)auth.getPrincipal());
-
-
-		ApplicantResponse applicantResponse = applicantService.getProfileInfo(auth);
+		System.out.println("inside profileInfo endpoint");
+		
+		ApplicantResponse applicantResponse = applicantService.getProfileInfo();
 
 		return new ResponseEntity<>(applicantResponse, HttpStatus.OK);
 		// send response as applicant details to be displayed on profile section of
@@ -116,11 +110,10 @@ public class ApplicantController {
 	// Method : GET
 	// Res : EducationResponse
 	@GetMapping("/educationDetails")
-	public ResponseEntity<?> getEducationDetails(Authentication auth) {
+	public ResponseEntity<?> getEducationDetails() {
 
-		System.out.println("inside EducationDetails endpoint with email : "+(String)auth.getPrincipal());
-
-		List<EducationResponse> educationResponseList = educationService.getEducationDetail(auth);
+		System.out.println("inside Education endpoint");
+		List<EducationResponse> educationResponseList = educationService.getEducationDetail();
 
 		return new ResponseEntity<>(educationResponseList, HttpStatus.OK);
 		// send response as education details to be displayed on profile section of
@@ -132,11 +125,11 @@ public class ApplicantController {
 	// Method : GET
 	// Res : projectResponse
 	@GetMapping("/projectDetails")
-	public ResponseEntity<?> getProjectDetails(Authentication auth) {
+	public ResponseEntity<?> getProjectDetails() {
 
-		System.out.println("inside ProjectDetails endpoint with email : "+(String)auth.getPrincipal());
-
-		List<ProjectResponse> projectResponseList = projectService.getProjectDetail(auth);
+		System.out.println("inside project endpoint");
+		
+		List<ProjectResponse> projectResponseList = projectService.getProjectDetail();
 
 		return new ResponseEntity<>(projectResponseList, HttpStatus.OK);
 		// send response as project details to be displayed on profile section of
@@ -152,7 +145,7 @@ public class ApplicantController {
 
 		System.out.println("inside getSkills endpoint with email : "+(String)auth.getPrincipal());
 
-		List<SkillResponse> skillResponseList = applicantService.getAllSkills(auth);
+		List<SkillResponse> skillResponseList = applicantService.getAllSkills();
 
 		return new ResponseEntity<>(skillResponseList, HttpStatus.OK);
 		// send response as skill list to be displayed on profile section of applicant
@@ -163,11 +156,11 @@ public class ApplicantController {
 	// Method : GET
 	// Res : LanguagesResponse
 	@GetMapping("/languages")
-	public ResponseEntity<?> getLanguages(Authentication auth) {
+	public ResponseEntity<?> getLanguages() {
 
-		System.out.println("inside getLanguages endpoint with email : "+(String)auth.getPrincipal());
+		System.out.println("inside language endpoint");
 
-		List<LanguageResponse> LanguageResponseList = applicantService.getAllLanguages(auth);
+		List<LanguageResponse> LanguageResponseList = applicantService.getAllLanguages();
 
 		return new ResponseEntity<>(LanguageResponseList, HttpStatus.OK);
 		// send response as skill list to be displayed on profile section of applicant
@@ -178,11 +171,11 @@ public class ApplicantController {
 	// Method : GET
 	// Res : SchoolingResponse
 	@GetMapping("/schooling")
-	public ResponseEntity<?> getSchoolingDetails(Authentication auth) {
+	public ResponseEntity<?> getSchoolingDetails() {
 
-		System.out.println("inside getSchoolingDetails endpoint with email : "+(String)auth.getPrincipal());
+		System.out.println("inside schooling endpoint");
 
-		SchoolingResponse schoolingResponse = schoolingService.getSchooling(auth);
+		SchoolingResponse schoolingResponse = schoolingService.getSchooling();
 
 		return new ResponseEntity<>(schoolingResponse, HttpStatus.OK);
 		// send response as schooling details to be displayed on profile section of
@@ -194,11 +187,11 @@ public class ApplicantController {
 	// Method : GET
 	// Res : EmploymentResponse
 	@GetMapping("/employment")
-	public ResponseEntity<?> getEmployment(Authentication auth) {
+	public ResponseEntity<?> getEmployment() {
 
-		System.out.println("inside getEmployment endpoint with email : "+(String)auth.getPrincipal());
+		System.out.println("inside employment endpoint");
 
-		List<EmploymentResponse> EmploymentResponseList = employmentService.getAllEmployment(auth);
+		List<EmploymentResponse> EmploymentResponseList = employmentService.getAllEmployment();
 
 		return new ResponseEntity<>(EmploymentResponseList, HttpStatus.OK);
 		// send response as skill list to be displayed on profile section of applicant

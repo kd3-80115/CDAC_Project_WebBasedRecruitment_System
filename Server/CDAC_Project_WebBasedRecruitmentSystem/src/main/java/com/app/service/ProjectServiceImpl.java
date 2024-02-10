@@ -1,14 +1,13 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUser;
-import static com.app.utils.UserHelper.findUserByEmail;
+import static com.app.utils.UserHelper.findUserById	;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +15,11 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.ProjectEntity;
 import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
-import com.app.payload.response.EducationResponse;
 import com.app.payload.response.ProjectResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.ProjectEntityRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -37,17 +36,20 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Autowired //To map entity with the DTO 
 	private ModelMapper mapper;
-
+	
+	@Autowired
+	private FindAuthenticationDetails findUser;
+	
 	@Override
-	public List<ProjectResponse> getProjectDetail(Authentication auth) {
+	public List<ProjectResponse> getProjectDetail() {
 		
-		String email=(String)auth.getPrincipal();
+		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object
 				
-		UserEntity user=findUserByEmail(email, userRepo);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		
 		//statically imported method from ApplicantHelper class
@@ -61,7 +63,7 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		List<ProjectEntity> projectList =projectRepo.findAllByApplicant(applicant).
 				orElseThrow(()-> new ResourceNotFoundException
-						("project in project service", "email ID", email));
+						("project in project service","Applicant ID", applicant.getId()));
 		
 		return  projectList.stream().
 				map(project -> mapper.map(project, ProjectResponse.class)).

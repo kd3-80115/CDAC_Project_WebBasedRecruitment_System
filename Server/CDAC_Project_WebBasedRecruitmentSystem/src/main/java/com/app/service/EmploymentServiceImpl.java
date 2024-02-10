@@ -1,28 +1,25 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUser;
-import static com.app.utils.UserHelper.findUserByEmail;
+import static com.app.utils.UserHelper.findUserById;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 
 import com.app.entities.ApplicantEntity;
-import com.app.entities.EducationEntity;
 import com.app.entities.EmploymentEntity;
 import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
-import com.app.payload.response.EducationResponse;
 import com.app.payload.response.EmploymentResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.EmploymentEntityRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -40,15 +37,18 @@ public class EmploymentServiceImpl implements EmploymentService {
 	@Autowired
 	private UserEntityRepository userRepo;
 	
+	@Autowired
+	private FindAuthenticationDetails findUser;
+	
 	@Override
-	public List<EmploymentResponse> getAllEmployment(Authentication auth) {
-		String email=(String)auth.getPrincipal();
-		
+	public List<EmploymentResponse> getAllEmployment() {
+	
+		Long userId=findUser.getUserId();
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object
 				
-		UserEntity user=findUserByEmail(email, userRepo);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		
 		//statically imported method from ApplicantHelper class
@@ -61,7 +61,7 @@ public class EmploymentServiceImpl implements EmploymentService {
 		
 		List<EmploymentEntity> employmentList =employmentRepo.findAllByApplicant(applicant).
 				orElseThrow(()-> new ResourceNotFoundException
-						("Education in education service", "email ID", email));
+						("Education in education service", "Applicant ID", applicant.getId()));
 		
 		
 		return employmentList.stream().

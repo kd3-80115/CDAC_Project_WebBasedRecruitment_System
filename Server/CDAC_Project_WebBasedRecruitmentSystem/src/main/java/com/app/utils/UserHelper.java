@@ -12,12 +12,12 @@ public class UserHelper {
 	
 	
 	
-	public static UserEntity findUserByEmail(String email,UserEntityRepository userDao){
+	public static UserEntity findUserById(Long userId,UserEntityRepository userDao){
 		
 		//finds persistent user entity by email obtained from authentication object
-		UserEntity user = userDao.findByEmail(email).
+		UserEntity user = userDao.findById(userId).
 				orElseThrow(()-> new ResourceNotFoundException
-						("User", "Email ID", email));
+						("User", "User ID", userId));
 		// Returns the value in case of non empty Optional
 			// OR throws supplied exception
 		return user;

@@ -1,11 +1,10 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUser;
-import static com.app.utils.UserHelper.findUserByEmail;
+import static com.app.utils.UserHelper.findUserById;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +16,7 @@ import com.app.payload.response.SchoolingResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.SchoolingEntityRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -34,16 +34,19 @@ public class SchoolingServiceImpl implements SchoolingService {
 	@Autowired //To map entity with the DTO 
 	private ModelMapper mapper;
 	
+	@Autowired
+	private FindAuthenticationDetails findUser;
+	
 	@Override
-	public SchoolingResponse getSchooling(Authentication auth) {
+	public SchoolingResponse getSchooling() {
 		
-String email=(String)auth.getPrincipal();
+		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by email
 		//extracted from authentication object
 				
-		UserEntity user=findUserByEmail(email, userRepo);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		
 		//statically imported method from ApplicantHelper class
@@ -55,7 +58,7 @@ String email=(String)auth.getPrincipal();
 		
 		SchoolingEntity schooling= schoolingRepo.findByApplicant(applicant).
 				orElseThrow(()-> new ResourceNotFoundException
-						("Schooling in schooling service", "email ID", email));
+						("Schooling in schooling service", "Applicant ID", applicant.getId()));
 		return mapper.map(schooling, SchoolingResponse.class);
 	}
 
