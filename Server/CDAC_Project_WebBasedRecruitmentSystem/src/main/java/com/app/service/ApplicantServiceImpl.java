@@ -56,12 +56,21 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 	
 	@Override
-	public List<SkillResponse> getAllSkills(Long applicantId) {
-		ApplicantEntity applicant=applicantRepo.findById(applicantId).
-				orElseThrow(()-> new ResourceNotFoundException
-						("Applicant", "Applicant ID", applicantId));
+	public List<SkillResponse> getAllSkills(Authentication auth) {
+		
+		String email=(String)auth.getPrincipal();
+		
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by email
+		//extracted from authentication object		
+		UserEntity user=findUserByEmail(email, userRepo);
+		
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by User
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		
 		// Returns the value in case of non empty Optional
-				// OR throws supplied exception
+		// OR throws supplied exception
 		List<SkillEntity> skillList=applicant.getSkills().stream().collect(Collectors.toList());
 		
 		return skillList.stream().
@@ -70,13 +79,21 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 	
 	@Override
-	public List<LanguageResponse> getAllLanguages(Long applicantId) {
-		ApplicantEntity applicant=applicantRepo.findById(applicantId).
-				orElseThrow(()-> new ResourceNotFoundException
-						("Applicant", "Applicant ID", applicantId));
+	public List<LanguageResponse> getAllLanguages(Authentication auth) {
+		
+		String email=(String)auth.getPrincipal();
+		
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by email
+		//extracted from authentication object		
+		UserEntity user=findUserByEmail(email, userRepo);
+		
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by User
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
 		
 		// Returns the value in case of non empty Optional
-				// OR throws supplied exception
+		// OR throws supplied exception
 		
 		List<LanguageEntity> languageList=applicant.getLanguages().stream().collect(Collectors.toList());
 		

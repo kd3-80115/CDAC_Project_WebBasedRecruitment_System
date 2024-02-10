@@ -12,8 +12,8 @@ public interface ApplicantService {
 
 	ApplicantResponse getProfileInfo(Authentication  auth);
 	
-	List<SkillResponse> getAllSkills(Long applicantId);
+	List<SkillResponse> getAllSkills(Authentication auth);
 	
-	List<LanguageResponse> getAllLanguages(Long applicantId);
+	List<LanguageResponse> getAllLanguages(Authentication auth);
 
 }

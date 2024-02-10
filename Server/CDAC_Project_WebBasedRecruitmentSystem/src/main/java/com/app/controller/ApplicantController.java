@@ -2,22 +2,15 @@ package com.app.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.response.AddressResp;
-import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.EducationResponse;
 import com.app.payload.response.EmploymentResponse;
@@ -88,8 +81,9 @@ public class ApplicantController {
 	
 	@GetMapping("/userDetail")
 	public ResponseEntity<?> getBasicDetail(Authentication auth) {
+		String email =(String)auth.getPrincipal();
 		
-		System.out.println("inside userDetail endpoint with email : "+(String)auth.getPrincipal());
+		System.out.println("inside userDetail endpoint with email : "+email);
 
 
 		
@@ -137,12 +131,12 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/projectDetails
 	// Method : GET
 	// Res : projectResponse
-	@GetMapping("/projectDetails/{applicantId}")
-	public ResponseEntity<?> getProjectDetails(@PathVariable Long applicantId) {
+	@GetMapping("/projectDetails")
+	public ResponseEntity<?> getProjectDetails(Authentication auth) {
 
-		System.out.println("Inside applicant getProjectDetails endpoint with applicant ID : " + applicantId);
+		System.out.println("inside ProjectDetails endpoint with email : "+(String)auth.getPrincipal());
 
-		List<ProjectResponse> projectResponseList = projectService.getProjectDetail(applicantId);
+		List<ProjectResponse> projectResponseList = projectService.getProjectDetail(auth);
 
 		return new ResponseEntity<>(projectResponseList, HttpStatus.OK);
 		// send response as project details to be displayed on profile section of
@@ -153,12 +147,12 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/skills
 	// Method : GET
 	// Res : SkillResponse
-	@GetMapping("/skills/{applicantId}")
-	public ResponseEntity<?> getSkills(@PathVariable Long applicantId) {
+	@GetMapping("/skills")
+	public ResponseEntity<?> getSkills(Authentication auth) {
 
-		System.out.println("Inside applicant getSkills endpoint with applicant ID : " + applicantId);
+		System.out.println("inside getSkills endpoint with email : "+(String)auth.getPrincipal());
 
-		List<SkillResponse> skillResponseList = applicantService.getAllSkills(applicantId);
+		List<SkillResponse> skillResponseList = applicantService.getAllSkills(auth);
 
 		return new ResponseEntity<>(skillResponseList, HttpStatus.OK);
 		// send response as skill list to be displayed on profile section of applicant
@@ -168,12 +162,12 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/languages
 	// Method : GET
 	// Res : LanguagesResponse
-	@GetMapping("/languages/{applicantId}")
-	public ResponseEntity<?> getLanguages(@PathVariable Long applicantId) {
+	@GetMapping("/languages")
+	public ResponseEntity<?> getLanguages(Authentication auth) {
 
-		System.out.println("Inside applicant getLanguages endpoint with applicant ID : " + applicantId);
+		System.out.println("inside getLanguages endpoint with email : "+(String)auth.getPrincipal());
 
-		List<LanguageResponse> LanguageResponseList = applicantService.getAllLanguages(applicantId);
+		List<LanguageResponse> LanguageResponseList = applicantService.getAllLanguages(auth);
 
 		return new ResponseEntity<>(LanguageResponseList, HttpStatus.OK);
 		// send response as skill list to be displayed on profile section of applicant
@@ -183,12 +177,12 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/schooling
 	// Method : GET
 	// Res : SchoolingResponse
-	@GetMapping("/schooling/{applicantId}")
-	public ResponseEntity<?> getSchoolingDetails(@PathVariable Long applicantId) {
+	@GetMapping("/schooling")
+	public ResponseEntity<?> getSchoolingDetails(Authentication auth) {
 
-		System.out.println("Inside applicant getSchoolingDetails endpoint with applicant ID : " + applicantId);
+		System.out.println("inside getSchoolingDetails endpoint with email : "+(String)auth.getPrincipal());
 
-		SchoolingResponse schoolingResponse = schoolingService.getSchooling(applicantId);
+		SchoolingResponse schoolingResponse = schoolingService.getSchooling(auth);
 
 		return new ResponseEntity<>(schoolingResponse, HttpStatus.OK);
 		// send response as schooling details to be displayed on profile section of
@@ -199,12 +193,12 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/employment
 	// Method : GET
 	// Res : EmploymentResponse
-	@GetMapping("/employment/{applicantId}")
-	public ResponseEntity<?> getEmployment(@PathVariable Long applicantId) {
+	@GetMapping("/employment")
+	public ResponseEntity<?> getEmployment(Authentication auth) {
 
-		System.out.println("Inside applicant getEmployment endpoint with applicant ID : " + applicantId);
+		System.out.println("inside getEmployment endpoint with email : "+(String)auth.getPrincipal());
 
-		List<EmploymentResponse> EmploymentResponseList = employmentService.getAllEmployment(applicantId);
+		List<EmploymentResponse> EmploymentResponseList = employmentService.getAllEmployment(auth);
 
 		return new ResponseEntity<>(EmploymentResponseList, HttpStatus.OK);
 		// send response as skill list to be displayed on profile section of applicant
