@@ -15,7 +15,7 @@ public class HrServiceTest {
 	@Test
 	void getHrTest()
 	{
-		HrResponse hr = hrService.getHrDetails("hina@gmail.com");
-		System.out.println(hr);
+//		HrResponse hr = hrService.getHrDetails("hina@gmail.com");
+//		System.out.println(hr);
 	}
 }

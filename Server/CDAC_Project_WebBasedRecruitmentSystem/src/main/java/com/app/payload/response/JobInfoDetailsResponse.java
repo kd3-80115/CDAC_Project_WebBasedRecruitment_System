@@ -23,7 +23,8 @@ public class JobInfoDetailsResponse {
 	private String qualification;
 	private String departmentName;
 	private int vacancies;
-	public JobInfoDetailsResponse(long jobId, String jobTitle, int experienceRequired, WorkSchedule workSchedule, int salary, LocalDate applicationDeadline, LocalDate jobCreatedDate, String qualification, String departmentName, int vacancies) {
+	private boolean status;
+	public JobInfoDetailsResponse(long jobId, String jobTitle, int experienceRequired, WorkSchedule workSchedule, int salary, LocalDate applicationDeadline, LocalDate jobCreatedDate, String qualification, String departmentName, int vacancies,boolean status) {
 		super();
 		this.jobId = jobId;
 		this.jobTitle = jobTitle;
@@ -35,6 +36,7 @@ public class JobInfoDetailsResponse {
 		this.qualification = qualification;
 		this.departmentName = departmentName;
 		this.vacancies = vacancies;
+		this.status=status;
 	}
 	
 	

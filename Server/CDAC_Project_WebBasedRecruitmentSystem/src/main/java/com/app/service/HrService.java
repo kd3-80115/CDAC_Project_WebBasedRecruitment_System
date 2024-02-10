@@ -7,7 +7,7 @@ import com.app.payload.response.HrResponse;
 public interface HrService {
 
 	//get HR whole details
-	public HrResponse getHrDetails(String userName);
+	public HrResponse getHrDetails();
 	
 	//update the hr details password etc
 	public ApiResponse updateHr(HrRequest hr);

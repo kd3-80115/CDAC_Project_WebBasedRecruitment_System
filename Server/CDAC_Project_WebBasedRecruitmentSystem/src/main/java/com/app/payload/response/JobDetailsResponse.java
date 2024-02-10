@@ -21,9 +21,9 @@ public class JobDetailsResponse {
 	public LocalDate applicationDeadline;
 	public String location;
 	private int vacancies;
-	
+	private boolean status;
 	public JobDetailsResponse(Long jobId, String jobTitle, String firstName, String lastName, LocalDate jobCreatedDate,
-			LocalDate applicationDeadline, String location, int vacancies) {
+			LocalDate applicationDeadline, String location, int vacancies,boolean status) {
 		super();
 		this.jobId = jobId;
 		this.jobTitle = jobTitle;
@@ -33,6 +33,7 @@ public class JobDetailsResponse {
 		this.applicationDeadline = applicationDeadline;
 		this.location = location;
 		this.vacancies = vacancies;
+		this.status=status;
 	}
 	
 }

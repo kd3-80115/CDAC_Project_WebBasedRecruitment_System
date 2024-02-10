@@ -70,6 +70,9 @@ public class JobInfoEntity {
 	@Column(name="vacancies")
 	private int vacancies;
 	
+	@Column(name="status")
+	private boolean status;
+	
 	@ManyToMany
 	@JoinTable(
 	  name = "saved_job", 
@@ -111,7 +114,7 @@ public class JobInfoEntity {
 
 	public JobInfoEntity(String jobTitle, int experienceRequired, WorkSchedule workSchedule, int salary,
 			LocalDate applicationDeadline, String location, LocalDate jobCreatedDate, String qualification, HREntity hr,
-			DepartmentEntity department) {
+			DepartmentEntity department,boolean status) {
 		super();
 		this.jobTitle = jobTitle;
 		this.experienceRequired = experienceRequired;
@@ -123,6 +126,7 @@ public class JobInfoEntity {
 		this.qualification = qualification;
 		this.hr = hr;
 		this.department = department;
+		this.status = status;
 	}
 
 
