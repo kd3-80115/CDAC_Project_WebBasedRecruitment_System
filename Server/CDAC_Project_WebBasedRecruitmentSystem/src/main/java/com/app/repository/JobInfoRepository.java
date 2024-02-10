@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.app.entities.JobInfoEntity;
 import com.app.payload.response.JobDetailsResponse;
+import com.app.payload.response.JobInfoDetailsResponse;
 
 public interface JobInfoRepository extends JpaRepository<JobInfoEntity, Long>{
 
@@ -24,4 +26,21 @@ public interface JobInfoRepository extends JpaRepository<JobInfoEntity, Long>{
 	 * */
 	@Query("SELECT COUNT(j) FROM JobInfoEntity j WHERE j.applicationDeadline > CURRENT_DATE")
 	Long countActiveJobs();
+	
+	
+	/**
+	 * Get jobs created by the HR using HR id with JPQL
+	 * */
+	@Query("SELECT new com.app.payload.response.JobInfoDetailsResponse(j.jobId, j.jobTitle, j.experienceRequired, j.workSchedule, " +
+	        "j.salary, j.applicationDeadline, j.jobCreatedDate, j.qualification, j.department.departmentName, j.vacancies) " +
+	        "FROM JobInfoEntity j WHERE j.hr.id = :hrId")
+	List<JobInfoDetailsResponse> findAllJobsByHrId(@Param("hrId") Long hrId);
+	
+	/**
+	 * Get job by job id created by the HR using HR id with JPQL
+	 * */
+	@Query("SELECT new com.app.payload.response.JobInfoDetailsResponse(j.jobId, j.jobTitle, j.experienceRequired, j.workSchedule, " +
+	        "j.salary, j.applicationDeadline, j.jobCreatedDate, j.qualification, j.department.departmentName, j.vacancies) " +
+	        "FROM JobInfoEntity j WHERE j.hr.id = :hrId and j.id= :jobId")
+	JobInfoDetailsResponse findJobByHrIdAndJobId(@Param("hrId")Long hrId,@Param("jobId")Long jobId);
 }

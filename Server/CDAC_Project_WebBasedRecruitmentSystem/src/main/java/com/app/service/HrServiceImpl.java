@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.entities.HREntity;
 import com.app.entities.UserEntity;
+import com.app.entities.UserRole;
 import com.app.payload.request.HrRequest;
 import com.app.payload.request.Signup;
 import com.app.payload.response.ApiResponse;
@@ -42,6 +43,7 @@ public class HrServiceImpl implements HrService{
 		return hrResponse;
 	}
 
+	//update hr info
 	@Override
 	public ApiResponse updateHr(HrRequest hr) {
 		 if (hr.getUser() != null && hr.getUser().getEmail() != null) {
@@ -51,6 +53,8 @@ public class HrServiceImpl implements HrService{
 			 	
 			 //encode the plain password	
 			 	hr.getUser().setPassword(encoder.encode(hr.getUser().getPassword()));
+			 // set the role as hr
+			 	hr.getUser().setRole(UserRole.ROLE_HR);
 			 // Retrieve the existing user from the database
 		        UserEntity existingUser = userRepo.findById(hr.getId()).orElse(null);
 		     // Retrieve the existing hr info from the database

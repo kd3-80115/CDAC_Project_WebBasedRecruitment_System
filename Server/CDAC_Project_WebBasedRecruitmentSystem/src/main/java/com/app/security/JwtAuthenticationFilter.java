@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			// save this auth token under spring sec so that subsequent filters will NOT
 			// retry the auth again
 			SecurityContextHolder.getContext().setAuthentication(token);
-			System.out.println("saved auth token in sec ctx");
+			System.out.println("saved auth token in security context");
 		}
 		filterChain.doFilter(request, response);// to continue with remaining chain of spring sec filters
 

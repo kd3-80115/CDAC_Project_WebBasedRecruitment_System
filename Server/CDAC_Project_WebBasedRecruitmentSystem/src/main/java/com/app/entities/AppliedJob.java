@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -28,6 +30,7 @@ import lombok.Setter;
 public class AppliedJob {
 
 	@EmbeddedId
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ApplicantJobId id;
 
 	// Many-to-One association with the ApplicantEntity using the applicant_id
@@ -63,5 +66,14 @@ public class AppliedJob {
 		AppliedJob other = (AppliedJob) obj;
 		return Objects.equals(applicant, other.applicant) && Objects.equals(job, other.job);
 	}
-    
+
+	public AppliedJob(ApplicantEntity applicant, JobInfoEntity job, JobStatus status) {
+		super();
+		this.applicant = applicant;
+		this.job = job;
+		this.status = status;
+	}
+  
+	
+	
 }
