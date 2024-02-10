@@ -2,6 +2,8 @@ package com.app.payload.response;
 
 
 
+import com.app.entities.NoticePeriod;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,5 +22,6 @@ public class ApplicantResponse {
 	private String profileSummary;
 	private String profilePictureLink;
 	private String maritalStatus;
+	private NoticePeriod noticePeriod;
 	
 }

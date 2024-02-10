@@ -23,7 +23,6 @@ public class EmploymentResponse {
 	private String previousCompanyName;
 	private String currentDesignation;
 	private String previousDesignation;
-	
 	private String jobProfile;
 	private String department;
 	private int currentSalary;

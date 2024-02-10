@@ -1,7 +1,10 @@
 package com.app.service;
 
+import static com.app.utils.UserHelper.findUserByEmail;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,28 +26,27 @@ public class AddressServiceImpl implements AddressService {
 	
 	@Autowired //To map entity with the DTO 
 	private ModelMapper mapper;
-	
-	@Autowired
-	private UserEntityRepository userRepo; 
-	
+		
 	@Autowired
 	private ApplicantRepository applicantRepo;
 	
+	@Autowired
+	private UserEntityRepository userRepo;
 	
 	@Override 
-	public AddressResp getAddress(Long applicantId) {
+	public AddressResp getAddress(Authentication auth) {
 		
-		ApplicantEntity applicant=applicantRepo.findById(applicantId).
-				orElseThrow(()-> new ResourceNotFoundException
-						("Applicant", "Applicant ID", applicantId));
+		String email=(String)auth.getPrincipal();
 		
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by email
+		//extracted from authentication object
 		
-		
-		UserEntity user = applicant.getUser();
+		UserEntity user=findUserByEmail(email, userRepo);
 		
 		AddressEntity address= addressRepo.findByUser(user)
 									.orElseThrow(()-> new ResourceNotFoundException
-											("Address", "Applicant ID", applicantId));
+											("Address", "Applicant ID", email));
 				// Returns the value in case of non empty Optional
 				// OR throws supplied exception
 				
