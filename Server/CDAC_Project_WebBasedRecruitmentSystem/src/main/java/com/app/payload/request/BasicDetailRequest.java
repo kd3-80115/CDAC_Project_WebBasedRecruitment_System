@@ -34,6 +34,6 @@ public class BasicDetailRequest {
 	@Size(min = 10,max = 13,message = "mobile number is not valid")
 	@Pattern(regexp = "^\\d{10}$")
 	private String phoneNumber;
-		
+	
 	private int noticePeriod;
 }
