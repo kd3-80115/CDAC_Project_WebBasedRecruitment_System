@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import com.app.entities.HREntity;
 import com.app.payload.request.HrRequest;
 import com.app.payload.request.JobDetailsRequest;
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.ApplicantAndJobInfo;
 import com.app.payload.response.HrResponse;
 import com.app.payload.response.JobInfoDetailsResponse;
 import com.app.service.HrService;
@@ -81,4 +84,14 @@ public class HRController {
 		ApiResponse response=jobService.updateJobDetails(job,jobId);
 		return new ResponseEntity<ApiResponse>(response,HttpStatus.CREATED);
 	}
+	
+	/**
+	 * Get the applicants for particular job by jobId
+	 * */
+	@GetMapping("/applicants/{jobId}")
+	public ResponseEntity<List<ApplicantAndJobInfo>>getApplicantsForJobId(@PathVariable Long jobId)
+	{
+		return new ResponseEntity<List<ApplicantAndJobInfo>>(jobService.getApplicants(jobId),HttpStatus.OK);
+	}
+	
 }

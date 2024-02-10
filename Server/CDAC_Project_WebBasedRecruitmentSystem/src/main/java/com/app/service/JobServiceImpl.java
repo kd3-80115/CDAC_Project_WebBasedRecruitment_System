@@ -13,9 +13,12 @@ import com.app.entities.HREntity;
 import com.app.entities.JobInfoEntity;
 import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
+import com.app.exception.UnauthorizedAccessException;
 import com.app.payload.request.JobDetailsRequest;
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.ApplicantAndJobInfo;
 import com.app.payload.response.JobInfoDetailsResponse;
+import com.app.repository.AppliedJobRepository;
 import com.app.repository.DepartmentEntityRepository;
 import com.app.repository.HREntityRepository;
 import com.app.repository.JobInfoRepository;
@@ -40,6 +43,10 @@ public class JobServiceImpl implements JobService {
 
 	@Autowired
 	private FindAuthenticationDetails userDetails;
+	
+	@Autowired 
+	private AppliedJobRepository appliedJobRepo;
+	
 	@Override
 	public ApiResponse createJob(JobDetailsRequest job) {
 
@@ -79,6 +86,9 @@ public class JobServiceImpl implements JobService {
 	 * */
 	@Override
 	public ApiResponse deactivateJobById(Long JobId) {
+		if (!isJobOwnedByHr(JobId, userDetails.getUserId())) {
+	        throw new UnauthorizedAccessException("You are not authorized to deactivate this job.");
+	    }
 		Long hrId=userDetails.getUserId();
 		jobRepo.updateJobStatusToFalse(JobId, hrId);
 		return new ApiResponse("job status changed to deactivated");
@@ -91,13 +101,34 @@ public class JobServiceImpl implements JobService {
 	public ApiResponse updateJobDetails(JobDetailsRequest job,Long JobId) {
 	JobInfoEntity existingJobInfo=jobRepo.findById(JobId).orElseThrow(
 			()->new ResourceNotFoundException("Job", "id", JobId));
-
+	if (!isJobOwnedByHr(JobId, userDetails.getUserId())) {
+        throw new UnauthorizedAccessException("You are not authorized to update this job");
+    }
 	//this will map the existing job with incoming changed details in request body
 	mapper.map(job, existingJobInfo);
 	//after this line the changes will saved to the database
 	return new ApiResponse("Job updated");
 	}
 
-	
-	
+	/**
+	 * Get the applicant info --name and the job they have applied
+	 * and status
+	 * */
+	@Override
+	public List<ApplicantAndJobInfo> getApplicants(Long jobId) {
+		if (!isJobOwnedByHr(jobId, userDetails.getUserId())) {
+            throw new UnauthorizedAccessException("You are not authorized to view applicants for this job.");
+        }
+			return appliedJobRepo.getApplicantInfoByJobId(jobId);
+	}
+
+	/**
+	 * To check if the job belongs to the particular hr or not
+	 * */
+	  private boolean isJobOwnedByHr(Long jobId, Long userId) {
+		  JobInfoEntity jobInfo= jobRepo.findById(jobId).orElseThrow(()->new ResourceNotFoundException("Job", "id", jobId));
+		  if(jobInfo.getHr().getId()==userDetails.getUserId())
+			  return true;
+		  return false;
+	  }
 }

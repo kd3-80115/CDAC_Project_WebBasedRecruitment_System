@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.app.payload.request.JobDetailsRequest;
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.ApplicantAndJobInfo;
 import com.app.payload.response.JobInfoDetailsResponse;
 
 public interface JobService {
@@ -24,4 +25,7 @@ public interface JobService {
 	
 	//update the job details
 	public ApiResponse updateJobDetails(JobDetailsRequest job,Long jobId);
+	
+	//get applicant list for particular job
+	public List<ApplicantAndJobInfo> getApplicants(Long jobId);
 }
