@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.app.entities.NoticePeriod;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,5 +37,6 @@ public class BasicDetailRequest {
 	@Pattern(regexp = "^\\d{10}$")
 	private String phoneNumber;
 	
-	private int noticePeriod;
+	
+	private NoticePeriod noticePeriod;
 }

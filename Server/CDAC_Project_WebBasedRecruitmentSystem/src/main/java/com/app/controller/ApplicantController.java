@@ -2,15 +2,23 @@ package com.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.entities.LanguageEntity;
+import com.app.entities.SkillEntity;
+import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.response.AddressResp;
+import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.EducationResponse;
 import com.app.payload.response.EmploymentResponse;
@@ -200,11 +208,64 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/basicDetails
 	// Method : PUT
-	// Res : BasicDetailRequest
-//	@PutMapping("/basicDetails/{applicantId}")
-//	public ResponseEntity<ApiResponse> updateBasicDetails(@PathVariable Long applicantId,@RequestBody @Valid BasicDetailRequest basicDetails ) {
-//		ApiResponse apiResponse=userService.updateBasicDetails(basicDetails);
-//		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
-//	}
+	// DTO : BasicDetailRequest
+	@PutMapping("/basicDetails")
+	public ResponseEntity<ApiResponse> updateBasicDetails(@RequestBody @Valid BasicDetailRequest basicDetails ) {
+	
+		ApiResponse apiResponse=userService.updateBasicDetails(basicDetails);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/headline
+	// Method : PUT
+	// DTO : String
+	@PutMapping("/headline")
+	public ResponseEntity<ApiResponse> updateHeadLine(@RequestBody @Valid String headLine ) {
+	
+		ApiResponse apiResponse=applicantService.updateHeadLine(headLine);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/skills
+	// Method : PUT
+	// DTO : List<String>
+	@PutMapping("/skills")
+	public ResponseEntity<ApiResponse> updateSkills(@RequestBody @Valid List<String> skills) {
+	
+		ApiResponse apiResponse=applicantService.updateSkills(skills);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/skills
+	// Method : PUT
+	// DTO : List<LanguageEntity>
+	@PutMapping("/language")
+	public ResponseEntity<ApiResponse> updateLanguage(@RequestBody @Valid List<LanguageResponse> languages) {
+	
+		ApiResponse apiResponse=applicantService.updateLanguage(languages);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/profileSummary
+	// Method : PUT
+	// DTO : String
+	@PutMapping("/profileSummary")
+	public ResponseEntity<ApiResponse> updateProfileSummary(@RequestBody @Valid String summary ) {
+	
+		ApiResponse apiResponse=applicantService.updateProfileSmry(summary);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+		
 
 }
