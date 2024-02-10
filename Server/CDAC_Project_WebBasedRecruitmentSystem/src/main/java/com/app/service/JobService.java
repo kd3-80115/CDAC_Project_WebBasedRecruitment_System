@@ -9,16 +9,16 @@ import com.app.payload.response.JobInfoDetailsResponse;
 public interface JobService {
 
 	//post method to post a job by HR
-	public ApiResponse createJob(JobDetailsRequest job,String email);
+	public ApiResponse createJob(JobDetailsRequest job);
 	
 	//get job lists created by HR only
-	public List<JobInfoDetailsResponse> getAllJobsCreatedByHr(String email);
+	public List<JobInfoDetailsResponse> getAllJobsCreatedByHr();
 	
 	//deactivate the job --job which are only created by the HR
-	
+	public ApiResponse deactivateJobById(Long JobId);
 	
 	//get the particular job by id and HR name
-	public JobInfoDetailsResponse getJobByHrAndJobId(String email,Long jobId);
+	public JobInfoDetailsResponse getJobByHrAndJobId(Long jobId);
 	
 	//get no. of vacancies opening in the job posted by HR
 }

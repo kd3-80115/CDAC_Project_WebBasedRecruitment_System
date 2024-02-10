@@ -20,6 +20,7 @@ import com.app.repository.DepartmentEntityRepository;
 import com.app.repository.HREntityRepository;
 import com.app.repository.JobInfoRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -40,14 +41,13 @@ public class JobServiceImpl implements JobService {
 	@Autowired
 	private DepartmentEntityRepository deptRepo;
 
+	@Autowired
+	private FindAuthenticationDetails userDetails;
 	@Override
-	public ApiResponse createJob(JobDetailsRequest job, String email) {
-
-		// get the user from database
-		UserEntity user = userRepo.findByEmail(email).orElseThrow();
+	public ApiResponse createJob(JobDetailsRequest job) {
 
 		// get the respective HR info from HR table
-		HREntity hr = hrRepo.findById(user.getId()).orElse(null);
+		HREntity hr = hrRepo.findById(userDetails.getUserId()).orElse(null);
 
 		// get the department from the table
 		DepartmentEntity department = deptRepo.findById(job.getDepId())
@@ -66,22 +66,22 @@ public class JobServiceImpl implements JobService {
 	 * @param{ String email}
 	 * */
 	@Override
-	public List<JobInfoDetailsResponse> getAllJobsCreatedByHr(String email) {
-		// get the user from database
-			UserEntity user = userRepo.findByEmail(email).orElseThrow();
-			Long hrId=user.getId();
-		return jobRepo.findAllJobsByHrId(hrId);
+	public List<JobInfoDetailsResponse> getAllJobsCreatedByHr() {	
+		return jobRepo.findAllJobsByHrId(userDetails.getUserId());
 	}
 
 	/**
 	 * get the job by job id
 	 * */	
 	@Override
-	public JobInfoDetailsResponse getJobByHrAndJobId(String email, Long jobId) {
-	// get the user from database
-		UserEntity user = userRepo.findByEmail(email).orElseThrow();
-		Long hrId=user.getId();
-		return jobRepo.findJobByHrIdAndJobId(hrId, jobId);
+	public JobInfoDetailsResponse getJobByHrAndJobId(Long jobId) {
+		return jobRepo.findJobByHrIdAndJobId(userDetails.getUserId(), jobId);
+	}
+
+	@Override
+	public ApiResponse deactivateJobById(Long JobId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -40,4 +40,5 @@ public class JobDetailsRequest {
 	@NotNull(message ="enter number of vacancies")
 	@Min(3)
 	private int vacancies;
+	private boolean status;
 }

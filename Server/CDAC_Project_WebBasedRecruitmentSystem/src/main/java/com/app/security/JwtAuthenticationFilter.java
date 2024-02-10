@@ -36,10 +36,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			Claims payloadClaims = utils.validateJwtToken(jwt);
 			// get user name from the claims
 			String email = utils.getUserNameFromJwtToken(payloadClaims);
+			//adding custom user id to the token
+			Long userId = utils.getUserId(payloadClaims);
 			// get granted authorities as a custom claim
 			List<GrantedAuthority> authorities = utils.getAuthoritiesFromClaims(payloadClaims);
 			// add username/email n granted authorities in Authentication object
-			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, null,
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, userId,
 					authorities);
 			// save this auth token under spring sec so that subsequent filters will NOT
 			// retry the auth again

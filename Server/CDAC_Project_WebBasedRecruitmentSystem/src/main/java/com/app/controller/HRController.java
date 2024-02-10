@@ -31,35 +31,31 @@ public class HRController {
 	private JobService jobService;
 	
 	@GetMapping
-	public ResponseEntity<HrResponse> getHrDetails(Authentication auth)
+	public ResponseEntity<HrResponse> getHrDetails()
 	{
-		String userEmail=(String)auth.getPrincipal();
-		return new ResponseEntity<HrResponse>(hrService.getHrDetails(userEmail),HttpStatus.OK);
+		return new ResponseEntity<HrResponse>(hrService.getHrDetails(),HttpStatus.OK);
 	}
 	
-	// TODO: Add the authorization head
+
 	@PostMapping
 	public ResponseEntity<ApiResponse> updateHr(@RequestBody HrRequest hr){
 		return new ResponseEntity<ApiResponse>(hrService.updateHr(hr),HttpStatus.OK);
 	}
 	
 	@PostMapping("/createjob")
-	public ResponseEntity<ApiResponse> createJob(@RequestBody JobDetailsRequest job,Authentication auth)
+	public ResponseEntity<ApiResponse> createJob(@RequestBody JobDetailsRequest job)
 	{
-		String userEmail=(String)auth.getPrincipal();
-		return new ResponseEntity<ApiResponse>(jobService.createJob(job, userEmail),HttpStatus.CREATED);
+		return new ResponseEntity<ApiResponse>(jobService.createJob(job),HttpStatus.CREATED);
 	}
 	@GetMapping("/jobs")
-	public ResponseEntity<?> getAllJobsCreatedByHr(Authentication auth)
+	public ResponseEntity<?> getAllJobsCreatedByHr()
 	{
-		String email=(String)auth.getPrincipal();
-		return new ResponseEntity<>(jobService.getAllJobsCreatedByHr(email),HttpStatus.OK);
+		return new ResponseEntity<>(jobService.getAllJobsCreatedByHr(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/job/{jobId}")
-	public ResponseEntity<?> getAllJobsCreatedByHr(@PathVariable Long jobId,Authentication auth)
+	public ResponseEntity<?> getAllJobsCreatedByHr(@PathVariable Long jobId)
 	{
-		String email=(String)auth.getPrincipal();
-		return new ResponseEntity<>(jobService.getJobByHrAndJobId(email,jobId),HttpStatus.OK);
+		return new ResponseEntity<>(jobService.getJobByHrAndJobId(jobId),HttpStatus.OK);
 	}
 }

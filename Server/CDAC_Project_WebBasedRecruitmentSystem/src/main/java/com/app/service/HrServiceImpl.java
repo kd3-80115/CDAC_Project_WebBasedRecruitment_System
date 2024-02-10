@@ -16,6 +16,7 @@ import com.app.payload.response.ApiResponse;
 import com.app.payload.response.HrResponse;
 import com.app.repository.HREntityRepository;
 import com.app.repository.UserEntityRepository;
+import com.app.security.FindAuthenticationDetails;
 
 @Service
 @Transactional
@@ -33,9 +34,13 @@ public class HrServiceImpl implements HrService{
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	@Autowired
+	private FindAuthenticationDetails user;
+	
 	@Override
-	public HrResponse getHrDetails(String userName) {
-		UserEntity user=userRepo.findByEmail(userName).orElseThrow();
+	public HrResponse getHrDetails() {
+		Long userId=user.getUserId();
+		UserEntity user=userRepo.findById(userId).orElseThrow();
 		HREntity hrEntity=hrRepo.findByUser(user).orElseThrow();
 		hrEntity.setUser(user);
 		HrResponse hrResponse=mapper.map(hrEntity, HrResponse.class);
@@ -49,7 +54,7 @@ public class HrServiceImpl implements HrService{
 		 if (hr.getUser() != null && hr.getUser().getEmail() != null) {
 		     
 			 //set the hr user id also same as user id
-			 	hr.getUser().setId(hr.getId());
+			 	hr.getUser().setId(user.getUserId());
 			 	
 			 //encode the plain password	
 			 	hr.getUser().setPassword(encoder.encode(hr.getUser().getPassword()));
