@@ -16,7 +16,7 @@ import com.app.payload.request.HrRegistrationDetailsRequest;
 import com.app.payload.response.AnalysisResponseAdmin;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.HrDetailsResponse;
-import com.app.payload.response.JobDetailsResponse;
+import com.app.payload.response.JobDetailsWithUsernameResponse;
 import com.app.repository.HREntityRepository;
 import com.app.repository.JobInfoRepository;
 import com.app.repository.UserEntityRepository;
@@ -73,8 +73,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<JobDetailsResponse> getAllJobs() {
-		List<JobDetailsResponse> jobList=jobRepo.findAllJobs();
+	public List<JobDetailsWithUsernameResponse> getAllJobs() {
+		List<JobDetailsWithUsernameResponse> jobList=jobRepo.findAllJobs();
 		return jobList;
 	}
 

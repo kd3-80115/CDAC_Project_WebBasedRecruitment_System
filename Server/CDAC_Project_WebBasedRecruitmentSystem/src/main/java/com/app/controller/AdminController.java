@@ -19,7 +19,7 @@ import com.app.payload.request.HrRegistrationDetailsRequest;
 import com.app.payload.response.AnalysisResponseAdmin;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.HrDetailsResponse;
-import com.app.payload.response.JobDetailsResponse;
+import com.app.payload.response.JobDetailsWithUsernameResponse;
 import com.app.service.AdminService;
 
 
@@ -54,9 +54,9 @@ public class AdminController {
 	//get t whole list of jobs
 	// https://localhost:7878/admin/jobList
 	@GetMapping("/jobList")
-	public ResponseEntity<List<JobDetailsResponse>> getAllJobs()
+	public ResponseEntity<List<JobDetailsWithUsernameResponse>> getAllJobs()
 	{
-		return new ResponseEntity<List<JobDetailsResponse>>(adminService.getAllJobs(),HttpStatus.OK);
+		return new ResponseEntity<List<JobDetailsWithUsernameResponse>>(adminService.getAllJobs(),HttpStatus.OK);
 	}
 	
 	

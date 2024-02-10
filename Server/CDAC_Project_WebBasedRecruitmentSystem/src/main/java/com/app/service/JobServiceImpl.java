@@ -33,9 +33,6 @@ public class JobServiceImpl implements JobService {
 	private JobInfoRepository jobRepo;
 
 	@Autowired
-	private UserEntityRepository userRepo;
-
-	@Autowired
 	private ModelMapper mapper;
 
 	@Autowired
@@ -63,7 +60,6 @@ public class JobServiceImpl implements JobService {
 
 	/**
 	 * get the all jobs created by the HR
-	 * @param{ String email}
 	 * */
 	@Override
 	public List<JobInfoDetailsResponse> getAllJobsCreatedByHr() {	
@@ -78,10 +74,30 @@ public class JobServiceImpl implements JobService {
 		return jobRepo.findJobByHrIdAndJobId(userDetails.getUserId(), jobId);
 	}
 
+	/**
+	 * Deactivating the current job by job id and hr id
+	 * */
 	@Override
 	public ApiResponse deactivateJobById(Long JobId) {
-		// TODO Auto-generated method stub
-		return null;
+		Long hrId=userDetails.getUserId();
+		jobRepo.updateJobStatusToFalse(JobId, hrId);
+		return new ApiResponse("job status changed to deactivated");
 	}
 
+	/**
+	 * Update the job details
+	 * */
+	@Override
+	public ApiResponse updateJobDetails(JobDetailsRequest job,Long JobId) {
+	JobInfoEntity existingJobInfo=jobRepo.findById(JobId).orElseThrow(
+			()->new ResourceNotFoundException("Job", "id", JobId));
+
+	//this will map the existing job with incoming changed details in request body
+	mapper.map(job, existingJobInfo);
+	//after this line the changes will saved to the database
+	return new ApiResponse("Job updated");
+	}
+
+	
+	
 }

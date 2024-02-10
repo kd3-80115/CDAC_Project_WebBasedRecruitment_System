@@ -21,4 +21,7 @@ public interface JobService {
 	public JobInfoDetailsResponse getJobByHrAndJobId(Long jobId);
 	
 	//get no. of vacancies opening in the job posted by HR
+	
+	//update the job details
+	public ApiResponse updateJobDetails(JobDetailsRequest job,Long jobId);
 }

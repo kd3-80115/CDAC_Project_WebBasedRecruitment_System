@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.app.payload.request.HrRequest;
 import com.app.payload.request.JobDetailsRequest;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.HrResponse;
+import com.app.payload.response.JobInfoDetailsResponse;
 import com.app.service.HrService;
 import com.app.service.JobService;
 import com.app.service.UserService;
@@ -54,8 +56,29 @@ public class HRController {
 	}
 	
 	@GetMapping("/job/{jobId}")
-	public ResponseEntity<?> getAllJobsCreatedByHr(@PathVariable Long jobId)
+	public ResponseEntity<?> getJobCreatedByHr(@PathVariable Long jobId)
 	{
 		return new ResponseEntity<>(jobService.getJobByHrAndJobId(jobId),HttpStatus.OK);
+	}
+	
+	
+	/**
+	 * Update the status of job
+	 * */
+	@PutMapping("/job/deactivatejob/{jobId}")
+	public ResponseEntity<ApiResponse> deactivateJob(@PathVariable Long jobId)
+	{
+		return new ResponseEntity<ApiResponse>(jobService.deactivateJobById(jobId),HttpStatus.OK);
+	}
+	
+	
+	/**
+	 * Update the job
+	 * */
+	@PutMapping("/job/updateJob/{jobId}")
+	public ResponseEntity<ApiResponse>updateJobDetails(@RequestBody JobDetailsRequest job,@PathVariable Long jobId)
+	{
+		ApiResponse response=jobService.updateJobDetails(job,jobId);
+		return new ResponseEntity<ApiResponse>(response,HttpStatus.CREATED);
 	}
 }
