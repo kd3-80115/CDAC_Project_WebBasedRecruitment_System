@@ -12,5 +12,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class SkillResponse {
+	private Long skillId;
 	private String name;
 }

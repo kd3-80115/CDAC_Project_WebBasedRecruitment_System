@@ -1,4 +1,5 @@
 package com.app.service;
+import static com.app.utils.ApplicantHelper.findApplicantByUser;
 import static com.app.utils.UserHelper.findUserById;
 
 import org.modelmapper.ModelMapper;
@@ -7,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.entities.ApplicantEntity;
+import com.app.entities.NoticePeriod;
 import com.app.entities.UserEntity;
 import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.request.Signup;
@@ -31,12 +34,18 @@ public class UserServiceImpl implements UserService {
 	
 	//dep
 	@Autowired
+	private ApplicantRepository applicantRepo;
+	
+	//dep
+	@Autowired
 	private FindAuthenticationDetails findUser;
 	
 	@Override
 	public Signup userRegistration(Signup reqDTO) {
 		//dto --> entity
 		UserEntity user=mapper.map(reqDTO, UserEntity.class);
+		ApplicantEntity applicant=new ApplicantEntity(user, false, false, "0", "0", "0",NoticePeriod.FIFTEEN_DAYS_OR_LESS);
+		applicantRepo.save(applicant);
 		user.setPassword(encoder.encode(user.getPassword()));//pwd : encrypted using SHA
 		
 		return mapper.map(userDao.save(user), Signup.class);
@@ -56,15 +65,29 @@ public class UserServiceImpl implements UserService {
 		//dto <-- entity
 		return mapper.map(user, UserDetailsResp.class);
 	}
-	
-	
-	@Autowired
-	private ApplicantRepository applicantRepo;
 
 	@Override
-	public ApiResponse updateBasicDetails(BasicDetailRequest basicDetails,Long applicantId) {
+	public ApiResponse updateBasicDetails(BasicDetailRequest basicDetails) {
 		
-		return null;
+		Long userId=findUser.getUserId();
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by id		
+		UserEntity user=findUserById(userId, userDao);
+		
+		user.setFirstName(basicDetails.getFirstName());
+		user.setLastName(basicDetails.getLastName());
+		user.setPhoneNumber(basicDetails.getPhoneNumber());
+		user.setEmail(basicDetails.getEmail());
+		
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+		applicant.setNoticePeriod(basicDetails.getNoticePeriod());
+		
+		userDao.save(user);
+		applicantRepo.save(applicant);
+		return new ApiResponse("User with id "+userId+" Updated");
 	}
 	
 	

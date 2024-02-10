@@ -8,4 +8,5 @@ import com.app.entities.SkillEntity;
 
 public interface SkillEntityRepository extends JpaRepository<SkillEntity, Long> {
 	
+	Optional<SkillEntity> findByName(String skill);
 }
