@@ -42,4 +42,15 @@ public class GlobalExceptionHandler {
 		ApiResponse apiRes=new ApiResponse(msg);
 		return new ResponseEntity<ApiResponse>(apiRes,HttpStatus.NOT_FOUND);
 	}
+	
+	
+	/**
+	 * UnAuthorized Exception handler method
+	 * */
+	@ExceptionHandler(UnauthorizedAccessException.class)
+	public ResponseEntity<ApiResponse> unAuthorizedException(UnauthorizedAccessException ex){
+		String msg=ex.getMessage();
+		ApiResponse apiRes=new ApiResponse(msg);
+		return new ResponseEntity<ApiResponse>(apiRes,HttpStatus.FORBIDDEN);
+	}
 }

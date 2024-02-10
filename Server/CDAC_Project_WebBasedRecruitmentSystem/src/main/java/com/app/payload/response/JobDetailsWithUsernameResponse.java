@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 
-public class JobDetailsResponse {
+public class JobDetailsWithUsernameResponse {
 
 	public Long jobId;
 	public String jobTitle;
@@ -22,7 +22,7 @@ public class JobDetailsResponse {
 	public String location;
 	private int vacancies;
 	private boolean status;
-	public JobDetailsResponse(Long jobId, String jobTitle, String firstName, String lastName, LocalDate jobCreatedDate,
+	public JobDetailsWithUsernameResponse(Long jobId, String jobTitle, String firstName, String lastName, LocalDate jobCreatedDate,
 			LocalDate applicationDeadline, String location, int vacancies,boolean status) {
 		super();
 		this.jobId = jobId;

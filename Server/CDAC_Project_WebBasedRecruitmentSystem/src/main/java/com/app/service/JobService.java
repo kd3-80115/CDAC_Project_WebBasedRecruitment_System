@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.app.payload.request.JobDetailsRequest;
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.ApplicantAndJobInfo;
 import com.app.payload.response.JobInfoDetailsResponse;
 
 public interface JobService {
@@ -21,4 +22,10 @@ public interface JobService {
 	public JobInfoDetailsResponse getJobByHrAndJobId(Long jobId);
 	
 	//get no. of vacancies opening in the job posted by HR
+	
+	//update the job details
+	public ApiResponse updateJobDetails(JobDetailsRequest job,Long jobId);
+	
+	//get applicant list for particular job
+	public List<ApplicantAndJobInfo> getApplicants(Long jobId);
 }

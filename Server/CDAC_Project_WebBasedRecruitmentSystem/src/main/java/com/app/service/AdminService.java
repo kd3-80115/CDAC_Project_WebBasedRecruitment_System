@@ -5,7 +5,7 @@ import com.app.payload.request.HrRegistrationDetailsRequest;
 import com.app.payload.response.AnalysisResponseAdmin;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.HrDetailsResponse;
-import com.app.payload.response.JobDetailsResponse;
+import com.app.payload.response.JobDetailsWithUsernameResponse;
 
 public interface AdminService {
 
@@ -18,7 +18,7 @@ public interface AdminService {
 	public List<HrDetailsResponse>  getAllHr();
 	
 	//get list of all jobs
-	public List<JobDetailsResponse> getAllJobs();
+	public List<JobDetailsWithUsernameResponse> getAllJobs();
 	
 	
 	

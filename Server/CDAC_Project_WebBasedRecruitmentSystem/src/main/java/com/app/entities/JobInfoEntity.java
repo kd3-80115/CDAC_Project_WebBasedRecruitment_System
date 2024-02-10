@@ -26,10 +26,12 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="job_info")
-@Setter @Getter @NoArgsConstructor 
+@Setter @Getter @NoArgsConstructor
+@ToString
 public class JobInfoEntity {
 
 	@Id
@@ -70,7 +72,7 @@ public class JobInfoEntity {
 	@Column(name="vacancies")
 	private int vacancies;
 	
-	@Column(name="status")
+	@Column(name="status",columnDefinition = "Boolean")
 	private boolean status;
 	
 	@ManyToMany
