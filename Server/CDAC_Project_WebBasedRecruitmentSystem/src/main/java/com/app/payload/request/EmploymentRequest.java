@@ -48,5 +48,8 @@ public class EmploymentRequest {
 	
 	
 	private int currentSalary;
-
+	
+	public boolean getCurrentlyEmployed() {
+		return this.currentlyEmployed;
+	}
 }

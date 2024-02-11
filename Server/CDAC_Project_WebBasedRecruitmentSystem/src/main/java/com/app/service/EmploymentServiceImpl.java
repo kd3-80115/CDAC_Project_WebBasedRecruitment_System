@@ -91,7 +91,7 @@ public class EmploymentServiceImpl implements EmploymentService {
 		employmentEntity.setApplicant(applicant);
 		
 		employmentRepo.save(employmentEntity);
-		return new ApiResponse("Applicant Profile summary updated with id "+applicant.getId());
+		return new ApiResponse("Applicant employment added with id "+applicant.getId());
 	}
 	
 	
@@ -112,7 +112,7 @@ public class EmploymentServiceImpl implements EmploymentService {
 		
 		EmploymentEntity setEmployment=employmentRepo.findById(employment.getId()) .
 					orElseThrow(()-> new ResourceNotFoundException
-						("Employment in Employment service", "Employment ID", applicant.getId()));
+						("Employment in Employment service", "Employment ID", employment.getId()));
 			
 		setEmployment.setCurrentCompanyName(employment.getCurrentCompanyName());
 		setEmployment.setCurrentDesignation(employment.getCurrentDesignation());
@@ -124,7 +124,7 @@ public class EmploymentServiceImpl implements EmploymentService {
 		setEmployment.setJobProfile(employment.getJobProfile());
 		setEmployment.setPreviousCompanyName(employment.getPreviousCompanyName());
 		setEmployment.setPreviousDesignation(employment.getPreviousDesignation());
-		
+		setEmployment.setCurrentlyEmployed(employment.getCurrentlyEmployed());
 		
 		employmentRepo.save(setEmployment);
 		return new ApiResponse("Applicant Employment updated with id "+applicant.getId());

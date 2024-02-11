@@ -15,6 +15,8 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.ProjectEntity;
 import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
+import com.app.payload.request.ProjectRequest;
+import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ProjectResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.ProjectEntityRepository;
@@ -69,6 +71,59 @@ public class ProjectServiceImpl implements ProjectService {
 				map(project -> mapper.map(project, ProjectResponse.class)).
 				collect(Collectors.toList());
 	}
+
+	@Override
+	public ApiResponse addProjectFun(ProjectRequest projectDTO) {
+		
+		Long userId=findUser.getUserId();
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by id		
+		UserEntity user=findUserById(userId, userRepo);
+		
+
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+		ProjectEntity projectEntity=mapper.map(projectDTO, ProjectEntity.class);
+		projectEntity.setApplicant(applicant);
+		projectRepo.save(projectEntity);
+		
+		return new ApiResponse("Applicant Project added with id "+applicant.getId());
+	}
+	
+	@Override
+	public ApiResponse updateProjectFun(ProjectRequest projectDTO) {
+		
+		Long userId=findUser.getUserId();
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by id		
+		UserEntity user=findUserById(userId, userRepo);
+		
+
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+	
+		
+		ProjectEntity projectEntity=projectRepo.findById(projectDTO.getId()).
+					orElseThrow(()-> new ResourceNotFoundException
+						("Project in project service", "project ID", projectDTO.getId()));
+
+		projectEntity.setProjectDescription(projectDTO.getProjectDescription());
+		projectEntity.setProjectEndDate(projectDTO.getProjectEndDate());
+		projectEntity.setProjectStartDate(projectDTO.getProjectStartDate());
+		projectEntity.setProjectStatus(projectDTO.getProjectStatus());
+		projectEntity.setProjectTitle(projectDTO.getProjectTitle());
+		projectEntity.setApplicant(applicant);
+		projectRepo.save(projectEntity);
+		
+		return new ApiResponse("Applicant Project added with id "+applicant.getId());
+	}
+	
+	
+	
 	
 
 

@@ -20,6 +20,7 @@ import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
 import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.request.EmploymentRequest;
+import com.app.payload.request.ProjectRequest;
 import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
@@ -294,8 +295,32 @@ public class ApplicantController {
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/project
+	// Method : POST
+	// DTO : ProjectRequest
+	@PostMapping("/project")
+	public ResponseEntity<ApiResponse> addProject(@RequestBody @Valid ProjectRequest project ) {
+	
+		ApiResponse apiResponse=projectService.addProjectFun(project);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
 		
 	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/project
+	// Method : PUT
+	// DTO : ProjectRequest
+	@PutMapping("/project")
+	public ResponseEntity<ApiResponse> updateProject(@RequestBody @Valid ProjectRequest project ) {
+	
+		ApiResponse apiResponse=projectService.updateProjectFun(project);
 		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
 
 }
