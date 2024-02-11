@@ -44,6 +44,10 @@ public class EducationServiceImpl implements EducationService {
 	@Autowired
 	private FindAuthenticationDetails findUser;
 	
+	
+	/**
+	 * Get applicant Education
+	 * **/
 	@Override
 	public List<EducationResponse> getEducationDetail() {
 		
@@ -72,6 +76,9 @@ public class EducationServiceImpl implements EducationService {
 		
 	}
 
+	/**
+	 * Add applicant Education
+	 * **/
 	@Override
 	public ApiResponse addEducationFun(EducationRequest education) {
 		
@@ -95,7 +102,9 @@ public class EducationServiceImpl implements EducationService {
 	
 	}
 	
-	
+	/**
+	 * Update applicant Education
+	 * **/
 	@Override
 	public ApiResponse updateEducationFun(EducationRequest education) {
 		

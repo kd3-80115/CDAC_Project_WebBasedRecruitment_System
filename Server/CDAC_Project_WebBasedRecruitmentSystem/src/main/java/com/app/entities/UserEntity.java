@@ -24,6 +24,7 @@ import lombok.ToString;
 @Setter
 @ToString(exclude = "password") // toString excluding password
 public class UserEntity extends BaseEntity {
+	
 	@Column(length = 20,nullable=false)
 	private String firstName;
 	

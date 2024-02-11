@@ -3,6 +3,9 @@ package com.app.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,7 +36,10 @@ public class AddressEntity extends BaseEntity{
 	@Column(length = 30)
 	private String country;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="applicant_id",nullable = false)
+	@MapsId	
 	private UserEntity user;
 
 	public AddressEntity(String permanentAddress, String pincode, String state, String country, UserEntity user) {

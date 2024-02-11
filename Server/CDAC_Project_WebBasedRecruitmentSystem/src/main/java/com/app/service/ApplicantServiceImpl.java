@@ -181,7 +181,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return new ApiResponse("Applicant Skills updated with id "+applicant.getId());
 	}
 
-
+	
+	/**
+	 * Update applicant Language
+	 * **/
 	@Override
 	public ApiResponse updateLanguage(List<LanguageResponse> languageList) {
 		
@@ -209,7 +212,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	
 	
 	/**
-	 * Updating Applicant Headline
+	 * Updating Applicant Summary
 	 * */
 	@Override
 	public ApiResponse updateProfileSmry(String summary) {

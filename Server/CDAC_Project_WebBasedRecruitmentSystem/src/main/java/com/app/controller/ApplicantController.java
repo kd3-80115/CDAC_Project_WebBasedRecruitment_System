@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.entities.EmploymentEntity;
 import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
+import com.app.payload.request.AddressRequest;
 import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.request.EducationRequest;
 import com.app.payload.request.EmploymentRequest;
@@ -371,6 +372,31 @@ public class ApplicantController {
 	public ResponseEntity<ApiResponse> updateSchooling(@RequestBody @Valid SchoolingRequest schooling ) {
 	
 		ApiResponse apiResponse=schoolingService.updateSchoolingFun(schooling);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/address
+	// Method : POST
+	// DTO : AddressRequest
+	@PostMapping("/address")
+	public ResponseEntity<ApiResponse> addAddress(@RequestBody @Valid AddressRequest address ) {
+	
+		ApiResponse apiResponse=addressService.addAddressFun(address);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/address
+	// Method : PUT
+	// DTO : AddressRequest
+	@PutMapping("/address")
+	public ResponseEntity<ApiResponse> updateAddress(@RequestBody @Valid AddressRequest address ) {
+	
+		ApiResponse apiResponse=addressService.updateAddressFun(address);
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}

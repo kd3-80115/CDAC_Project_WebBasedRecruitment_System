@@ -9,5 +9,9 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.EducationEntity;
 
 public interface EducationEntityRepository extends JpaRepository<EducationEntity, Long> {
+	
+	/**
+	 * Get all Education by applicant
+	 * **/
 	Optional<List<EducationEntity>> findAllByApplicant(ApplicantEntity applicant);
 }

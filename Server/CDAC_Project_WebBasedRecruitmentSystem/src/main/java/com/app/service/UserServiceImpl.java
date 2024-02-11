@@ -50,7 +50,11 @@ public class UserServiceImpl implements UserService {
 		
 		return mapper.map(userDao.save(user), Signup.class);
 	}
-
+	
+	
+	/**
+	 * Get applicant Basic Details
+	 * **/
 	@Override
 	public UserDetailsResp getBasicDetail() {
 		
@@ -65,7 +69,11 @@ public class UserServiceImpl implements UserService {
 		//dto <-- entity
 		return mapper.map(user, UserDetailsResp.class);
 	}
-
+	
+	
+	/**
+	 * Update applicant Basic Details
+	 * **/
 	@Override
 	public ApiResponse updateBasicDetails(BasicDetailRequest basicDetails) {
 		

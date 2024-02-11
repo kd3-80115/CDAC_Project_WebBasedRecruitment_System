@@ -11,6 +11,9 @@ import com.app.entities.UserEntity;
 
 
 public interface ApplicantRepository extends JpaRepository<ApplicantEntity, Long> {
-
+	
+	/**
+	 * Get applicant by user
+	 * **/
 	Optional<ApplicantEntity> findByUser(UserEntity user);
 }
