@@ -128,7 +128,8 @@ public class ApplicantEntity extends BaseEntity{
 	// one applicant can have multiple jobs saved as well as applied
 	@ManyToMany(mappedBy = "applicant")
 	private Set<JobInfoEntity> job=new HashSet<JobInfoEntity>();
-		
+	
+	
 	// Mapping a many to many relation between applicant and jobs using third
 	// table applied job
     @OneToMany(
@@ -138,12 +139,18 @@ public class ApplicantEntity extends BaseEntity{
     )
     private Set<AppliedJob> appliedJobs = new HashSet<>();
     
+    
+    
+    
     //adds languages in the applicant profile
     public void addLanguage(LanguageEntity language) {
 		
 		languages.add(language);
 		language.getApplicants().add(this);
 	}
+    
+    
+    
     //removes languages in the applicant profile
     public void removeLanguage(LanguageEntity language) {
 		
