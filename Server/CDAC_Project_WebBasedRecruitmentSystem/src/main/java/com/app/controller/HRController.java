@@ -122,7 +122,7 @@ public class HRController {
 	}
 	
 	/**
-	 * 
+	 * Remove image from AWS S3 and user account
 	 * */
 	@DeleteMapping("/remove_image")
 	public ResponseEntity<ApiResponse> removeImage()

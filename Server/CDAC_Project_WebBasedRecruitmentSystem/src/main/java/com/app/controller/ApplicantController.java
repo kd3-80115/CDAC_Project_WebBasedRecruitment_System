@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.app.entities.EmploymentEntity;
 import com.app.entities.LanguageEntity;
@@ -412,5 +415,96 @@ public class ApplicantController {
 		ApiResponse apiResponse=userService.updatePersonalDetailFun(personalDetail);
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	/**
+	 * Rest API end point
+	 * URL:https://localhost:7878/applicant/upload-image
+	 * Method :POST
+	 * Request body->file
+	 * */
+	@PostMapping("/upload-image")
+	public ResponseEntity<ApiResponse> uploadImage(@RequestParam MultipartFile file ) {
+		if (!isValidImage(file)) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse("Invalid file type"),HttpStatus.BAD_REQUEST);
+        }
+		return new ResponseEntity<ApiResponse>(applicantService.uploadImage(file),HttpStatus.OK);
+	}
+	/**
+	 * Rest API end point
+	 * URL:https://localhost:7878/applicant/update-image
+	 * Method :PUT
+	 * Request body->file
+	 * */
+	@PutMapping("/update-image")
+	public ResponseEntity<ApiResponse> updateImage(@RequestParam MultipartFile file ) {
+		if (!isValidImage(file)) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse("Invalid file type"),HttpStatus.BAD_REQUEST);
+        }
+		return new ResponseEntity<ApiResponse>(applicantService.updateImage(file),HttpStatus.OK);
+	}
+	/**
+	 * Rest API end point
+	 * URL:https://localhost:7878/applicant/delete-image
+	 * Method :PUT
+	 * */
+	@DeleteMapping("remove-image")
+	public ResponseEntity<ApiResponse> removeImage()
+	{
+		return new ResponseEntity<ApiResponse>(applicantService.removeImage(),HttpStatus.OK);
+	}
+	
+	/**
+	 * Rest API end point
+	 * URL:https://localhost:7878/applicant/upload-resume
+	 * Method :POST
+	 * Request body->file
+	 * */
+	@PostMapping("/upload-resume")
+	public ResponseEntity<ApiResponse> uploadResume(@RequestParam MultipartFile file ) {
+		if (!isValidPdf(file)) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse("Invalid file type-must be pdf"),HttpStatus.BAD_REQUEST);
+        }
+		return new ResponseEntity<ApiResponse>(applicantService.uploadResume(file),HttpStatus.OK);
+	}
+	/**
+	 * Rest API end point
+	 * URL:https://localhost:7878/applicant/update-resume
+	 * Method :PUT
+	 * Request body->file
+	 * */
+	@PutMapping("/update-resume")
+	public ResponseEntity<ApiResponse> updateResume(@RequestParam MultipartFile file ) {
+		if (!isValidPdf(file)) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse("Invalid file type-must be pdf"),HttpStatus.BAD_REQUEST);
+        }
+		return new ResponseEntity<ApiResponse>(applicantService.updateResume(file),HttpStatus.OK);
+	}
+	/**
+	 * Rest API end point
+	 * URL:https://localhost:7878/applicant/delete-resume
+	 * Method :PUT
+	 * */
+	@DeleteMapping("remove-resume")
+	public ResponseEntity<ApiResponse> removeResume()
+	{
+		return new ResponseEntity<ApiResponse>(applicantService.removeResume(),HttpStatus.OK);
+	}
+	
+	
+	/**
+	 * Custom validation method to check if the file is an image
+	 * */ 
+	 private boolean isValidImage(MultipartFile file) {
+		      String fileName = file.getOriginalFilename();
+		      return fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".jpeg"));
+	 }
+	 
+	 /**
+	  *Custom validation method to check if the file is a pdf
+	  * */ 
+	 private boolean isValidPdf(MultipartFile file) {
+		 String fileName = file.getOriginalFilename();
+		 return fileName != null && (fileName.endsWith(".pdf"));
 	}
 }

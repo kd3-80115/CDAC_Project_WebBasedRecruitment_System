@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.app.entities.LanguageEntity;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
@@ -13,20 +15,33 @@ import com.app.payload.response.SkillResponse;
 
 public interface ApplicantService {
 
-	ApplicantResponse getProfileInfo();
+	public ApplicantResponse getProfileInfo();
 		
-	List<SkillResponse> getAllSkills();
+	public List<SkillResponse> getAllSkills();
 	
-	List<LanguageResponse> getAllLanguages();
+	public List<LanguageResponse> getAllLanguages();
 
-	ApiResponse updateHeadLine( String headLine);
+	public ApiResponse updateHeadLine( String headLine);
 
-	ApiResponse updateSkills( List<String> skills);
+	public ApiResponse updateSkills( List<String> skills);
 
-	ApiResponse updateLanguage( List<LanguageResponse> languages);
+	public ApiResponse updateLanguage( List<LanguageResponse> languages);
 
-	ApiResponse updateProfileSmry(String summary);
+	public ApiResponse updateProfileSmry(String summary);
 
 
-
+	//upload image
+	public ApiResponse uploadImage(MultipartFile file);
+	//update image
+	public ApiResponse updateImage(MultipartFile file);
+	//remove image
+	public ApiResponse removeImage();
+	
+	//upload resume
+	public ApiResponse uploadResume(MultipartFile file);
+	//update resume
+	public ApiResponse updateResume(MultipartFile file);
+	//remove resume
+	public ApiResponse removeResume();
+		
 }

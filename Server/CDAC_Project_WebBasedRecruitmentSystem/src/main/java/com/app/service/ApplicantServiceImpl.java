@@ -8,11 +8,15 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.app.entities.ApplicantEntity;
 import com.app.entities.EmploymentEntity;
+import com.app.entities.HREntity;
 import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
 import com.app.entities.UserEntity;
@@ -50,7 +54,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private LanguageEntityRepository languageRepo;
 	
+	@Autowired
+	private StorageService storageService;
 	
+	@Autowired
+	private AmazonS3 s3Client;
+
+	@Value("${application.bucket.name}")
+    private String bucketName;
 	
 	
 	/**
@@ -231,12 +242,94 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return new ApiResponse("Applicant Profile summary updated with id "+applicant.getId());
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Uploading the image to the AWS S3 Bucket
+	 * and storing the file name in the database  
+	 * */
+	@Override
+	public ApiResponse uploadImage(MultipartFile file) {
+		Long userId=findUser.getUserId();
+		ApplicantEntity applicant=applicantRepo.findById(userId).orElseThrow();
+		String filename=storageService.uploadFile("ApplicantId_"+userId, file);
+		applicant.setProfilePictureLink(filename);
+		return new ApiResponse("Image Uploaded Successfully");
+	}
+
+	/**
+	 * Update the image in AWS S3 bucket
+	 * 1.it will delete the object in s3 bucket than
+	 * 2.it will upload the new image
+	 * */
+	@Override
+	public ApiResponse updateImage(MultipartFile file) {
+		Long userId=findUser.getUserId();
+		ApplicantEntity applicant=applicantRepo.findById(userId).orElseThrow();
+		String fileName=applicant.getProfilePictureLink();
+		String deletedFileName=storageService.deleteFile(fileName);
+		if(deletedFileName.equals(fileName))
+		{
+			fileName=storageService.uploadFile("UserID_"+userId, file);
+			applicant.setProfilePictureLink(deletedFileName);
+		}
+		return new ApiResponse(fileName+" image update successfully");
+	}
+
+	/**
+	 * Removes the image from the AWS S3
+	 * */
+	@Override
+	public ApiResponse removeImage() {
+		Long userId = findUser.getUserId();
+		ApplicantEntity applicant=applicantRepo.findById(userId).orElseThrow();
+		String fileName=applicant.getProfilePictureLink();
+		storageService.deleteFile(fileName);
+		applicant.setProfilePictureLink("deleted");
+		return new ApiResponse("image removed");
+	}
+
+	/**
+	 * uploading resume to the
+	 * AWS S3 and setting the resume column in database
+	 * */
+	@Override
+	public ApiResponse uploadResume(MultipartFile file) {
+		Long userId=findUser.getUserId();
+		ApplicantEntity applicant=applicantRepo.findById(userId).orElseThrow();
+		String filename=storageService.uploadFile("Resume_ApplicantId_"+userId, file);
+		applicant.setResumeLink(filename);
+		return new ApiResponse("Resume uploaded of :"+userId);
+	}
+
+
+	/**
+	 * Updating the resume as same as 
+	 * updating image
+	 * */
+	@Override
+	public ApiResponse updateResume(MultipartFile file) {
+		Long userId=findUser.getUserId();
+		ApplicantEntity applicant=applicantRepo.findById(userId).orElseThrow();
+		String fileName=applicant.getResumeLink();
+		String deletedFileName=storageService.deleteFile(fileName);
+		if(deletedFileName.equals(fileName))
+		{
+			fileName=storageService.uploadFile("UserID_"+userId, file);
+			applicant.setResumeLink(deletedFileName);
+		}
+		return new ApiResponse(fileName+" resume update successfully");
+	}
+
+	/**
+	 * Remove resume from AWS S3
+	 * */
+	@Override
+	public ApiResponse removeResume() {
+		Long userId=findUser.getUserId();
+		ApplicantEntity applicant=applicantRepo.findById(userId).orElseThrow();
+		String fileName=applicant.getResumeLink();
+		storageService.deleteFile(fileName);
+		applicant.setResumeLink("deleted");
+		return new ApiResponse("resume removed");
+	}
+
 }
