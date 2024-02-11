@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.app.entities.ApplicantJobId;
 import com.app.entities.AppliedJob;
 import com.app.payload.response.ApplicantAndJobInfo;
 
-public interface AppliedJobRepository extends JpaRepository<AppliedJob, Long> {
+public interface AppliedJobRepository extends JpaRepository<AppliedJob, ApplicantJobId> {
 
 	/**
 	 * JPQL query selects a new ApplicantAndJobInfo DTO, 

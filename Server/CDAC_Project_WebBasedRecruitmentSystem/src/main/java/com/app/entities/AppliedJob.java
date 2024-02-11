@@ -67,10 +67,10 @@ public class AppliedJob {
 		return Objects.equals(applicant, other.applicant) && Objects.equals(job, other.job);
 	}
 
-	public AppliedJob(ApplicantEntity applicant, JobInfoEntity job, JobStatus status) {
-		super();
-		this.applicant = applicant;
-		this.job = job;
+	public AppliedJob(ApplicantJobId applicantJobId, JobStatus status) {
+	
+		this.id = applicantJobId;
+		
 		this.status = status;
 	}
   

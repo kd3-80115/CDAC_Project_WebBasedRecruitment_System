@@ -23,6 +23,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ApplicantJobId implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// The ID of the job
 	@Column(name="job_id")
 	private Long jobId;
@@ -30,6 +35,8 @@ public class ApplicantJobId implements Serializable{
 	// The ID of the applicant
 	@Column(name="applicant_id")
 	private Long applicantId;
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -46,6 +53,12 @@ public class ApplicantJobId implements Serializable{
 			return false;
 		ApplicantJobId other = (ApplicantJobId) obj;
 		return Objects.equals(applicantId, other.applicantId) && Objects.equals(jobId, other.jobId);
+	}
+
+	public ApplicantJobId(Long jobId, Long applicantId) {
+		
+		this.jobId = jobId;
+		this.applicantId = applicantId;
 	}
 	
 	
