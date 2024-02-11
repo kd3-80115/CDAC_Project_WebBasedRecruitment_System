@@ -22,6 +22,7 @@ import com.app.payload.request.AddressRequest;
 import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.request.EducationRequest;
 import com.app.payload.request.EmploymentRequest;
+import com.app.payload.request.PersonalDetailRequest;
 import com.app.payload.request.ProjectRequest;
 import com.app.payload.request.SchoolingRequest;
 import com.app.payload.response.AddressResp;
@@ -397,6 +398,18 @@ public class ApplicantController {
 	public ResponseEntity<ApiResponse> updateAddress(@RequestBody @Valid AddressRequest address ) {
 	
 		ApiResponse apiResponse=addressService.updateAddressFun(address);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/personalDetail
+	// Method : PUT
+	// DTO : PersonalDetailRequest
+	@PutMapping("/personalDetail")
+	public ResponseEntity<ApiResponse> updatePersonalDetails(@RequestBody @Valid PersonalDetailRequest personalDetail ) {
+	
+		ApiResponse apiResponse=userService.updatePersonalDetailFun(personalDetail);
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}

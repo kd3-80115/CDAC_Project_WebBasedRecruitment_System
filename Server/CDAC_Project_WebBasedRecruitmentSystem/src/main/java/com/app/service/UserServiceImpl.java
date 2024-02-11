@@ -12,6 +12,7 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.NoticePeriod;
 import com.app.entities.UserEntity;
 import com.app.payload.request.BasicDetailRequest;
+import com.app.payload.request.PersonalDetailRequest;
 import com.app.payload.request.Signup;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.UserDetailsResp;
@@ -96,6 +97,28 @@ public class UserServiceImpl implements UserService {
 		userDao.save(user);
 		applicantRepo.save(applicant);
 		return new ApiResponse("User with id "+userId+" Updated");
+	}
+
+
+	@Override
+	public ApiResponse updatePersonalDetailFun(PersonalDetailRequest personalDetail) {
+			
+		Long userId=findUser.getUserId();
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by id		
+		UserEntity user=findUserById(userId, userDao);
+		
+		user.setDob(personalDetail.getDob());
+		user.setGender(personalDetail.getGender());
+		userDao.save(user);
+		
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+		applicant.setMaritalStatus(personalDetail.getMaritalStatus());
+		applicantRepo.save(applicant);
+		return new ApiResponse("Personal details update with id "+userId);
 	}
 	
 	
