@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,7 +22,10 @@ import lombok.Setter;
 @Setter
 public class SchoolingEntity extends BaseEntity {
 	
-	@OneToOne(cascade = CascadeType.ALL,orphanRemoval =true)
+	
+	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval =true)
+	@JoinColumn(name="applicant_id",nullable = false)
+	@MapsId	
 	private ApplicantEntity applicant;
 	
 	@Column(name = "class_10_board", length = 100)

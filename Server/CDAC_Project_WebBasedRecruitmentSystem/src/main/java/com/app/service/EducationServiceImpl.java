@@ -16,6 +16,8 @@ import com.app.entities.ApplicantEntity;
 import com.app.entities.EducationEntity;
 import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
+import com.app.payload.request.EducationRequest;
+import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.EducationResponse;
 import com.app.repository.ApplicantRepository;
@@ -69,6 +71,65 @@ public class EducationServiceImpl implements EducationService {
 
 		
 	}
+
+	@Override
+	public ApiResponse addEducationFun(EducationRequest education) {
+		
+		
+		Long userId=findUser.getUserId();
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by id		
+		UserEntity user=findUserById(userId, userRepo);
+		
+
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+		EducationEntity educationEntity=mapper.map(education, EducationEntity.class);
+		educationEntity.setApplicant(applicant);
+		
+		EducationRepo.save(educationEntity);
+		
+		return new ApiResponse("Applicant Education added with id "+applicant.getId());
+	
+	}
+	
+	
+	@Override
+	public ApiResponse updateEducationFun(EducationRequest education) {
+		
+		
+		Long userId=findUser.getUserId();
+		//statically imported method from UserHelper class
+		//to find persistent UserEntity by id		
+		UserEntity user=findUserById(userId, userRepo);
+		
+
+		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+		EducationEntity educationEntity=EducationRepo.findById(education.getId()).
+				orElseThrow(()-> new ResourceNotFoundException
+						("Education in education service", "education ID", education.getId()));
+		
+		educationEntity.setCourse(education.getCourse());
+		educationEntity.setCourseEndDate(education.getCourseEndDate());
+		educationEntity.setCourseStartDate(education.getCourseStartDate());
+		educationEntity.setEducationType(education.getEducationType());
+		educationEntity.setSpecialization(education.getSpecialization());
+		educationEntity.setUniversity(education.getUniversity());
+		
+		educationEntity.setApplicant(applicant);
+		
+		EducationRepo.save(educationEntity);
+		
+		return new ApiResponse("Applicant Education update with applicant id "+applicant.getId()+" and Education id " +education.getId());
+	
+	}
+	
+	
 	
 	
 }

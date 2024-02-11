@@ -19,8 +19,10 @@ import com.app.entities.EmploymentEntity;
 import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
 import com.app.payload.request.BasicDetailRequest;
+import com.app.payload.request.EducationRequest;
 import com.app.payload.request.EmploymentRequest;
 import com.app.payload.request.ProjectRequest;
+import com.app.payload.request.SchoolingRequest;
 import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
@@ -322,5 +324,54 @@ public class ApplicantController {
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}
-
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/education
+	// Method : POST
+	// DTO : EducationRequest
+	@PostMapping("/education")
+	public ResponseEntity<ApiResponse> addEducation(@RequestBody @Valid EducationRequest education ) {
+	
+		ApiResponse apiResponse=educationService.addEducationFun(education);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/education
+	// Method : PUT
+	// DTO : EducationRequest
+	@PutMapping("/education")
+	public ResponseEntity<ApiResponse> updateEducation(@RequestBody @Valid EducationRequest education ) {
+	
+		ApiResponse apiResponse=educationService.updateEducationFun(education);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/schooling
+	// Method : POST
+	// DTO : SchoolingRequest
+	@PostMapping("/schooling")
+	public ResponseEntity<ApiResponse> addSchooling(@RequestBody @Valid SchoolingRequest schooling ) {
+	
+		ApiResponse apiResponse=schoolingService.addSchoolingFun(schooling);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/schooling
+	// Method : PUT
+	// DTO : SchoolingRequest
+	@PutMapping("/schooling")
+	public ResponseEntity<ApiResponse> updateSchooling(@RequestBody @Valid SchoolingRequest schooling ) {
+	
+		ApiResponse apiResponse=schoolingService.updateSchoolingFun(schooling);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
 }

@@ -2,37 +2,39 @@ package com.app.payload.request;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
-import com.app.entities.ApplicantEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class EducationRequest {
 
-	
+	@NotNull(message = "Employment ID is required field")
 	private Long id;
 	
-	
-	private ApplicantEntity applicant;
-
-
+	@NotBlank(message = "Education Type is required field")
 	private String educationType;
 	
-
+	@NotBlank(message = "Course is required field")
 	private String course;
 	
-
+	@NotBlank(message = "University is required field")
 	private String university;
 	
-
+	@NotBlank(message = "Specialization is required field")
 	private String specialization;
 	
+	@Past(message = "Course Start date should be from past")
 	private LocalDate courseStartDate;
+	
 	
 	private LocalDate courseEndDate;
 	

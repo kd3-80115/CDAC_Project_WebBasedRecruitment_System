@@ -127,7 +127,7 @@ public class EmploymentServiceImpl implements EmploymentService {
 		setEmployment.setCurrentlyEmployed(employment.getCurrentlyEmployed());
 		
 		employmentRepo.save(setEmployment);
-		return new ApiResponse("Applicant Employment updated with id "+applicant.getId());
+		return new ApiResponse("Applicant Employment updated with applicant id "+applicant.getId()+"and employment id " +employment.getId());
 		
 	}
 	

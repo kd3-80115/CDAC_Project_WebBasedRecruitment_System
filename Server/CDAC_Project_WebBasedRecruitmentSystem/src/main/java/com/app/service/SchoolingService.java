@@ -1,9 +1,13 @@
 package com.app.service;
 
-import org.springframework.security.core.Authentication;
-
+import com.app.payload.request.SchoolingRequest;
+import com.app.payload.response.ApiResponse;
 import com.app.payload.response.SchoolingResponse;
 
 public interface SchoolingService {
 	SchoolingResponse getSchooling();
+
+	ApiResponse addSchoolingFun(SchoolingRequest schooling);
+
+	ApiResponse updateSchoolingFun(SchoolingRequest schooling);
 }

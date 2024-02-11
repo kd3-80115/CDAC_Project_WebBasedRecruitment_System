@@ -1,5 +1,6 @@
 package com.app.exception;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,16 @@ public class GlobalExceptionHandler {
 	 * */
 	@ExceptionHandler(UnauthorizedAccessException.class)
 	public ResponseEntity<ApiResponse> unAuthorizedException(UnauthorizedAccessException ex){
+		String msg=ex.getMessage();
+		ApiResponse apiRes=new ApiResponse(msg);
+		return new ResponseEntity<ApiResponse>(apiRes,HttpStatus.FORBIDDEN);
+	}
+	
+	/**
+	 * SQLIntegrityConstraintViolationException Exception handler method
+	 * */
+	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	public ResponseEntity<ApiResponse> DuplicatePrimaryKeyRecordException(SQLIntegrityConstraintViolationException ex){
 		String msg=ex.getMessage();
 		ApiResponse apiRes=new ApiResponse(msg);
 		return new ResponseEntity<ApiResponse>(apiRes,HttpStatus.FORBIDDEN);

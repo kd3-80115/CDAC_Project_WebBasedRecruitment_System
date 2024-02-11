@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 
 import com.app.entities.Gender;
 import com.app.entities.UserRole;
@@ -32,7 +33,7 @@ public class Signup {
 	private String password;
 	
 	private String phoneNumber;
-	
+	@Past(message = "DOB should be from past")
 	private LocalDate dob;
 	@JsonProperty(access = Access.READ_ONLY) 
 	private UserRole role=UserRole.ROLE_APPLICANT;
