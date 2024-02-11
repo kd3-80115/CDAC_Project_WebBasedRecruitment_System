@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class EmploymentResponse {
-	
+	private Long id;
 	private boolean currentlyEmployed;
 	private String employementType;
 	private int experienceYears;

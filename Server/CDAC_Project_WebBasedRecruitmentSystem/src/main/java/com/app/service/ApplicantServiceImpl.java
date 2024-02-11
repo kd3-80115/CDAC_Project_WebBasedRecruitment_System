@@ -12,12 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.entities.ApplicantEntity;
+import com.app.entities.EmploymentEntity;
 import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
 import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
+import com.app.payload.response.EmploymentResponse;
 import com.app.payload.response.LanguageResponse;
 import com.app.payload.response.SkillResponse;
 import com.app.repository.ApplicantRepository;
@@ -47,6 +49,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 	
 	@Autowired
 	private LanguageEntityRepository languageRepo;
+	
+	
+	
 	
 	/**
 	 * getting profile details
@@ -222,6 +227,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 		applicantRepo.save(applicant);
 		return new ApiResponse("Applicant Profile summary updated with id "+applicant.getId());
 	}
+
+	
+	
 	
 	
 	

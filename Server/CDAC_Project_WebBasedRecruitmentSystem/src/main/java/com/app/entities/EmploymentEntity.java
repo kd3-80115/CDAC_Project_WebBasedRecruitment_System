@@ -5,6 +5,7 @@ package com.app.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,7 +19,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class EmploymentEntity extends BaseEntity{
+public class EmploymentEntity {
+	
+	@Id
+	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
@@ -30,8 +34,10 @@ public class EmploymentEntity extends BaseEntity{
 	@Column(length = 20)
 	private String employementType;
 	
+	@Column(nullable = true)
 	private int experienceYears;
 	
+	@Column(nullable = true)
 	private int experienceMonths;
 	
 	@Column(length = 100)
@@ -46,13 +52,13 @@ public class EmploymentEntity extends BaseEntity{
 	@Column(length = 30)
 	private String previousDesignation;
 	
-	
-	
 	@Column(columnDefinition = "TEXT")
 	private String jobProfile;
 	
+	@Column(nullable = true)
 	private String department;
 	
+	@Column(nullable = true)
 	private int currentSalary;
 
 	public EmploymentEntity(ApplicantEntity applicant, boolean currentlyEmployed, String employementType,

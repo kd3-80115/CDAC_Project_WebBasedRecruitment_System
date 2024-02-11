@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.app.entities.LanguageEntity;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
+import com.app.payload.response.EmploymentResponse;
 import com.app.payload.response.LanguageResponse;
 import com.app.payload.response.SkillResponse;
 
@@ -25,5 +26,7 @@ public interface ApplicantService {
 	ApiResponse updateLanguage( List<LanguageResponse> languages);
 
 	ApiResponse updateProfileSmry(String summary);
+
+
 
 }

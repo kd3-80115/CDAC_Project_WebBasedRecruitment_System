@@ -9,14 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.entities.EmploymentEntity;
 import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
 import com.app.payload.request.BasicDetailRequest;
+import com.app.payload.request.EmploymentRequest;
 import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
@@ -266,6 +269,33 @@ public class ApplicantController {
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/employment
+	// Method : PUT
+	// DTO : EmployementRequest
+	@PostMapping("/employment")
+	public ResponseEntity<ApiResponse> addEmployment(@RequestBody @Valid EmploymentRequest employment ) {
+	
+		ApiResponse apiResponse=employmentService.addEmployementFun(employment);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/employment
+	// Method : PUT
+	// DTO : EmployementRequest
+	@PutMapping("/employment")
+	public ResponseEntity<ApiResponse> UpdateEmployment(@RequestBody @Valid EmploymentRequest employment ) {
+	
+		ApiResponse apiResponse=employmentService.UpdateEmployementFun(employment);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+		
+	
 		
 
 }
