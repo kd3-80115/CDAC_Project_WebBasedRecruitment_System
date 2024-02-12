@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
-@Getter @NoArgsConstructor 
+@Getter 
+@NoArgsConstructor
+@AllArgsConstructor
 public class JobInfoDetailsResponse {
 
 	private Long jobId;
@@ -24,20 +26,8 @@ public class JobInfoDetailsResponse {
 	private String departmentName;
 	private int vacancies;
 	private boolean status;
-	public JobInfoDetailsResponse(long jobId, String jobTitle, int experienceRequired, WorkSchedule workSchedule, int salary, LocalDate applicationDeadline, LocalDate jobCreatedDate, String qualification, String departmentName, int vacancies,boolean status) {
-		super();
-		this.jobId = jobId;
-		this.jobTitle = jobTitle;
-		this.experienceRequired = experienceRequired;
-		this.workSchedule = workSchedule;
-		this.salary = salary;
-		this.applicationDeadline = applicationDeadline;
-		this.jobCreatedDate = jobCreatedDate;
-		this.qualification = qualification;
-		this.departmentName = departmentName;
-		this.vacancies = vacancies;
-		this.status=status;
-	}
+	private String description;
+	
 	
 	
 }

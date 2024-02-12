@@ -70,8 +70,7 @@ public class AddressServiceImpl implements AddressService {
 		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
-		//to find persistent UserEntity by email
-		//extracted from authentication object
+		//to find persistent UserEntity userId
 		
 		UserEntity user=findUserById(userId, userRepo);
 		
