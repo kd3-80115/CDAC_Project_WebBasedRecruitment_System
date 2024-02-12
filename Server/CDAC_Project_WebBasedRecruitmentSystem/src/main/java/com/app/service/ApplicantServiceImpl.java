@@ -83,8 +83,21 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
+	
 
-		return mapper.map(applicant, ApplicantResponse.class);
+		ApplicantResponse response=mapper.map(applicant, ApplicantResponse.class);
+		//if the resume or profile picture is removed --sets the values
+		// as deleted in response
+		if(applicant.getResumeLink().equals("deleted"))
+			response.setResumeLink("deleted");	
+		else
+			response.setResumeLink(s3Client.getUrl(bucketName, applicant.getResumeLink()).toString());
+		if(applicant.getProfilePictureLink().equals("deleted"))
+			response.setProfilePictureLink("deleted");
+		else
+			response.setProfilePictureLink(s3Client.getUrl(bucketName, applicant.getProfilePictureLink()).toString());
+		
+		return response; 
 	}
 	
 	
