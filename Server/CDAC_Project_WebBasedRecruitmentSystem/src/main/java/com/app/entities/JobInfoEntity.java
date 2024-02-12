@@ -31,7 +31,7 @@ import lombok.ToString;
 @Entity
 @Table(name="job_info")
 @Setter @Getter @NoArgsConstructor
-@ToString
+
 public class JobInfoEntity {
 
 	@Id
@@ -75,6 +75,9 @@ public class JobInfoEntity {
 	@Column(name="status",columnDefinition = "Boolean")
 	private boolean status;
 	
+	@Column(columnDefinition = "TEXT")
+	private String description;
+	
 	@ManyToMany
 	@JoinTable(
 	  name = "saved_job", 
@@ -116,7 +119,7 @@ public class JobInfoEntity {
 
 	public JobInfoEntity(String jobTitle, int experienceRequired, WorkSchedule workSchedule, int salary,
 			LocalDate applicationDeadline, String location, LocalDate jobCreatedDate, String qualification, HREntity hr,
-			DepartmentEntity department,boolean status) {
+			DepartmentEntity department,boolean status,String description) {
 		super();
 		this.jobTitle = jobTitle;
 		this.experienceRequired = experienceRequired;
@@ -129,6 +132,7 @@ public class JobInfoEntity {
 		this.hr = hr;
 		this.department = department;
 		this.status = status;
+		this.description=description;
 	}
 
 
@@ -158,4 +162,14 @@ public class JobInfoEntity {
 		this.JobSkills.remove(jobSkill);
 		jobSkill.getJobInfo().remove(this);
 	}
+
+	@Override
+	public String toString() {
+		return "JobInfoEntity [jobId=" + jobId + ", jobTitle=" + jobTitle + ", experienceRequired=" + experienceRequired
+				+ ", workSchedule=" + workSchedule + ", salary=" + salary + ", applicationDeadline="
+				+ applicationDeadline + ", location=" + location + ", jobCreatedDate=" + jobCreatedDate
+				+ ", qualification=" + qualification + ", vacancies=" + vacancies + ", status=" + status + "]";
+	}
+	
+	
 }

@@ -1,5 +1,5 @@
 package com.app.service;
-import static com.app.utils.ApplicantHelper.findApplicantByUser;
+import static com.app.utils.ApplicantHelper.findApplicantByUserId;
 import static com.app.utils.UserHelper.findUserById;
 
 import org.modelmapper.ModelMapper;
@@ -62,8 +62,7 @@ public class UserServiceImpl implements UserService {
 		Long userId=findUser.getUserId();
 		
 		//statically imported method from UserHelper class
-		//to find persistent UserEntity by email
-		//extracted from authentication object
+		//to find persistent UserEntity by User Id
 				
 		UserEntity user=findUserById(userId, userDao);
 		
@@ -87,8 +86,12 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(basicDetails.getLastName());
 		user.setPhoneNumber(basicDetails.getPhoneNumber());
 		user.setEmail(basicDetails.getEmail());
+
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
 		
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		
@@ -99,7 +102,10 @@ public class UserServiceImpl implements UserService {
 		return new ApiResponse("User with id "+userId+" Updated");
 	}
 
-
+	
+	/**
+	 * Update applicant Personal Details
+	 * **/
 	@Override
 	public ApiResponse updatePersonalDetailFun(PersonalDetailRequest personalDetail) {
 			
@@ -111,8 +117,12 @@ public class UserServiceImpl implements UserService {
 		user.setDob(personalDetail.getDob());
 		user.setGender(personalDetail.getGender());
 		userDao.save(user);
+
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
 		
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		

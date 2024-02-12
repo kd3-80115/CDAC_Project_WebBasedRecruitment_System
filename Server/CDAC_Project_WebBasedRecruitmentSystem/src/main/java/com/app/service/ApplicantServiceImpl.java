@@ -1,6 +1,6 @@
 package com.app.service;
 
-import static com.app.utils.ApplicantHelper.findApplicantByUser;
+import static com.app.utils.ApplicantHelper.findApplicantByUserId;
 import static com.app.utils.UserHelper.findUserById;
 
 import java.util.List;
@@ -72,14 +72,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		Long userId=findUser.getUserId();
 		
-		//statically imported method from UserHelper class
-		//to find persistent UserEntity by email
-		//extracted from authentication object		
-		UserEntity user=findUserById(userId, userRepo);
-		
 		//statically imported method from ApplicantHelper class
-		//to find persistent ApplicantEntity by User
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
 		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
@@ -96,17 +91,13 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		Long userId=findUser.getUserId();
 		
-		//statically imported method from UserHelper class
-		//to find persistent UserEntity by email
-		//extracted from authentication object		
-		UserEntity user=findUserById(userId, userRepo);
-		
 		//statically imported method from ApplicantHelper class
-		//to find persistent ApplicantEntity by User
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
-		
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+			
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
+			
 		List<SkillEntity> skillList=applicant.getSkills().stream().collect(Collectors.toList());
 		
 		return skillList.stream().
@@ -123,15 +114,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		Long userId=findUser.getUserId();
 		
-		//statically imported method from UserHelper class
-		//to find persistent UserEntity by email
-		//extracted from authentication object		
-		UserEntity user=findUserById(userId, userRepo);
-		
 		//statically imported method from ApplicantHelper class
-		//to find persistent ApplicantEntity by User
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
-		
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+			
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		
@@ -149,12 +135,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Override
 	public ApiResponse updateHeadLine(String headLine) {
 		Long userId=findUser.getUserId();
-		//statically imported method from UserHelper class
-		//to find persistent UserEntity by id		
-		UserEntity user=findUserById(userId, userRepo);
 		
-
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		
@@ -170,12 +155,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Override
 	public ApiResponse updateSkills(List<String> skillList) {
 		Long userId=findUser.getUserId();
-		//statically imported method from UserHelper class
-		//to find persistent UserEntity by id		
-		UserEntity user=findUserById(userId, userRepo);
-		
 
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		
@@ -200,12 +184,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 	public ApiResponse updateLanguage(List<LanguageResponse> languageList) {
 		
 		Long userId=findUser.getUserId();
-		//statically imported method from UserHelper class
-		//to find persistent UserEntity by id		
-		UserEntity user=findUserById(userId, userRepo);
-		
 
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		
@@ -227,13 +210,13 @@ public class ApplicantServiceImpl implements ApplicantService {
 	 * */
 	@Override
 	public ApiResponse updateProfileSmry(String summary) {
-		Long userId=findUser.getUserId();
-		//statically imported method from UserHelper class
-		//to find persistent UserEntity by id		
-		UserEntity user=findUserById(userId, userRepo);
 		
+		Long userId=findUser.getUserId();
 
-		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+		
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		

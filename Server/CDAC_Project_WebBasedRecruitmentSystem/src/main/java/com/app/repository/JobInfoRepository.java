@@ -2,12 +2,15 @@ package com.app.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.app.entities.ApplicantEntity;
+import com.app.entities.ApplicantJobId;
 import com.app.entities.JobInfoEntity;
 import com.app.payload.response.JobDetailsWithUsernameResponse;
 import com.app.payload.response.JobInfoDetailsResponse;
@@ -33,15 +36,15 @@ public interface JobInfoRepository extends JpaRepository<JobInfoEntity, Long>{
 	 * Get jobs created by the HR using HR id with JPQL
 	 * */
 	@Query("SELECT new com.app.payload.response.JobInfoDetailsResponse(j.jobId, j.jobTitle, j.experienceRequired, j.workSchedule, " +
-	        "j.salary, j.applicationDeadline, j.jobCreatedDate, j.qualification, j.department.departmentName, j.vacancies,j.status) " +
+	        "j.salary, j.applicationDeadline, j.jobCreatedDate, j.qualification, j.department.departmentName, j.vacancies,j.status,j.description) " +
 	        "FROM JobInfoEntity j WHERE j.hr.id = :hrId")
 	List<JobInfoDetailsResponse> findAllJobsByHrId(@Param("hrId") Long hrId);
 	
 	/**
-	 * Get job by job id created by the HR using HR id with JPQL
+	 * Get job by job id created by the HR using HR id with JPQL 
 	 * */
 	@Query("SELECT new com.app.payload.response.JobInfoDetailsResponse(j.jobId, j.jobTitle, j.experienceRequired, j.workSchedule, " +
-	        "j.salary, j.applicationDeadline, j.jobCreatedDate, j.qualification, j.department.departmentName, j.vacancies,j.status) " +
+	        "j.salary, j.applicationDeadline, j.jobCreatedDate, j.qualification, j.department.departmentName, j.vacancies,j.status,j.description) " +
 	        "FROM JobInfoEntity j WHERE j.hr.id = :hrId and j.id= :jobId")
 	JobInfoDetailsResponse findJobByHrIdAndJobId(@Param("hrId")Long hrId,@Param("jobId")Long jobId);
 	
@@ -52,5 +55,7 @@ public interface JobInfoRepository extends JpaRepository<JobInfoEntity, Long>{
 	@Modifying
     @Query("UPDATE JobInfoEntity j SET j.status = false WHERE j.jobId = :jobId AND j.hr.id = :hrId")
     int updateJobStatusToFalse(@Param("jobId") Long jobId, @Param("hrId") Long hrId);
+	
+	
 	
 }

@@ -34,13 +34,13 @@ public class AppliedJob {
 	private ApplicantJobId id;
 
 	// Many-to-One association with the ApplicantEntity using the applicant_id
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("applicant_id")
 	@JoinColumn(name="applicant_id")
     private ApplicantEntity applicant;
  
 	// Many-to-One association with the JobInfoEntity using the job_id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("job_id")
     @JoinColumn(name="job_id")
     private JobInfoEntity job;
