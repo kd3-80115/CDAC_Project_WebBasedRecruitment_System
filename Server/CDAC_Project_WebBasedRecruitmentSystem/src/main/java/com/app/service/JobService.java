@@ -28,4 +28,7 @@ public interface JobService {
 	
 	//get applicant list for particular job
 	public List<ApplicantAndJobInfo> getApplicants(Long jobId);
+	
+	
+	
 }

@@ -98,7 +98,7 @@ public class ApplicantController {
 	// Method : GET
 	// Res : userDetailsResp
 	
-	@GetMapping("/userDetail")
+	@GetMapping("/user-detail")
 	public ResponseEntity<?> getBasicDetail() {
 		System.out.println("inside profileInfo endpoint");
 		
@@ -112,7 +112,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/profileInfo
 	// Method : GET
 	// Res : ApplicantResponse
-	@GetMapping("/profileInfo")
+	@GetMapping("/profile-info")
 	public ResponseEntity<?> getProfileInfo() {
 
 		System.out.println("inside profileInfo endpoint");
@@ -128,7 +128,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/educationDetails
 	// Method : GET
 	// Res : EducationResponse
-	@GetMapping("/educationDetails")
+	@GetMapping("/education-details")
 	public ResponseEntity<?> getEducationDetails() {
 
 		System.out.println("inside Education endpoint");
@@ -143,7 +143,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/projectDetails
 	// Method : GET
 	// Res : projectResponse
-	@GetMapping("/projectDetails")
+	@GetMapping("/project-details")
 	public ResponseEntity<?> getProjectDetails() {
 
 		System.out.println("inside project endpoint");
@@ -219,8 +219,8 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/basicDetails
 	// Method : PUT
-	// DTO : BasicDetailRequest
-	@PutMapping("/basicDetails")
+	// Payload : BasicDetailRequest
+	@PutMapping("/basic-details")
 	public ResponseEntity<ApiResponse> updateBasicDetails(@RequestBody @Valid BasicDetailRequest basicDetails ) {
 	
 		ApiResponse apiResponse=userService.updateBasicDetails(basicDetails);
@@ -231,7 +231,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/headline
 	// Method : PUT
-	// DTO : String
+	// Payload : String
 	@PutMapping("/headline")
 	public ResponseEntity<ApiResponse> updateHeadLine(@RequestBody @Valid String headLine ) {
 	
@@ -244,7 +244,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/skills
 	// Method : PUT
-	// DTO : List<String>
+	// Payload : List<String>
 	@PutMapping("/skills")
 	public ResponseEntity<ApiResponse> updateSkills(@RequestBody @Valid List<String> skills) {
 	
@@ -257,7 +257,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/skills
 	// Method : PUT
-	// DTO : List<LanguageEntity>
+	// Payload : List<LanguageEntity>
 	@PutMapping("/language")
 	public ResponseEntity<ApiResponse> updateLanguage(@RequestBody @Valid List<LanguageResponse> languages) {
 	
@@ -269,8 +269,8 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/profileSummary
 	// Method : PUT
-	// DTO : String
-	@PutMapping("/profileSummary")
+	// Payload : String
+	@PutMapping("/profile-summary")
 	public ResponseEntity<ApiResponse> updateProfileSummary(@RequestBody @Valid String summary ) {
 	
 		ApiResponse apiResponse=applicantService.updateProfileSmry(summary);
@@ -281,7 +281,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/employment
 	// Method : PUT
-	// DTO : EmployementRequest
+	// Payload : EmployementRequest
 	@PostMapping("/employment")
 	public ResponseEntity<ApiResponse> addEmployment(@RequestBody @Valid EmploymentRequest employment ) {
 	
@@ -294,7 +294,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/employment
 	// Method : PUT
-	// DTO : EmployementRequest
+	// Payload : EmployementRequest
 	@PutMapping("/employment")
 	public ResponseEntity<ApiResponse> UpdateEmployment(@RequestBody @Valid EmploymentRequest employment ) {
 	
@@ -321,7 +321,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/project
 	// Method : PUT
-	// DTO : ProjectRequest
+	// Payload : ProjectRequest
 	@PutMapping("/project")
 	public ResponseEntity<ApiResponse> updateProject(@RequestBody @Valid ProjectRequest project ) {
 	
@@ -334,7 +334,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/education
 	// Method : POST
-	// DTO : EducationRequest
+	// Payload : EducationRequest
 	@PostMapping("/education")
 	public ResponseEntity<ApiResponse> addEducation(@RequestBody @Valid EducationRequest education ) {
 	
@@ -346,7 +346,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/education
 	// Method : PUT
-	// DTO : EducationRequest
+	// Payload : EducationRequest
 	@PutMapping("/education")
 	public ResponseEntity<ApiResponse> updateEducation(@RequestBody @Valid EducationRequest education ) {
 	
@@ -359,7 +359,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/schooling
 	// Method : POST
-	// DTO : SchoolingRequest
+	// Payload : SchoolingRequest
 	@PostMapping("/schooling")
 	public ResponseEntity<ApiResponse> addSchooling(@RequestBody @Valid SchoolingRequest schooling ) {
 	
@@ -371,7 +371,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/schooling
 	// Method : PUT
-	// DTO : SchoolingRequest
+	// Payload : SchoolingRequest
 	@PutMapping("/schooling")
 	public ResponseEntity<ApiResponse> updateSchooling(@RequestBody @Valid SchoolingRequest schooling ) {
 	
@@ -384,7 +384,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/address
 	// Method : POST
-	// DTO : AddressRequest
+	// Payload : AddressRequest
 	@PostMapping("/address")
 	public ResponseEntity<ApiResponse> addAddress(@RequestBody @Valid AddressRequest address ) {
 	
@@ -408,8 +408,8 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/personalDetail
 	// Method : PUT
-	// DTO : PersonalDetailRequest
-	@PutMapping("/personalDetail")
+	// Payload : PersonalDetailRequest
+	@PutMapping("/personal-detail")
 	public ResponseEntity<ApiResponse> updatePersonalDetails(@RequestBody @Valid PersonalDetailRequest personalDetail ) {
 	
 		ApiResponse apiResponse=userService.updatePersonalDetailFun(personalDetail);

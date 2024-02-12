@@ -54,4 +54,13 @@ public class AppliedJobEntityRepositoryTest {
 		assertEquals(2, list2.size());
 		
 	}
+	
+	@Test
+	void testFindAppliedJob() {
+		AppliedJob ap =appliedJobRepo.findById(new ApplicantJobId(1l,4l)).orElseThrow(()-> new ResourceNotFoundException
+				("Address", "Applicant ID", 1l));
+		System.out.println("Applied job :"+ap.getId().getApplicantId()+","+ap.getId().getJobId()+","+ap.getStatus());
+		ap.setStatus(JobStatus.INTERVIEW);
+		appliedJobRepo.save(ap);
+	}
 }
