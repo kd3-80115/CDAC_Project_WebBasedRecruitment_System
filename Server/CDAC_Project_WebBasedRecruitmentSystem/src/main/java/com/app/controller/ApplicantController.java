@@ -98,7 +98,7 @@ public class ApplicantController {
 	// Method : GET
 	// Res : userDetailsResp
 	
-	@GetMapping("/userDetail")
+	@GetMapping("/user-detail")
 	public ResponseEntity<?> getBasicDetail() {
 		System.out.println("inside profileInfo endpoint");
 		
@@ -112,7 +112,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/profileInfo
 	// Method : GET
 	// Res : ApplicantResponse
-	@GetMapping("/profileInfo")
+	@GetMapping("/profile-info")
 	public ResponseEntity<?> getProfileInfo() {
 
 		System.out.println("inside profileInfo endpoint");
@@ -128,7 +128,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/educationDetails
 	// Method : GET
 	// Res : EducationResponse
-	@GetMapping("/educationDetails")
+	@GetMapping("/education-details")
 	public ResponseEntity<?> getEducationDetails() {
 
 		System.out.println("inside Education endpoint");
@@ -143,7 +143,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/projectDetails
 	// Method : GET
 	// Res : projectResponse
-	@GetMapping("/projectDetails")
+	@GetMapping("/project-details")
 	public ResponseEntity<?> getProjectDetails() {
 
 		System.out.println("inside project endpoint");
@@ -220,7 +220,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/basicDetails
 	// Method : PUT
 	// Payload : BasicDetailRequest
-	@PutMapping("/basicDetails")
+	@PutMapping("/basic-details")
 	public ResponseEntity<ApiResponse> updateBasicDetails(@RequestBody @Valid BasicDetailRequest basicDetails ) {
 	
 		ApiResponse apiResponse=userService.updateBasicDetails(basicDetails);
@@ -270,7 +270,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/profileSummary
 	// Method : PUT
 	// Payload : String
-	@PutMapping("/profileSummary")
+	@PutMapping("/profile-summary")
 	public ResponseEntity<ApiResponse> updateProfileSummary(@RequestBody @Valid String summary ) {
 	
 		ApiResponse apiResponse=applicantService.updateProfileSmry(summary);
@@ -409,7 +409,7 @@ public class ApplicantController {
 	// URL : http://localhost:7878/applicant/personalDetail
 	// Method : PUT
 	// Payload : PersonalDetailRequest
-	@PutMapping("/personalDetail")
+	@PutMapping("/personal-detail")
 	public ResponseEntity<ApiResponse> updatePersonalDetails(@RequestBody @Valid PersonalDetailRequest personalDetail ) {
 	
 		ApiResponse apiResponse=userService.updatePersonalDetailFun(personalDetail);

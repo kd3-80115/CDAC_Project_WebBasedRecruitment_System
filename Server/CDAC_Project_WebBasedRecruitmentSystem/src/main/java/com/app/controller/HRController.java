@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.app.payload.request.HrRequest;
 import com.app.payload.request.JobDetailsRequest;
+import com.app.payload.request.UpdateStatusRequest;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantAndJobInfo;
 import com.app.payload.response.HrResponse;
@@ -149,10 +150,10 @@ public class HRController {
 	// URL : http://localhost:7878/hr/updateStatus
 	// Method : PUT
 	// Payload : String
-	@PutMapping("/updateStatus/{jobId}")
-	public ResponseEntity<ApiResponse> updateStatus(@PathVariable Long jobId,@RequestBody @Valid String status) {
+	@PutMapping("/update-status")
+	public ResponseEntity<ApiResponse> updateStatus(@RequestBody @Valid UpdateStatusRequest status) {
 	
-		ApiResponse apiResponse=appliedJobService.updateStatusFun(jobId,status);
+		ApiResponse apiResponse=appliedJobService.updateStatusFun(status);
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}
