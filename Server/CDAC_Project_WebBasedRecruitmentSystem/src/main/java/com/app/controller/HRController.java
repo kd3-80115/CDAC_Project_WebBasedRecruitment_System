@@ -81,7 +81,7 @@ public class HRController {
 	 * Update the job
 	 * */
 	@PutMapping("/job/updateJob/{jobId}")
-	public ResponseEntity<ApiResponse>updateJobDetails(@RequestBody JobDetailsRequest job,@PathVariable Long jobId)
+	public ResponseEntity<ApiResponse> updateJobDetails(@RequestBody JobDetailsRequest job,@PathVariable Long jobId)
 	{
 		ApiResponse response=jobService.updateJobDetails(job,jobId);
 		return new ResponseEntity<ApiResponse>(response,HttpStatus.CREATED);
@@ -91,7 +91,7 @@ public class HRController {
 	 * Get the applicants for particular job by jobId
 	 * */
 	@GetMapping("/applicants/{jobId}")
-	public ResponseEntity<List<ApplicantAndJobInfo>>getApplicantsForJobId(@PathVariable Long jobId)
+	public ResponseEntity<List<ApplicantAndJobInfo>> getApplicantsForJobId(@PathVariable Long jobId)
 	{
 		return new ResponseEntity<List<ApplicantAndJobInfo>>(jobService.getApplicants(jobId),HttpStatus.OK);
 	}
