@@ -26,11 +26,11 @@ public interface AppliedJobRepository extends JpaRepository<AppliedJob, Applican
 	        "WHERE aj.id.jobId = :jobId")
 	List<ApplicantAndJobInfo> getApplicantInfoByJobId(@Param("jobId") Long jobId);
 	
+	
+	
 	/**
 	 * Get Applied jobs by particular applicant
 	 * */
-	
-	//@Query("select new com.app.entities.ApplicantJobId from AppliedJob aj where aj.applicant=:applicant")
 	@Query("select aj from AppliedJob aj where aj.applicant=:applicant")
 	Optional<List<AppliedJob>> findAllAppliedJobByApplicant(@Param("applicant") ApplicantEntity applicant);
 }

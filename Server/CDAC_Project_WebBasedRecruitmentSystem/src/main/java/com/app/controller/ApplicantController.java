@@ -219,7 +219,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/basicDetails
 	// Method : PUT
-	// DTO : BasicDetailRequest
+	// Payload : BasicDetailRequest
 	@PutMapping("/basicDetails")
 	public ResponseEntity<ApiResponse> updateBasicDetails(@RequestBody @Valid BasicDetailRequest basicDetails ) {
 	
@@ -231,7 +231,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/headline
 	// Method : PUT
-	// DTO : String
+	// Payload : String
 	@PutMapping("/headline")
 	public ResponseEntity<ApiResponse> updateHeadLine(@RequestBody @Valid String headLine ) {
 	
@@ -244,7 +244,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/skills
 	// Method : PUT
-	// DTO : List<String>
+	// Payload : List<String>
 	@PutMapping("/skills")
 	public ResponseEntity<ApiResponse> updateSkills(@RequestBody @Valid List<String> skills) {
 	
@@ -257,7 +257,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/skills
 	// Method : PUT
-	// DTO : List<LanguageEntity>
+	// Payload : List<LanguageEntity>
 	@PutMapping("/language")
 	public ResponseEntity<ApiResponse> updateLanguage(@RequestBody @Valid List<LanguageResponse> languages) {
 	
@@ -269,7 +269,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/profileSummary
 	// Method : PUT
-	// DTO : String
+	// Payload : String
 	@PutMapping("/profileSummary")
 	public ResponseEntity<ApiResponse> updateProfileSummary(@RequestBody @Valid String summary ) {
 	
@@ -281,7 +281,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/employment
 	// Method : PUT
-	// DTO : EmployementRequest
+	// Payload : EmployementRequest
 	@PostMapping("/employment")
 	public ResponseEntity<ApiResponse> addEmployment(@RequestBody @Valid EmploymentRequest employment ) {
 	
@@ -294,7 +294,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/employment
 	// Method : PUT
-	// DTO : EmployementRequest
+	// Payload : EmployementRequest
 	@PutMapping("/employment")
 	public ResponseEntity<ApiResponse> UpdateEmployment(@RequestBody @Valid EmploymentRequest employment ) {
 	
@@ -321,7 +321,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/project
 	// Method : PUT
-	// DTO : ProjectRequest
+	// Payload : ProjectRequest
 	@PutMapping("/project")
 	public ResponseEntity<ApiResponse> updateProject(@RequestBody @Valid ProjectRequest project ) {
 	
@@ -334,7 +334,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/education
 	// Method : POST
-	// DTO : EducationRequest
+	// Payload : EducationRequest
 	@PostMapping("/education")
 	public ResponseEntity<ApiResponse> addEducation(@RequestBody @Valid EducationRequest education ) {
 	
@@ -346,7 +346,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/education
 	// Method : PUT
-	// DTO : EducationRequest
+	// Payload : EducationRequest
 	@PutMapping("/education")
 	public ResponseEntity<ApiResponse> updateEducation(@RequestBody @Valid EducationRequest education ) {
 	
@@ -359,7 +359,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/schooling
 	// Method : POST
-	// DTO : SchoolingRequest
+	// Payload : SchoolingRequest
 	@PostMapping("/schooling")
 	public ResponseEntity<ApiResponse> addSchooling(@RequestBody @Valid SchoolingRequest schooling ) {
 	
@@ -371,7 +371,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/schooling
 	// Method : PUT
-	// DTO : SchoolingRequest
+	// Payload : SchoolingRequest
 	@PutMapping("/schooling")
 	public ResponseEntity<ApiResponse> updateSchooling(@RequestBody @Valid SchoolingRequest schooling ) {
 	
@@ -384,7 +384,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/address
 	// Method : POST
-	// DTO : AddressRequest
+	// Payload : AddressRequest
 	@PostMapping("/address")
 	public ResponseEntity<ApiResponse> addAddress(@RequestBody @Valid AddressRequest address ) {
 	
@@ -408,7 +408,7 @@ public class ApplicantController {
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/personalDetail
 	// Method : PUT
-	// DTO : PersonalDetailRequest
+	// Payload : PersonalDetailRequest
 	@PutMapping("/personalDetail")
 	public ResponseEntity<ApiResponse> updatePersonalDetails(@RequestBody @Valid PersonalDetailRequest personalDetail ) {
 	

@@ -2,6 +2,7 @@ package com.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import com.app.payload.request.JobDetailsRequest;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantAndJobInfo;
 import com.app.payload.response.HrResponse;
+import com.app.service.AppliedJobService;
 import com.app.service.HrService;
 import com.app.service.JobService;
 
@@ -36,6 +38,9 @@ public class HRController {
 	
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private AppliedJobService appliedJobService;
 	
 	@GetMapping
 	public ResponseEntity<HrResponse> getHrDetails()
@@ -138,5 +143,18 @@ public class HRController {
         String fileName = file.getOriginalFilename();
         return fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".jpeg"));
     }
+    
+
+	// Rest API end point
+	// URL : http://localhost:7878/hr/updateStatus
+	// Method : PUT
+	// Payload : String
+	@PutMapping("/updateStatus/{jobId}")
+	public ResponseEntity<ApiResponse> updateStatus(@PathVariable Long jobId,@RequestBody @Valid String status) {
+	
+		ApiResponse apiResponse=appliedJobService.updateStatusFun(jobId,status);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
 	
 }

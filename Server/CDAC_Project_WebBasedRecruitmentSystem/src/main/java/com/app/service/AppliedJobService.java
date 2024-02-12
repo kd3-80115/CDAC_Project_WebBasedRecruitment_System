@@ -1,6 +1,9 @@
 package com.app.service;
 
-public interface AppliedJobService {
+import com.app.payload.response.ApiResponse;
 
-	//get no.of applicants applied to particular job
+public interface AppliedJobService {
+	
+	//update job status
+	ApiResponse updateStatusFun(Long jobId, String status);
 }
