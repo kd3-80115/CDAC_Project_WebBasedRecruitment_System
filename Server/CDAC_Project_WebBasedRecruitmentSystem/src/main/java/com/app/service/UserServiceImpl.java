@@ -2,8 +2,15 @@ package com.app.service;
 import static com.app.utils.ApplicantHelper.findApplicantByUser;
 import static com.app.utils.UserHelper.findUserById;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.mail.MessagingException;
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,19 +20,24 @@ import com.app.entities.NoticePeriod;
 import com.app.entities.UserEntity;
 import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.request.PersonalDetailRequest;
+import com.app.payload.request.ResetPassword;
 import com.app.payload.request.Signup;
+import com.app.payload.request.UserAndOtp;
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.OtpAndEmailResponse;
 import com.app.payload.response.UserDetailsResp;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.UserEntityRepository;
 import com.app.security.FindAuthenticationDetails;
+import com.app.utils.EmailUtil;
+import com.app.utils.OtpUtil;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
 	//dep : dao layer i/f
 	@Autowired
-	private UserEntityRepository userDao;
+	private UserEntityRepository userRepo;
 	//dep
 	@Autowired
 	private ModelMapper mapper;
@@ -41,6 +53,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private FindAuthenticationDetails findUser;
 	
+	@Autowired
+	private EmailUtil emailUtil;
+	
+	@Autowired
+	private OtpUtil optUtils;
+	
 	@Override
 	public Signup userRegistration(Signup reqDTO) {
 		//dto --> entity
@@ -49,7 +67,7 @@ public class UserServiceImpl implements UserService {
 		applicantRepo.save(applicant);
 		user.setPassword(encoder.encode(user.getPassword()));//pwd : encrypted using SHA
 		
-		return mapper.map(userDao.save(user), Signup.class);
+		return mapper.map(userRepo.save(user), Signup.class);
 	}
 	
 	
@@ -65,7 +83,7 @@ public class UserServiceImpl implements UserService {
 		//to find persistent UserEntity by email
 		//extracted from authentication object
 				
-		UserEntity user=findUserById(userId, userDao);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		//dto <-- entity
 		return mapper.map(user, UserDetailsResp.class);
@@ -81,7 +99,7 @@ public class UserServiceImpl implements UserService {
 		Long userId=findUser.getUserId();
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by id		
-		UserEntity user=findUserById(userId, userDao);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		user.setFirstName(basicDetails.getFirstName());
 		user.setLastName(basicDetails.getLastName());
@@ -94,7 +112,7 @@ public class UserServiceImpl implements UserService {
 		
 		applicant.setNoticePeriod(basicDetails.getNoticePeriod());
 		
-		userDao.save(user);
+		userRepo.save(user);
 		applicantRepo.save(applicant);
 		return new ApiResponse("User with id "+userId+" Updated");
 	}
@@ -106,11 +124,11 @@ public class UserServiceImpl implements UserService {
 		Long userId=findUser.getUserId();
 		//statically imported method from UserHelper class
 		//to find persistent UserEntity by id		
-		UserEntity user=findUserById(userId, userDao);
+		UserEntity user=findUserById(userId, userRepo);
 		
 		user.setDob(personalDetail.getDob());
 		user.setGender(personalDetail.getGender());
-		userDao.save(user);
+		userRepo.save(user);
 		
 		ApplicantEntity applicant=findApplicantByUser(user, applicantRepo);
 		// Returns the value in case of non empty Optional
@@ -122,6 +140,54 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
+	@Override
+	public ApiResponse forgotPassword(String email) {
+		String otp=optUtils.generateOtp();
+		UserEntity user=userRepo.findByEmail(email).orElseThrow(()->new UsernameNotFoundException(email));
+		if(user!=null)
+		{
+			try {
+				emailUtil.sendOtpEmail(email,otp);
+				user.setOtp(otp);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException("Unable to send otp,please try again");
+			}
+		}
+		return new ApiResponse("email sent successfully,check you email");
+	}
 	
+	/**
+	 * Otp will be verified and store in the DB
+	 * */
+	@Override
+	public OtpAndEmailResponse verifyOtp(UserAndOtp userRequest) {
+		String email=userRequest.getEmail();
+		UserEntity user=userRepo.findByEmail(email).orElseThrow(()->new UsernameNotFoundException(email));
+		String otp=user.getOtp();
+		if(user!=null)
+		{
+			if(userRequest.getOtp().equals(otp))
+			{
+				return new OtpAndEmailResponse(email,otp);
+			}
+		}
+		return new OtpAndEmailResponse("invalid email","or otp");
+	}
 	
+	/**
+	 * We will fetch the OTP from the DB and the url and
+	 * then the password will be updated
+	 * */
+	@Override
+	public ApiResponse resetPassword(String email, String otp, ResetPassword password) {
+		UserEntity user=userRepo.findByEmail(email).orElseThrow(()->new UsernameNotFoundException(email));
+		String dbSavedOtp=user.getOtp();
+		if(otp.equals(dbSavedOtp))
+		{
+			user.setPassword(encoder.encode(password.getPassword()));
+			return new ApiResponse("password updated successfully");
+		}
+		return new ApiResponse("password updation failed");
+	}
 }
