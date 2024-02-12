@@ -36,7 +36,7 @@ public class AdminController {
 	
 	//creating a hr account
 	// https://localhost:7878/admin/registerHr
-	@PostMapping("/registerHr")
+	@PostMapping("/register-hr")
 	public ResponseEntity<?> registerHr(@RequestBody @Valid HrRegistrationDetailsRequest hr){
 		System.out.println("Inside controller of hr");
 		ApiResponse res=adminService.registerHr(hr);
@@ -45,7 +45,7 @@ public class AdminController {
 	
 	//getting the list of hr
 	// https://localhost:7878/admin/hrlist
-	@GetMapping("/hrlist")
+	@GetMapping("/hr-list")
 	public ResponseEntity<List<HrDetailsResponse>> getAllHrInfo()
 	{
 		return new ResponseEntity<List<HrDetailsResponse>>(adminService.getAllHr(),HttpStatus.OK);
@@ -53,7 +53,7 @@ public class AdminController {
 	
 	//get t whole list of jobs
 	// https://localhost:7878/admin/jobList
-	@GetMapping("/jobList")
+	@GetMapping("/job-list")
 	public ResponseEntity<List<JobDetailsWithUsernameResponse>> getAllJobs()
 	{
 		return new ResponseEntity<List<JobDetailsWithUsernameResponse>>(adminService.getAllJobs(),HttpStatus.OK);
@@ -62,7 +62,7 @@ public class AdminController {
 	
 	//deactivating HR account
 	// https://localhost:7878/admin/deactivatehr/{hrId}
-	@PutMapping("/deactivatehr/{hrId}")
+	@PutMapping("/deactivate-hr/{hrId}")
 	public ResponseEntity<ApiResponse> deactivateHrAccount(@PathVariable Long hrId)
 	{
 		return new ResponseEntity<ApiResponse>(adminService.deactivateHrById(hrId),HttpStatus.OK);

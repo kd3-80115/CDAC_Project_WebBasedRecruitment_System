@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ApplicantAndJobInfo {
+	private Long applicantId;
 	private String applicantName;
     private Long jobId;
     private JobStatus status;

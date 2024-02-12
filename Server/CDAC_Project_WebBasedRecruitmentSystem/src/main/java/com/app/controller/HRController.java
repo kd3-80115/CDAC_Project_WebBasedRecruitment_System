@@ -49,7 +49,7 @@ public class HRController {
 		return new ResponseEntity<ApiResponse>(hrService.updateHr(hr),HttpStatus.OK);
 	}
 	
-	@PostMapping("/createjob")
+	@PostMapping("/create-job")
 	public ResponseEntity<ApiResponse> createJob(@RequestBody JobDetailsRequest job)
 	{
 		return new ResponseEntity<ApiResponse>(jobService.createJob(job),HttpStatus.CREATED);
@@ -70,7 +70,7 @@ public class HRController {
 	/**
 	 * Update the status of job
 	 * */
-	@PutMapping("/job/deactivatejob/{jobId}")
+	@PutMapping("/job/deactivate-job/{jobId}")
 	public ResponseEntity<ApiResponse> deactivateJob(@PathVariable Long jobId)
 	{
 		return new ResponseEntity<ApiResponse>(jobService.deactivateJobById(jobId),HttpStatus.OK);
@@ -80,7 +80,7 @@ public class HRController {
 	/**
 	 * Update the job
 	 * */
-	@PutMapping("/job/updateJob/{jobId}")
+	@PutMapping("/job/update-job/{jobId}")
 	public ResponseEntity<ApiResponse> updateJobDetails(@RequestBody JobDetailsRequest job,@PathVariable Long jobId)
 	{
 		ApiResponse response=jobService.updateJobDetails(job,jobId);
@@ -99,7 +99,7 @@ public class HRController {
 	/**
 	 * HR will upload his/her profile image 
 	 * */
-	@PostMapping("/upload_image")
+	@PostMapping("/upload-image")
 	public ResponseEntity<ApiResponse> uploadImage(@RequestParam(value="file",required = true) MultipartFile file)
 	{
 		if (!isValidImage(file)) {
@@ -112,7 +112,7 @@ public class HRController {
 	/**
 	 * HR can update his/her image 
 	 * */
-	@PutMapping("/update_image")
+	@PutMapping("/update-image")
 	public ResponseEntity<ApiResponse> updateImage(@RequestParam(value="file",required = true) MultipartFile file)
 	{
 		if (!isValidImage(file)) {
@@ -124,7 +124,7 @@ public class HRController {
 	/**
 	 * Remove image from AWS S3 and user account
 	 * */
-	@DeleteMapping("/remove_image")
+	@DeleteMapping("/remove-image")
 	public ResponseEntity<ApiResponse> removeImage()
 	{
 		return new ResponseEntity<ApiResponse>(hrService.removeImage(),HttpStatus.OK);

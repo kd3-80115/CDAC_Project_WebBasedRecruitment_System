@@ -20,7 +20,7 @@ public interface AppliedJobRepository extends JpaRepository<AppliedJob, Applican
 	 * the jobId from the AppliedJob entity, and the status from the AppliedJob entity. 
 	 * It joins the AppliedJob entity with the UserEntity based on the applicantId and id fields
 	 * */
-	@Query("SELECT NEW com.app.payload.response.ApplicantAndJobInfo(u.firstName || ' ' || u.lastName AS applicantName, aj.id.jobId, aj.status) " +
+	@Query("SELECT NEW com.app.payload.response.ApplicantAndJobInfo(u.id,u.firstName || ' ' || u.lastName AS applicantName, aj.id.jobId, aj.status) " +
 	        "FROM AppliedJob aj " +
 	        "JOIN UserEntity u ON aj.id.applicantId = u.id " +
 	        "WHERE aj.id.jobId = :jobId")
