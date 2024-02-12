@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @EnableWebSecurity//to enable spring sec frmwork support
 @Configuration //to tell SC , this is config class containing @Bean methods
@@ -37,18 +38,30 @@ public class SecurityConfig {
 	{
 		//URL based authorization rules
 		http.cors()
-		.and().
+		//added for allowing cross origin access
+		.configurationSource(request ->
+		{
+			CorsConfiguration corsConfig = new CorsConfiguration();
+		    corsConfig.addAllowedOrigin("http://localhost:3000");
+		    corsConfig.addAllowedMethod("*");
+		    corsConfig.addAllowedHeader("*");
+		    return corsConfig;
+		})
+		.and()
 		//disable CSRF token generation n verification
-		csrf().disable()
+		.csrf().disable()
 		.exceptionHandling().authenticationEntryPoint(authEntry).
 		and().
 		authorizeRequests()
 		.antMatchers("/users/signup","/users/signin",
-				"/v*/api-doc*/**","/swagger-ui/**","/applicant/**","/**").permitAll()
+				"/v*/api-doc*/**","/swagger-ui/**",
+				"/users/send-otp","/users/reset-password",
+				"/users/verify-otp").permitAll()
 		// only required for JS clnts (react / angular) : for the pre flight requests
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
-//		.antMatchers("/users/test").hasRole("APPLICANT")
-//		.antMatchers("/users/test").hasRole("ADMIN")
+		.antMatchers("/admin/**").hasRole("ADMIN")
+		.antMatchers("/hr/**").hasRole("HR")
+		.antMatchers("/applicant/**","/job/**").hasRole("APPLICANT")
 		.anyRequest().authenticated()
 		.and()
 		//to tell spring security : not to use HttpSession to store user's auth details

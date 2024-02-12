@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	public Signup userRegistration(Signup reqDTO) {
 		//dto --> entity
 		UserEntity user=mapper.map(reqDTO, UserEntity.class);
-		ApplicantEntity applicant=new ApplicantEntity(user, false, false, "0", "0", "0",NoticePeriod.FIFTEEN_DAYS_OR_LESS);
+		ApplicantEntity applicant=new ApplicantEntity(user, false, false, "0", "0", "0",NoticePeriod.FIFTEEN_DAYS_OR_LESS,"deleted","deleted");
 		applicantRepo.save(applicant);
 		user.setPassword(encoder.encode(user.getPassword()));//pwd : encrypted using SHA
 		

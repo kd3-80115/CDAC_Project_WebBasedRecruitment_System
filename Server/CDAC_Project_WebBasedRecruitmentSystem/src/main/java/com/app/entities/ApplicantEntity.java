@@ -79,7 +79,7 @@ public class ApplicantEntity extends BaseEntity{
 
 
 	public ApplicantEntity(UserEntity user, boolean emailIdVerifyStatus, boolean mobileNumVerifyStatus,
-			String resumeHeadLine, String profileSummary, String maritalStatus, NoticePeriod noticePeriod) {
+			String resumeHeadLine, String profileSummary, String maritalStatus, NoticePeriod noticePeriod,String profilePicture,String resumeLink) {
 		
 		this.user = user;
 		this.emailIdVerifyStatus = emailIdVerifyStatus;
@@ -88,6 +88,8 @@ public class ApplicantEntity extends BaseEntity{
 		this.profileSummary = profileSummary;
 		this.maritalStatus = maritalStatus;
 		this.noticePeriod = noticePeriod;
+		this.profilePictureLink=profilePicture;
+		this.resumeLink=resumeLink;
 	}
 	
 	
