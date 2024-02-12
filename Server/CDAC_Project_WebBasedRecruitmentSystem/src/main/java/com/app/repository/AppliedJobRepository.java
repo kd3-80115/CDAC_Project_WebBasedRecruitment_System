@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import com.app.entities.ApplicantEntity;
 import com.app.entities.ApplicantJobId;
 import com.app.entities.AppliedJob;
+import com.app.entities.JobStatus;
 import com.app.payload.response.ApplicantAndJobInfo;
 
 public interface AppliedJobRepository extends JpaRepository<AppliedJob, ApplicantJobId> {
@@ -33,4 +34,10 @@ public interface AppliedJobRepository extends JpaRepository<AppliedJob, Applican
 	 * */
 	@Query("select aj from AppliedJob aj where aj.applicant=:applicant")
 	Optional<List<AppliedJob>> findAllAppliedJobByApplicant(@Param("applicant") ApplicantEntity applicant);
+	
+	/**
+	 * Get SortListed jobs of particular applicant
+	 * */
+	@Query("select aj from AppliedJob aj where aj.applicant=:applicant and aj.status=:status")
+	Optional<List<AppliedJob>> findAllSortListedJobOfApplicant(@Param("applicant") ApplicantEntity applicant,@Param("status")JobStatus status);
 }

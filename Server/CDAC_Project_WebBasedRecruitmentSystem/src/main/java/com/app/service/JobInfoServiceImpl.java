@@ -125,6 +125,39 @@ public class JobInfoServiceImpl implements JobInfoService {
 	
 	
 	/**
+	 * Get SortListed jobs
+	 * **/
+	@Override
+	public List<JobInfoDetailsResponse> getSortListedJobFun() {
+		Long userId=findUser.getUserId();
+
+
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+		
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+		
+		List<AppliedJob> appliedJobList =appliedJobRepo.findAllSortListedJobOfApplicant(applicant,JobStatus.INTERVIEW).
+						orElseThrow(()-> new ResourceNotFoundException
+								("AppliedJobId", "applicant", applicant.getId()));
+		
+		List<Long> jobIdList=new ArrayList<Long>();
+		
+		for (AppliedJob appliedJob : appliedJobList) {
+			jobIdList.add(appliedJob.getId().getJobId());
+		}
+		
+		List<JobInfoEntity> jobList=jobInfoRepo.findAllById(jobIdList);
+		System.out.println(jobList.toString());
+		return jobList.stream().map(jobInfo->mapper.map(jobInfo, JobInfoDetailsResponse.class)).
+								collect(Collectors.toList());
+	}
+	
+	
+	/**
 	 * Save a job
 	 **/
 	@Override

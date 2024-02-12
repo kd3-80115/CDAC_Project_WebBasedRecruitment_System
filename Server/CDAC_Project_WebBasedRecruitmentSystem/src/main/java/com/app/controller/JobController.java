@@ -28,7 +28,7 @@ public class JobController {
 	
 	
 	// Rest API end point
-	// URL : http://localhost:7878/job/applyJob
+	// URL : http://localhost:7878/job/apply-job
 	// Method : POST
 	// Payload : appliedJobRequest
 	@PostMapping("/apply-job/{jobId}")
@@ -41,7 +41,7 @@ public class JobController {
 	
 
 	// Rest API end point
-	// URL : http://localhost:7878/job/applyJob
+	// URL : http://localhost:7878/job/unapply-job
 	// Method : POST
 	// Payload : appliedJobRequest
 	@DeleteMapping("/unapply-job/{jobId}")
@@ -54,7 +54,7 @@ public class JobController {
 	
 	
 	// Rest API end point
-	// URL : http://localhost:7878/job/getAppliedJob
+	// URL : http://localhost:7878/job/get-applied-job
 	// Method : GET
 	// Payload : JobInfoDetailsResponse
 	@GetMapping("/get-applied-job")
@@ -67,7 +67,20 @@ public class JobController {
 	
 	
 	// Rest API end point
-	// URL : http://localhost:7878/job/saveJob
+	// URL : http://localhost:7878/job/get-sortlisted-job
+	// Method : GET
+	// Payload : JobInfoDetailsResponse
+	@GetMapping("/get-sortlisted-job")
+	public ResponseEntity<?> getSortListedJob() {
+	
+		List<JobInfoDetailsResponse> jobList=jobService.getSortListedJobFun();
+		
+		return new ResponseEntity<>(jobList,HttpStatus.OK);
+	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/job/save-job
 	// Method : POST
 	// Payload : Long
 	@PostMapping("/save-job/{jobId}")
@@ -80,7 +93,7 @@ public class JobController {
 	
 	
 	// Rest API end point
-	// URL : http://localhost:7878/job/unSaveJob
+	// URL : http://localhost:7878/job/unsave-job
 	// Method : POST
 	// Payload : Long
 	@PostMapping("/unsave-job/{jobId}")
@@ -93,7 +106,7 @@ public class JobController {
 	
 	
 	// Rest API end point
-	// URL : http://localhost:7878/job/getSavedJob
+	// URL : http://localhost:7878/job/get-saved-job
 	// Method : GET
 	// Payload : JobInfoDetailsResponse
 	@GetMapping("/get-saved-job")

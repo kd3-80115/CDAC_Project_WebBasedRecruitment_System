@@ -41,4 +41,10 @@ public interface JobInfoService {
 	 **/
 	List<JobInfoDetailsResponse> getSavedJobFun();
 
+
+	/**
+	 * Get SortListed jobs
+	 * **/
+	List<JobInfoDetailsResponse> getSortListedJobFun();
+
 }
