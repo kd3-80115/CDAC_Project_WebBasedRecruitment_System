@@ -10,12 +10,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.payload.request.ResetPassword;
 import com.app.payload.request.SigninRequest;
 import com.app.payload.request.Signup;
+import com.app.payload.request.UserAndOtp;
+import com.app.payload.response.ApiResponse;
+import com.app.payload.response.OtpAndEmailResponse;
 import com.app.payload.response.SigninResponse;
 import com.app.security.JwtUtils;
 import com.app.service.UserService;
@@ -61,5 +67,24 @@ public class UserSignInSignUpController {
 				.ok(new SigninResponse(utils.generateJwtToken(verifiedAuth), "Successful Authentication!!!"));
 
 	}
+	
+	@PutMapping("/send-otp")
+	public ResponseEntity<ApiResponse> forgotPassword(@Valid @RequestParam String email)
+	{
+		return new ResponseEntity<ApiResponse>(userService.forgotPassword(email),HttpStatus.OK);
+	}
+	
+	@PostMapping("/verify-otp")
+	public ResponseEntity<OtpAndEmailResponse> verifyOtp(@Valid @RequestBody UserAndOtp userAndOtp)
+	{
+		return new ResponseEntity<OtpAndEmailResponse>(userService.verifyOtp(userAndOtp),HttpStatus.OK);
+	}
 
+	@PutMapping("/reset-password")
+	public	ResponseEntity<ApiResponse> resetPassword(	@Valid @RequestParam String email,
+														@Valid @RequestParam String otp,
+														@Valid @RequestBody ResetPassword password) 
+	{
+		return new ResponseEntity<ApiResponse>(userService.resetPassword(email,otp,password),HttpStatus.OK);
+	}
 }
