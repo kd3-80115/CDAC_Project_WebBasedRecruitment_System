@@ -13,9 +13,17 @@ import lombok.Setter;
 public class ApiResponse {
 	private LocalDateTime timeStamp;
 	private String message;
+	private boolean flag;
 	public ApiResponse(String message) {
 		super();
 		this.message = message;
+		this.timeStamp=LocalDateTime.now();
+	}
+	
+	public ApiResponse(String message,boolean flag) {
+		super();
+		this.message = message;
+		this.flag=flag;
 		this.timeStamp=LocalDateTime.now();
 	}
 	

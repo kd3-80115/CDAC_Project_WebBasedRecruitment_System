@@ -52,5 +52,7 @@ public class UserEntity extends BaseEntity {
 	@Column(length = 30)
 	private UserRole role;
 	
+	@Column(length = 6)
+	private String otp;
 	
 }
