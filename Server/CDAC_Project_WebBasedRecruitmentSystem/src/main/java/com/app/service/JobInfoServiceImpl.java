@@ -124,6 +124,93 @@ public class JobInfoServiceImpl implements JobInfoService {
 	}
 	
 	
+	/**
+	 * Save a job
+	 **/
+	@Override
+	public ApiResponse saveJobFun(Long jobId) {
+		
+		Long userId=findUser.getUserId();
+				
+		if(jobInfoRepo.existsById(jobId)) {
+	
+			//statically imported method from ApplicantHelper class
+			//to find persistent ApplicantEntity by userId
+			ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+			
+			// Returns the value in case of non empty Optional
+			// OR throws supplied exception
+			
+			//Find job by jobId from payload
+			JobInfoEntity job=jobInfoRepo.findById(jobId).
+					orElseThrow(()-> new ResourceNotFoundException
+							("JOB", "jobId", userId));
+			
+			//removing applicant to job applicant List
+			//and job to applicant Saved jobs
+			job.addApplicant(applicant);
+			
+			return new ApiResponse("Applicant with ID : " +userId+" saved job with ID : "+jobId);
+		}
+		
+		return new ApiResponse("Job you're saving for job with ID : "+jobId+" does't exists");
+		
+	}
+	
+	
+	
+	/**
+	 * Unsave a job
+	 **/
+	@Override
+	public ApiResponse unSaveJobFun(Long jobId) {
+		
+		Long userId=findUser.getUserId();
+				
+		if(jobInfoRepo.existsById(jobId)) {
+			
+			//statically imported method from ApplicantHelper class
+			//to find persistent ApplicantEntity by userId
+			ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+			
+			// Returns the value in case of non empty Optional
+			// OR throws supplied exception
+			
+			//Find job by jobId from payload
+			JobInfoEntity job=jobInfoRepo.findById(jobId).
+					orElseThrow(()-> new ResourceNotFoundException
+							("JOB", "jobId", userId));
+			//removing applicant to job applicant List
+			//and job to applicant Saved jobs
+			job.removeApplicant(applicant);
+			
+			return new ApiResponse("Applicant with ID : " +userId+" Unsaved job with ID : "+jobId);
+		}
+		
+		return new ApiResponse("Job you're Unsaving for job with ID : "+jobId+" does't exists");
+		
+	}
+
+
+	@Override
+	public List<JobInfoDetailsResponse> getSavedJobFun() {
+
+		Long userId=findUser.getUserId();
+				
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+		
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		
+		
+		return applicant.getJob().stream().
+				map(jobInfo->mapper.map(jobInfo, JobInfoDetailsResponse.class)).
+				collect(Collectors.toList());
+	}
+	
+	
 	
 	
 	

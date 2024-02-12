@@ -62,7 +62,7 @@ public class JobInfoRepositoryTest {
 	public void addSavedJob()
 	{
 		ApplicantEntity app=appRepo.findById(4L).orElseThrow();
-		JobInfoEntity job=jobRepo.findById(1L).orElseThrow();
+		JobInfoEntity job=jobRepo.findById(3L).orElseThrow();
 		job.addApplicant(app);
 		
 	}
