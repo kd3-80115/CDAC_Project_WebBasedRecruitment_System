@@ -1,10 +1,10 @@
-import Base from "./components/Base";
+import DashBoard from "./components/Dashboard";
 
 function App() {
   return (
-    <Base>
+    <DashBoard>
       <h1>THis is our app</h1>
-    </Base>
+    </DashBoard>
   );
 }
 
