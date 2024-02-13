@@ -1,11 +1,13 @@
-import Base from "./components/Base";
+
 import Register from "./components/auth/Register";
+
+import DashBoard from "./components/Dashboard";
+
 function App() {
   return (
-    <Base>
+    <DashBoard>
       <h1>THis is our app</h1>
-      <Register/>
-    </Base>
+    </DashBoard>
   );
 }
 

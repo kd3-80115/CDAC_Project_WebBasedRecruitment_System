@@ -1,7 +1,9 @@
+import Header from "./common/Header"
+
 function Base({ title = "Weclome to Get Hire", children }) {
   return (
     <>
-      <h1>This is Header</h1>
+      <Header/>
       {children}
       <h1>This is footer</h1>
     </>
