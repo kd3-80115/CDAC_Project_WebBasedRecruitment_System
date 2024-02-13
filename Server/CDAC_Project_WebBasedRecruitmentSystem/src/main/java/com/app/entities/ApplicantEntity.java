@@ -92,6 +92,19 @@ public class ApplicantEntity extends BaseEntity{
 		this.resumeLink=resumeLink;
 	}
 	
+	public ApplicantEntity(UserEntity user, boolean emailIdVerifyStatus, boolean mobileNumVerifyStatus,
+			String resumeHeadLine, String profileSummary, String maritalStatus, NoticePeriod noticePeriod) {
+		
+		this.user = user;
+		this.emailIdVerifyStatus = emailIdVerifyStatus;
+		this.mobileNumVerifyStatus = mobileNumVerifyStatus;
+		this.resumeHeadLine = resumeHeadLine;
+		this.profileSummary = profileSummary;
+		this.maritalStatus = maritalStatus;
+		this.noticePeriod = noticePeriod;
+		
+	}
+	
 	
 	
 	//adds skills to the skills list of applicant
