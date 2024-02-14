@@ -2,8 +2,6 @@ package com.app.service;
 
 
 
-import javax.validation.Valid;
-
 import com.app.payload.request.BasicDetailRequest;
 import com.app.payload.request.PersonalDetailRequest;
 import com.app.payload.request.ResetPassword;

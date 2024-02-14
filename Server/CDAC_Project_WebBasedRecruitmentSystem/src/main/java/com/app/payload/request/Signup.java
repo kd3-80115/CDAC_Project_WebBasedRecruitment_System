@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import com.app.entities.Gender;
 import com.app.entities.UserRole;
@@ -30,6 +31,7 @@ public class Signup {
 	@Email(message = "Invalid Email!!!")
 	private String email;
 	@JsonProperty(access = Access.WRITE_ONLY)
+	@Pattern(regexp ="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",message = "Enter strong password" )
 	private String password;
 	
 	private String phoneNumber;

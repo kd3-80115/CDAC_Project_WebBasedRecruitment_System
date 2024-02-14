@@ -5,6 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
+  let message = "message";
+  let passwordError = "password";
+  let dob = "date";
   const url = "https://localhost:7878/users/signup";
   /* Response {
   "id": 9,
@@ -18,7 +21,8 @@ function Register() {
 }*/
 
   const [responseData, setResponseData] = useState([]);
-  const [error, setError] = useState("");
+
+  const [empty, setEmpty] = useState("");
   const [sendData, setSendUpData] = useState({
     firstName: "",
     lastName: "",
@@ -36,24 +40,50 @@ function Register() {
   };
 
   async function SignUp() {
-    const response = await axios
+    await axios
+
       .post(url, sendData)
-      .then((responseData) => {
-        setResponseData(responseData.data);
-        console.log("ReponseDate :" + responseData);
-        //toast.success("Signed up succesfully.");
+
+      .then((resp) => {
+        setResponseData(resp.data);
+
+        console.log("ReponseData :" + resp.data);
+
+        toast.success("Signed up succesfully.");
+
+        sendData.firstName = "";
+        sendData.lastName = "";
+        sendData.email = "";
+        sendData.password = "";
+        sendData.phoneNumber = "";
+        sendData.dob = "";
+        sendData.gender = "";
       })
+
       .catch((error) => {
-        setError(error.data);
-        console.log("error data :" + error.data);
-        toast.error(error.data);
+        if (error.response.data["message"]) {
+          message = error.response.data["message"];
+        }
+        if (error.response.data["password"]) {
+          passwordError = error.response.data["password"];
+        }
+        if (error.response.data["dob"]) {
+          dob = error.response.data["dob"];
+        }
+
+        console.log("Error Message :" + error.response.data["dob"]);
+        if (message.includes("Duplicate")) {
+          toast.error(
+            "User with this email " + sendData.email + " already exists"
+          );
+        } else if (passwordError.includes("strong")) {
+          toast.error(
+            "Enter a strong password, password must contain atleast one alphabet character, one numeric charater,and one special charater amoun '@$!%*#?&'"
+          );
+        } else if (dob.includes("DOB")) {
+          toast.error("Date of birth should be from past");
+        }
       });
-    console.log("Error :  " + response);
-    if (responseData.email === sendData.email) {
-      toast.success("Signed up succesfully email.");
-    } else {
-      toast.error(response);
-    }
   }
 
   function validateValues() {
@@ -82,6 +112,9 @@ function Register() {
 
     if (!password.trim()) {
       toast.error("Please enter your password.");
+      isValid = false;
+    } else if (!isValidPassword(password)) {
+      toast.error("Please enter a valid password.");
       isValid = false;
     }
 
@@ -118,6 +151,11 @@ function Register() {
     return /^\d{10}$/.test(phoneNumber);
   }
 
+  const isValidPassword = (password) => {
+    // Password validation using regex
+    return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
+  };
+
   const handleGenderChange = (event) => {
     const genderValue = event.target.value; // Get the selected gender value
     setSendUpData({
@@ -127,10 +165,17 @@ function Register() {
   };
 
   return (
-    <div class="container">
+    <div
+      class="container "
+      style={{ marginTop: "120px", marginBottom: "120px" }}
+    >
       <div
         className=" row justify-content-center   my-5 "
-        style={{ backgroundColor: "#F5F5F5" }}
+        style={{
+          backgroundColor: "#F5F5F5",
+          marginTop: "100",
+          marginBottom: "120px",
+        }}
       >
         <div id="signUpBar" className=" text-center  ">
           <h2>SignUp</h2>
@@ -151,7 +196,6 @@ function Register() {
                 autoComplete="off"
                 onChange={OnTextChanged}
               />
-              <div id="fNameErr" style={{ color: "red" }}></div>
             </div>
             <br />
             <div className="form-group">
@@ -248,6 +292,7 @@ function Register() {
                 className="form-control"
                 id="dob"
                 name="dob"
+                value={sendData.dob}
                 autoComplete="off"
                 onChange={OnTextChanged}
               />
