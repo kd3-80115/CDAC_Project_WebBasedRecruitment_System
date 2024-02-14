@@ -1,10 +1,10 @@
-import "../../assets/styles/Navbar.css";
-
+import "./Header.css";
+import { NavLink } from "react-router-dom";
 function Header() {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg background">
-        <a class="navbar-brand" href="#">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-fixed-top background">
+        <a class="navbar-brand" href="/Home">
           Get Hired
         </a>
         <button
@@ -21,29 +21,29 @@ function Header() {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto ">
             <li class="nav-item">
-              <a class="nav-link items" href="#">
+              <NavLink className="nav-link items" to={"/home"}>
                 Home
-              </a>
+              </NavLink>
             </li>
             <li class="nav-item ">
-              <a class="nav-link items" href="#">
+              <NavLink className="nav-link items" to={"/contact-us"}>
                 Contact us
-              </a>
+              </NavLink>
             </li>
             <li class="nav-item">
-              <a class="nav-link items" href="#">
-                About us
-              </a>
+              <NavLink className="nav-link items" to={"/about-us"}>
+                AboutUs
+              </NavLink>
             </li>
             <li class="nav-item ">
-              <a class="nav-link items" href="#">
+              <NavLink className="nav-link items" to={""}>
                 SignIn
-              </a>
+              </NavLink>
             </li>
             <li class="nav-item ">
-              <a class="nav-link items" href="#">
+              <NavLink className="nav-link items" to={""}>
                 SignUp
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>

@@ -1,13 +1,12 @@
-import Header from "./common/Header"
-
-function Base({ title = "Weclome to Get Hire", children }) {
+import Header from "./common/Header/Header"
+import {Outlet} from 'react-router-dom';
+function Dashboard() {
   return (
     <>
       <Header/>
-      {children}
-      <h1>This is footer</h1>
+      <Outlet/>
     </>
   );
 }
 
-export default Base;
+export default Dashboard;
