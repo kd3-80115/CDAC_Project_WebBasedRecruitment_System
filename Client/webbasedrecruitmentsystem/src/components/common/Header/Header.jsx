@@ -36,7 +36,7 @@ function Header() {
               </NavLink>
             </li>
             <li class="nav-item ">
-              <NavLink className="nav-link items" to={""}>
+              <NavLink className="nav-link items" to={'/register'}>
                 SignIn
               </NavLink>
             </li>
