@@ -4,7 +4,7 @@ function Header() {
   return (
     <div>
       <nav class="navbar navbar-expand-lg background">
-        <a class="navbar-brand" href="#">
+        <a className="navbar-brand" href="#">
           Get Hired
         </a>
         <button
