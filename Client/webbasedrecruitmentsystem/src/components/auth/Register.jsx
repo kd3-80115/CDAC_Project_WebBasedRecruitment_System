@@ -48,23 +48,25 @@ function Register() {
    
   }
 
-  // Function to handle radio button change
-  const handleGenderChange = (event) => {
-    const genderValue = event.target.value; // Get the selected gender value
-    setSendUpData({
-      ...sendData,
-      gender: genderValue, // Update the gender field in the state
-    });
-  };
-  return (
-    <div className="container">
-      <div
-        className=" row justify-content-center   my-5 "
-        style={{ backgroundColor: "#F5F5F5" }}
-      >
-        <div id="signUpBar" className=" text-center  ">
-          <h2>SignUp</h2>
-        </div>
+    return ( 
+
+    <div class="container">
+      
+  <section class="vh-100 bg-image">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style={{borderRadius:15}}>
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example1cg">Your Name</label>
+                </div>
 
         <div className="col-6">
           <br />
