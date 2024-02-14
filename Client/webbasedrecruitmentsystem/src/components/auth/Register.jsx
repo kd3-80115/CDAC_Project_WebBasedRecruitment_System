@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import "../auth/Register.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Register() {
   const url = "https://localhost:7878/users/signup";
   /* Response {
@@ -14,8 +17,8 @@ function Register() {
   "gender": "MALE"
 }*/
 
-  const [responseData, setResponseData] = useState();
-
+  const [responseData, setResponseData] = useState([]);
+  const [error, setError] = useState("");
   const [sendData, setSendUpData] = useState({
     firstName: "",
     lastName: "",
@@ -32,20 +35,87 @@ function Register() {
     setSendUpData(copyOfEmp);
   };
 
-  function SignUp() {
-    console.log("Hi");
-    console.log(sendData);
-    axios
+  async function SignUp() {
+    const response = await axios
       .post(url, sendData)
-      .then((result) => {
-        if (result.data.email === sendData.email) {
-          setResponseData(result.data);
-        }
+      .then((responseData) => {
+        setResponseData(responseData.data);
+        console.log("ReponseDate :" + responseData);
+        //toast.success("Signed up succesfully.");
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.data);
+        console.log("error data :" + error.data);
+        toast.error(error.data);
       });
-   
+    console.log("Error :  " + response);
+    if (responseData.email === sendData.email) {
+      toast.success("Signed up succesfully email.");
+    } else {
+      toast.error(response);
+    }
+  }
+
+  function validateValues() {
+    const { firstName, lastName, email, password, phoneNumber, dob, gender } =
+      sendData;
+    let isValid = true;
+
+    if (!firstName.trim()) {
+      toast.error("Please enter your first name.");
+
+      isValid = false;
+    }
+
+    if (!lastName.trim()) {
+      toast.error("Please enter your last name.");
+      isValid = false;
+    }
+
+    if (!email.trim()) {
+      toast.error("Please enter your email.");
+      isValid = false;
+    } else if (!isValidEmail(email)) {
+      toast.error("Please enter a valid email address.");
+      isValid = false;
+    }
+
+    if (!password.trim()) {
+      toast.error("Please enter your password.");
+      isValid = false;
+    }
+
+    if (!phoneNumber.trim()) {
+      toast.error("Please enter your phone number.");
+      isValid = false;
+    } else if (!isValidPhoneNumber(phoneNumber)) {
+      toast.error("Please enter a valid phone number.");
+      isValid = false;
+    }
+
+    if (!dob.trim()) {
+      toast.error("Please enter your date of birth.");
+      isValid = false;
+    }
+
+    if (!gender.trim()) {
+      toast.error("Please select your gender.");
+      isValid = false;
+    }
+    if (isValid) {
+      SignUp();
+    }
+
+    return isValid;
+  }
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  function isValidPhoneNumber(phoneNumber) {
+    // Example validation logic for phone number
+    return /^\d{10}$/.test(phoneNumber);
   }
 
   // Function to handle radio button change
@@ -81,6 +151,7 @@ function Register() {
                 autoComplete="off"
                 onChange={OnTextChanged}
               />
+              <div id="fNameErr" style={{ color: "red" }}></div>
             </div>
             <br />
             <div className="form-group">
@@ -98,40 +169,48 @@ function Register() {
             </div>
             <br />
             <div className="form-group">
-              <b style={{ color: "#9B7ED9", fontSize: 22 }}>Gender</b>
-              <br />
+              <div style={{ marginBottom: 18 }}>
+                <b style={{ color: "#9B7ED9", fontSize: 22 }}>Gender</b>
+              </div>
 
               <input
                 className="form-check-input"
                 type="radio"
                 name="MALE"
                 id="MALE"
-                checked={sendData.gender === 'MALE'}
+                checked={sendData.gender === "MALE"}
                 onChange={handleGenderChange}
                 value="MALE"
               />
-              <b style={{ color: "#9B7ED9", fontSize: 15 }}> Male</b>
-
+              <b style={{ color: "#9B7ED9", fontSize: 20 }}> Male</b>
+              <label
+                className="form-check-label"
+                style={{ marginRight: "20px" }}
+              ></label>
               <input
                 className="form-check-input"
                 type="radio"
                 name="FEMALE"
-                checked={sendData.gender === 'FEMALE'}
+                checked={sendData.gender === "FEMALE"}
                 onChange={handleGenderChange}
                 value="FEMALE"
               />
 
-              <b style={{ color: "#9B7ED9", fontSize: 15 }}> Female</b>
+              <b style={{ color: "#9B7ED9", fontSize: 20 }}> Female</b>
+              <label
+                className="form-check-label"
+                style={{ marginRight: "20px" }}
+              ></label>
               <input
                 className="form-check-input"
                 type="radio"
                 name="OTHER"
                 id="OTHER"
-                checked={sendData.gender === 'OTHER'}
+                checked={sendData.gender === "OTHER"}
                 onChange={handleGenderChange}
                 value="OTHER"
               />
-              <b style={{ color: "#9B7ED9", fontSize: 15 }}> Other</b>
+              <b style={{ color: "#9B7ED9", fontSize: 20 }}> Other</b>
             </div>
             <br />
             <div className="form-group">
@@ -192,7 +271,7 @@ function Register() {
               type="button"
               className="btn btn-primary"
               onClick={() => {
-                SignUp();
+                validateValues();
               }}
               style={{ backgroundColor: "#9B7ED9", width: 120, height: 50 }}
             >
@@ -201,6 +280,7 @@ function Register() {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
