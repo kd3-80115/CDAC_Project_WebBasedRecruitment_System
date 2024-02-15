@@ -1,4 +1,3 @@
-
 import Register from "./components/auth/Register";
 
 import DashBoard from "./components/Dashboard";
@@ -6,8 +5,7 @@ import DashBoard from "./components/Dashboard";
 function App() {
   return (
     <DashBoard>
-      
-      <Register/>
+      <Register />
     </DashBoard>
   );
 }

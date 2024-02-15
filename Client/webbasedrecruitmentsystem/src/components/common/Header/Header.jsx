@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 function Header() {
   return (
     <div>
-      <nav class="navbar fixed-top navbar-expand-lg navbar-fixed-top background">
-        <a class="navbar-brand" href="/Home">
+      <nav class="navbar  fnavbar-expand-lg navbar-fixed-top background">
+        <a class="navbar-brand " href="/Home">
           Get Hired
         </a>
         <button
@@ -36,7 +36,7 @@ function Header() {
               </NavLink>
             </li>
             <li class="nav-item ">
-              <NavLink className="nav-link items" to={'/register'}>
+              <NavLink className="nav-link items" to={"/register"}>
                 SignIn
               </NavLink>
             </li>

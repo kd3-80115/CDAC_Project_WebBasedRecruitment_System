@@ -1,0 +1,41 @@
+.buttonDiv{
+    background-color: #7fedd9;
+}
+
+.button{
+    height: 100px;
+    width: 250px;
+    padding-left: 200px;
+}
+.mainDiv{
+    height: 100vh;
+    background-color: #F5F5F5;
+}
+
+.containerDiv{
+    
+    background-color: #F5F5F5;
+}
+
+.imageDiv{
+    height: 160px;
+    width: 156px;
+    border-radius: 150px;
+    background-color: hsl(0, 6%, 90%);
+}
+.image{
+
+    height: 120px;
+    width: 160px; 
+}
+.basicDetailsDiv{
+    height: 200px;
+   
+    background-color: #ffff;
+
+}
+
+.roundedShadowDiv {
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }

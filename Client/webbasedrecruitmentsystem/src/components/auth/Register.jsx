@@ -20,9 +20,6 @@ function Register() {
   "gender": "MALE"
 }*/
 
-  const [responseData, setResponseData] = useState([]);
-
-  const [empty, setEmpty] = useState("");
   const [sendData, setSendUpData] = useState({
     firstName: "",
     lastName: "",
@@ -34,9 +31,9 @@ function Register() {
   });
 
   const OnTextChanged = (args) => {
-    var copyOfEmp = { ...sendData };
-    copyOfEmp[args.target.name] = args.target.value;
-    setSendUpData(copyOfEmp);
+    var copyOfData = { ...sendData };
+    copyOfData[args.target.name] = args.target.value;
+    setSendUpData(copyOfData);
   };
 
   async function SignUp() {
@@ -45,8 +42,6 @@ function Register() {
       .post(url, sendData)
 
       .then((resp) => {
-        setResponseData(resp.data);
-
         console.log("ReponseData :" + resp.data);
 
         toast.success("Signed up succesfully.");
@@ -90,7 +85,8 @@ function Register() {
     const { firstName, lastName, email, password, phoneNumber, dob, gender } =
       sendData;
     let isValid = true;
-
+    const currentDate = new Date();
+    const selectedDate = new Date(dob);
     if (!firstName.trim()) {
       toast.error("Please enter your first name.");
 
@@ -129,6 +125,9 @@ function Register() {
     if (!dob.trim()) {
       toast.error("Please enter your date of birth.");
       isValid = false;
+    } else if (selectedDate >= currentDate) {
+      toast.error("Date of birth should be in the past.");
+      isValid = false;
     }
 
     if (!gender.trim()) {
@@ -165,10 +164,7 @@ function Register() {
   };
 
   return (
-    <div
-      class="container "
-      style={{ marginTop: "120px", marginBottom: "120px" }}
-    >
+    <div class="container " style={{ marginBottom: "120px" }}>
       <div
         className=" row justify-content-center   my-5 "
         style={{
@@ -322,6 +318,22 @@ function Register() {
             >
               Sign Up
             </button>
+            <b
+              style={{
+                color: "#9B7ED9",
+                fontSize: 22,
+                marginLeft: "80px",
+                marginRight: "10px",
+              }}
+            >
+              Already registered ?
+            </b>
+            <a href="#signin" style={{ fontSize: "22px" }}>
+              Sign in
+            </a>
+            <b style={{ color: "#9B7ED9", fontSize: 22, marginLeft: "10px" }}>
+              here
+            </b>
           </form>
         </div>
       </div>
