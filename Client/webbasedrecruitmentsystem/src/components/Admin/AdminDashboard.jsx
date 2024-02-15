@@ -1,10 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
-import './Admin.css'
+import { Link, NavLink, Outlet } from "react-router-dom";
+import "./Admin.css";
 function AdminDashboard() {
   return (
     <>
       <nav className="navbar navbar-expand-lg  background">
-        <Link className="navbar-brand" href="/Home">
+        <Link className="navbar-brand" href="/">
           Get Hired
         </Link>
         <button
@@ -26,14 +26,53 @@ function AdminDashboard() {
           </ul>
         </div>
       </nav>
-      <div className="side-bar">
-        <div className="">
-          <h1 className="m-2">Welcome</h1>
-          <h2>Admin</h2>
+      <div className="row" style={{ height: "100vh" }}>
+        {/* For side bar */}
+        <div className="col-2 h-100" style={{ backgroundColor: "#f5f5f5" }}>
+          <h1 className="text-center">Welcome</h1>
+          <h2 className="text-center">Admin</h2>
+          <hr />
+          <div className="border border-2 text-center shadow-sm m-2"
+          style={{backgroundColor:"#BBADD9"}}>
+            <NavLink
+              to="/register-hr"
+              className=" link-underline link-underline-opacity-0">
+              <h4 className="m-2" style={{color:"black"}}>Register HR</h4>
+            </NavLink>
+          </div>
+          <br></br>
+          <div className="border border-2 text-center shadow-sm m-2"
+          style={{backgroundColor:"#BBADD9"}}>
+            <NavLink
+              to="/hr-list"
+              className=" link-underline link-underline-opacity-0">
+              <h4 className="m-2" style={{color:"black"}}>HR List</h4>
+            </NavLink>
+          </div>
+          <br></br>
+          <div className="border border-2 text-center shadow-sm m-2"
+          style={{backgroundColor:"#BBADD9"}}>
+            <NavLink
+              to="/job-list"
+              className=" link-underline link-underline-opacity-0">
+              <h4 className="m-2" style={{color:"black"}}>Job List</h4>
+            </NavLink>
+          </div>
+          <br></br>
+          <div className="border border-2 text-center shadow-sm m-2"
+          style={{backgroundColor:"#BBADD9"}}>
+            <NavLink
+              to="/report"
+              className=" link-underline link-underline-opacity-0">
+              <h4 className="m-2" style={{color:"black"}}>Report</h4>
+            </NavLink>
+          </div>
+          
         </div>
-        <div></div>
+        {/* For dashboard cards */}
+        <div className="col-10"></div>
+        <Outlet />
       </div>
-      <Outlet/>
     </>
   );
 }
