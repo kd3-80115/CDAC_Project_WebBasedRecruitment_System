@@ -1,6 +1,8 @@
 import "./ApplicantWelcomePage.css";
-import ProfilePicAlternate from "../../../assets/images/ProfilePicAlternate.png";
+import { useNavigate } from "react-router-dom";
 function ApplicantWelcomePage() {
+  /*use to navigate the function*/
+  const navigate = useNavigate();
   return (
     <div
       style={{ height: "100vh" }}
@@ -33,7 +35,9 @@ function ApplicantWelcomePage() {
             className="col-5 d-flex justify-content-center"
             style={{ height: "100px" }}
           >
-            <button
+            <button onClick={()=>{
+              navigate("/profile");
+            }}
               className="btn btn-success   "
               style={{ width: "280px", fontSize: "25px" }}
             >

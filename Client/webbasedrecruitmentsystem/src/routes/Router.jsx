@@ -15,6 +15,8 @@ import Home from "../components/common/Home/Home";
 import Register from "../components/auth/Register";
 import LogIn from "../components/auth/Login";
 import { jwtDecode } from "jwt-decode";
+import ApplicantWelcomePage from "../components/applicant/ApplicantWelcomePage/ApplicantWelcomePage";
+import ProfilePage from "../components/applicant/ProfilePage/applicantprofilepage";
 
 const Routes = () => {
   /*
@@ -54,8 +56,8 @@ const Routes = () => {
   const routesForApplicant=createRoutesFromElements(
     <Route id="applicant" path="/" element={<ProtectedRoute/>}>
       {/*Add your applicant component here element={<Applicant/>}*/}
-      <Route id="applicant1" path="/applicant" element></Route>
-      <Route id="applicant2" path="/profile" element></Route>
+      <Route id="applicant1" path="/applicant" element= {<ApplicantWelcomePage/>}></Route>
+      <Route id="applicant2" path="/profile" element= {<ProfilePage/>}></Route>
       <Route id="applicant3" path="/jobs" element></Route>
       <Route id="applicant4" path="/applied-jobs" element></Route>
       <Route id="applicant5" path="/saved-jobs" element></Route>
@@ -75,6 +77,15 @@ const Routes = () => {
       <Route id="adminUnAuth1" path="*" element={<><br/><br/><br/><br/><h1>You are not supposed to view this page</h1></>}></Route>
     </Route>
   )
+
+  //In this route we will show that use is un authorized for
+  // particular page
+  const routeForNotAuthorizedApplicant= createRoutesFromElements(
+    <Route id="applicantUnAuth" path="*" element={<ProtectedRoute/>}>
+      <Route id="applicantUnAuth1" path="*" element={<><br/><br/><br/><br/><h1>Unauthorized User</h1></>}></Route>
+    </Route>
+  )
+
   const router = createBrowserRouter([
     /*All public routes*/
     ...routesForPublic,
@@ -82,6 +93,8 @@ const Routes = () => {
     ...(userRoles.includes('ROLE_HR') ? routesForHROnly : routeForNotAuthorizedHR),
     /*IF the user is logged in as a ADMIN else unauthorized*/
     ...(userRoles.includes('ROLE_ADMIN') ? routesForAdminOnly : routeForNotAuthorizedAdmin),
+    /*IF the user is logged in as a Applicant else unauthorized*/
+    ...(userRoles.includes('ROLE_APPLICANT') ? routesForApplicant : routeForNotAuthorizedApplicant),
     !token && <Navigate to="/signin"></Navigate>
   ]);
   return <RouterProvider router={router} />;

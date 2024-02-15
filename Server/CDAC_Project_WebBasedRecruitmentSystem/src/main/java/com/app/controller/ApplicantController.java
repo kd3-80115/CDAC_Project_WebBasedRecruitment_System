@@ -100,7 +100,7 @@ public class ApplicantController {
 	
 	@GetMapping("/user-detail")
 	public ResponseEntity<?> getBasicDetail() {
-		System.out.println("inside profileInfo endpoint");
+		System.out.println("inside user-detail endpoint");
 		
 		UserDetailsResp userDetailsResp = userService.getBasicDetail();
 		
