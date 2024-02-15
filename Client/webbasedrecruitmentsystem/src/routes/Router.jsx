@@ -43,6 +43,10 @@ const Routes = () => {
   const routesForAdminOnly= createRoutesFromElements(
     <Route id="admin1" path="/" element={<ProtectedRoute/>}>
       <Route id="admin2" path="/admin" element={<AdminDashboard/>}></Route>
+      <Route id="admin3" path="/register-hr" element={<AdminDashboard/>}></Route>
+      <Route id="admin4" path="/job-list" element={<AdminDashboard/>}></Route>
+      <Route id="admin5" path="/hr-list" element={<AdminDashboard/>}></Route>
+      <Route id="admin6" path="/report" element={<AdminDashboard/>}></Route>
     </Route>
   );
 
