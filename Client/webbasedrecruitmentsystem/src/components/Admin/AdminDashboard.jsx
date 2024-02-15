@@ -35,7 +35,7 @@ function AdminDashboard() {
           <div className="border border-2 text-center shadow-sm m-2"
           style={{backgroundColor:"#BBADD9"}}>
             <NavLink
-              to="/register-hr"
+              to="/admin/register-hr"
               className=" link-underline link-underline-opacity-0">
               <h4 className="m-2" style={{color:"black"}}>Register HR</h4>
             </NavLink>
@@ -44,7 +44,7 @@ function AdminDashboard() {
           <div className="border border-2 text-center shadow-sm m-2"
           style={{backgroundColor:"#BBADD9"}}>
             <NavLink
-              to="/hr-list"
+              to="/admin/hr-list"
               className=" link-underline link-underline-opacity-0">
               <h4 className="m-2" style={{color:"black"}}>HR List</h4>
             </NavLink>
@@ -53,7 +53,7 @@ function AdminDashboard() {
           <div className="border border-2 text-center shadow-sm m-2"
           style={{backgroundColor:"#BBADD9"}}>
             <NavLink
-              to="/job-list"
+              to="/admin/job-list"
               className=" link-underline link-underline-opacity-0">
               <h4 className="m-2" style={{color:"black"}}>Job List</h4>
             </NavLink>
@@ -62,7 +62,7 @@ function AdminDashboard() {
           <div className="border border-2 text-center shadow-sm m-2"
           style={{backgroundColor:"#BBADD9"}}>
             <NavLink
-              to="/report"
+              to="/admin/report"
               className=" link-underline link-underline-opacity-0">
               <h4 className="m-2" style={{color:"black"}}>Report</h4>
             </NavLink>
@@ -70,9 +70,9 @@ function AdminDashboard() {
           
         </div>
         {/* For dashboard cards */}
-        <div className="col-10"></div>
-        <Outlet />
+        <div className="col-10"> <Outlet /></div>
       </div>
+      
     </>
   );
 }

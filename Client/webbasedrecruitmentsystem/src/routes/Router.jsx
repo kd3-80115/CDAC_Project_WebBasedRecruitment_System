@@ -17,7 +17,8 @@ import LogIn from "../components/auth/Login";
 import { jwtDecode } from "jwt-decode";
 import ApplicantWelcomePage from "../components/applicant/ApplicantWelcomePage/ApplicantWelcomePage";
 import ProfilePage from "../components/applicant/ProfilePage/applicantprofilepage";
-
+import RegisterHr from "../components/Admin/RegisterHr";
+import HrList from "../components/Admin/HrList"
 const Routes = () => {
   /*
   useAuth hook is called to retrieve the token value from the authentication context
@@ -42,11 +43,11 @@ const Routes = () => {
   //All routes that are for admin only
   const routesForAdminOnly= createRoutesFromElements(
     <Route id="admin1" path="/" element={<ProtectedRoute/>}>
-      <Route id="admin2" path="/admin" element={<AdminDashboard/>}></Route>
-      <Route id="admin3" path="/register-hr" element={<AdminDashboard/>}></Route>
-      <Route id="admin4" path="/job-list" element={<AdminDashboard/>}></Route>
-      <Route id="admin5" path="/hr-list" element={<AdminDashboard/>}></Route>
-      <Route id="admin6" path="/report" element={<AdminDashboard/>}></Route>
+      <Route id="admin2" path="admin" element={<AdminDashboard/>}>
+      <Route id="admin3" path="register-hr" element={<RegisterHr/>}></Route>
+      <Route id="admin4" path="job-list" element={<HrList/>}></Route>
+      <Route id="admin5" path="hr-list" element={<HrList/>}></Route>
+      <Route id="admin6" path="report" element={<AdminDashboard/>}></Route></Route>
     </Route>
   );
 

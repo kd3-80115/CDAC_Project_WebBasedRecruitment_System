@@ -38,7 +38,7 @@ public class AdminController {
 	// https://localhost:7878/admin/registerHr
 	@PostMapping("/register-hr")
 	public ResponseEntity<?> registerHr(@RequestBody @Valid HrRegistrationDetailsRequest hr){
-		System.out.println("Inside controller of hr");
+		System.out.println("Inside controller of admin register hr");
 		ApiResponse res=adminService.registerHr(hr);
 		return new ResponseEntity<>(res,HttpStatus.CREATED);
 	}
