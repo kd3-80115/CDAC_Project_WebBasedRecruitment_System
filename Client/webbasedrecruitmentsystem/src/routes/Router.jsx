@@ -53,6 +53,18 @@ const Routes = () =>{
     </Route>
   )
 
+  const routesForApplicant=createRoutesFromElements(
+    <Route id="applicant" path="/" element={<ProtectedRoute/>}>
+      {/*Add your applicant component here element={<Applicant/>}*/}
+      <Route id="applicant1" path="/applicant" element></Route>
+      <Route id="applicant2" path="/profile" element></Route>
+      <Route id="applicant3" path="/jobs" element></Route>
+      <Route id="applicant4" path="/applied-jobs" element></Route>
+      <Route id="applicant5" path="/saved-jobs" element></Route>
+    </Route>
+  );
+
+
   //In this route we will show that use is un authorized for
   // particular page
   const routeForNotAuthorizedHR= createRoutesFromElements(
