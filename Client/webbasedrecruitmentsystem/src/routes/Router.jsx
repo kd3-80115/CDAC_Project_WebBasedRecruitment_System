@@ -28,46 +28,50 @@ const Routes = () =>{
   
   //All public routes that will be shown to all users
   const routesForPublic =createRoutesFromElements(
-    <Route id="public" path="/" element={<Dashboard />}>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/contact-us" element={<ContactUs />}></Route>
-        <Route path="/about-us" element={<AboutUs />}></Route>
-        <Route path="/signup" element={<Register/>}></Route>
-        <Route path="/signin" element={<LogIn/>}></Route>
+    <Route key  ="public" path="/" element={<Dashboard />}>
+        <Route id="public1" path="/" element={<Home />}></Route>
+        <Route id="public2" path="/home" element={<Home />}></Route>
+        <Route id="public3" path="/contact-us" element={<ContactUs />}></Route>
+        <Route id="public4" path="/about-us" element={<AboutUs />}></Route>
+        <Route id="public5" path="/signup" element={<Register/>}></Route>
+        <Route id="public6" path="/signin" element={<LogIn/>}></Route>
       </Route>
   );
 
 
   //All routes that are for admin only
   const routesForAdminOnly= createRoutesFromElements(
-    <Route id="123" path="/" element={<ProtectedRoute/>}>
-      <Route id="admin" path="/admin" element={<div><br/><br/><br/><h1>Hello ADMIn</h1></div>}></Route>
+    <Route id="admin1" path="/" element={<ProtectedRoute/>}>
+      <Route id="admin2" path="/admin" element={<div><br/><br/><br/><h1>Hello ADMIn</h1></div>}></Route>
     </Route>
   )
 
   //All routes that are for Hr Only
   const routesForHROnly= createRoutesFromElements(
-    <Route id="456" path="/" element={<ProtectedRoute/>}>
-      <Route id="hr" path="/hr" element={<div><br/><br/><br/><h1>Hello HR</h1></div>}></Route>
+    <Route id="hr1" path="/" element={<ProtectedRoute/>}>
+      <Route id="hr2" path="/hr" element={<div><br/><br/><br/><h1>Hello HR</h1></div>}></Route>
     </Route>
   )
 
   //In this route we will show that use is un authorized for
   // particular page
-  const routeForNotAuthorized= createRoutesFromElements(
-    <Route id="err" path="*" element={<ProtectedRoute/>}>
-      <Route id="errorpage" path="*" element={<><br/><br/><br/><br/><h1>You are not supposed to view this page</h1></>}></Route>
+  const routeForNotAuthorizedHR= createRoutesFromElements(
+    <Route id="hrUnauth" path="*" element={<ProtectedRoute/>}>
+      <Route id="hrUnauth1" path="*" element={<><br/><br/><br/><br/><h1>You are not supposed to view this page</h1></>}></Route>
     </Route>
   )
-  
+  const routeForNotAuthorizedAdmin= createRoutesFromElements(
+    <Route id="adminUnAuth" path="*" element={<ProtectedRoute/>}>
+      <Route id="adminUnAuth1" path="*" element={<><br/><br/><br/><br/><h1>You are not supposed to view this page</h1></>}></Route>
+    </Route>
+  )
   const router = createBrowserRouter([
     /*All public routes*/
     ...routesForPublic,
     /*IF the user is logged in as a HR else unauthorized*/
-    ...(userRoles==='ROLE_HR'?routesForHROnly:routeForNotAuthorized),
+    ...(userRoles.includes('ROLE_HR') ? routesForHROnly : routeForNotAuthorizedHR),
     /*IF the user is logged in as a ADMIN else unauthorized*/
-    ...(userRoles==='ROLE_ADMIN'?routesForAdminOnly:routeForNotAuthorized),
+    ...(userRoles.includes('ROLE_ADMIN') ? routesForAdminOnly : routeForNotAuthorizedAdmin),
     !token && <Navigate to="/signin"></Navigate>
   ]);
   return <RouterProvider router={router} />;
