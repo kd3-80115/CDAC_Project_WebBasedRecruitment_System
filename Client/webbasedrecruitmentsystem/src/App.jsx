@@ -1,12 +1,10 @@
-import Register from "./components/auth/Register";
-
-import DashBoard from "./components/Dashboard";
-
+import AuthProvider from "./services/authprovider";
+import Routes from "./routes/Router";
 function App() {
   return (
-    <DashBoard>
-      <Register />
-    </DashBoard>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   );
 }
 
