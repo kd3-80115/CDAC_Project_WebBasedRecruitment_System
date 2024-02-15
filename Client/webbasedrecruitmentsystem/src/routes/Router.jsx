@@ -5,7 +5,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-
+import AdminDashboard from "../components/Admin/AdminDashboard"
 import { useAuth } from "../services/authprovider";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Dashboard from "../components/Dashboard";
@@ -40,7 +40,7 @@ const Routes = () => {
   //All routes that are for admin only
   const routesForAdminOnly= createRoutesFromElements(
     <Route id="admin1" path="/" element={<ProtectedRoute/>}>
-      <Route id="admin2" path="/admin" element={<div><br/><br/><br/><h1>Hello ADMIn</h1></div>}></Route>
+      <Route id="admin2" path="/admin" element={<AdminDashboard/>}></Route>
     </Route>
   );
 
