@@ -1,10 +1,15 @@
 import "./Login.css";
-import { Link} from "react-router-dom";
-import {useState } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../services/authprovider";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+
+/*Toastify container*/
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function LogIn() {
   const [user, setUser] = useState({
     email: "",
@@ -19,27 +24,37 @@ function LogIn() {
 
   const url = "https://localhost:7878/users/signin";
   const handleSubmit = (e) => {
+    /*Prevent sending data in URL*/
     e.preventDefault();
-    console.log("user before request:", user);
-     axios
-      .post(url, user)
-      .then((result) => {
-        let token = result.data["jwt"];
-        console.log(result.data.mesg)
-        let user = jwtDecode(token).authorities;
-        setToken(token);
-        if(user==='ROLE_HR')
-        {
-          navigate("/hr");
-        }
-        else if(user==='ROLE_ADMIN')
-        {
-          navigate("/admin")
-        }
-      })
-      .catch((error) => {
-        console.log("error:" + error.message);
-      });
+
+    if (user.email === "" || user.password === "") {
+      if (user.email === "") toast.error("enter email");
+      if (user.password === "") toast.error("enter password");
+    } else {
+      axios
+        .post(url, user)
+        .then((result) => {
+          let token = result.data["jwt"];
+          let user = jwtDecode(token).authorities;
+          setToken(token);
+          if (user === "ROLE_HR") {
+            navigate("/hr");
+          } else if (user === "ROLE_ADMIN") {
+            navigate("/admin");
+          } else if (user === "ROLE_APPLICANT") {
+            navigate("/applicant");
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            // Bad credentials error
+            toast.error("Invalid email or password. Please try again.");
+          } else {
+            // Handle other errors
+            toast.error("An error occurred. Please try again later.");
+          }
+        });
+    }
   };
 
   const OnTextChanged = (args) => {
@@ -105,6 +120,7 @@ function LogIn() {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
