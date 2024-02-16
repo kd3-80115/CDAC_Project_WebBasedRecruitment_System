@@ -11,3 +11,12 @@ server.port=7878
 - AWS
 - ReactJs
 - MySQL
+
+
+## Frontend Technologies used
+- ReactJs
+- - react-router-dom v6
+- - bootstrap v5
+- - recharts (for bar graph on admin dashboard)
+- - bootstrap icons
+- - axios for 

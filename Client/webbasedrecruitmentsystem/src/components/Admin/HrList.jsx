@@ -21,33 +21,36 @@ function HrList() {
       <h1>HR List</h1>
       <hr />
       <div className="container-fluid">
-        {hrList.map((hr) => (
-          <div key={hr.id} className="card">
-            <div className="card-body">
-              <p>User Id:{hr.id}</p>
-              <p>FirstName:{hr.firstName}</p>
-              <p>LastName:{hr.lastName}</p>
-              <p>Gender:{hr.gender}</p>
-              <p>Email:{hr.email}</p>
-              <p>PhoneNumber:{hr.phoneNumber}</p>
-              <p>Qualification:{hr.qualification}</p>
-            </div>
-          </div>
-        ))}
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">FirstName</th>
+              <th scope="col">LastName</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Email</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Qualification</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {hrList.map((hr) => (
+              <tr key={hr.id}>
+                <td>{hr.id}</td>
+                <td>{hr.firstName}</td>
+                <td>{hr.lastName}</td>
+                <td>{hr.gender}</td>
+                <td>{hr.email}</td>
+                <td>{hr.phoneNumber}</td>
+                <td>{hr.qualification}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
 }
-/*
- {
-    "id": 0,
-    "firstName": "string",
-    "lastName": "string",
-    "gender": "MALE",
-    "email": "string",
-    "phoneNumber": "string",
-    "qualification": "string",
-    "status": true
-  }
-*/
+
 export default HrList;

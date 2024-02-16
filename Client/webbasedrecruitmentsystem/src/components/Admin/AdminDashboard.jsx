@@ -1,6 +1,11 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet,useNavigate } from "react-router-dom";
 import "./Admin.css";
+
+import { logout } from "../../services/helper";
+
+
 function AdminDashboard() {
+  const navigate =useNavigate();
   return (
     <>
       <nav className="navbar navbar-expand-lg  background">
@@ -21,7 +26,7 @@ function AdminDashboard() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item ">
-              <button className="nav-link items">Log out</button>
+              <button className="nav-link items" onClick={()=>{logout(navigate)}}>Log out</button>
             </li>
           </ul>
         </div>
