@@ -1,9 +1,32 @@
 import "./ApplicantWelcomePage.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function ApplicantWelcomePage() {
   /*use to navigate the function*/
   const navigate = useNavigate();
-  return (
+  return (<>
+  <nav className="navbar navbar-expand-lg  background">
+        <Link className="navbar-brand" href="/">
+          Get Hired
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item ">
+              <button className="nav-link items">Log out</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
     <div
       style={{ height: "100vh" }}
       className="d-flex align-items-center justify-content-center"
@@ -47,6 +70,7 @@ function ApplicantWelcomePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

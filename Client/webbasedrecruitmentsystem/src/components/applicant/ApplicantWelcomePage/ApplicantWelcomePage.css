@@ -25,8 +25,8 @@
 }
 .image{
 
-    height: 120px;
-    width: 160px; 
+    height: 110px;
+    width: 135px; 
 }
 .basicDetailsDiv{
     height: 200px;
@@ -38,4 +38,28 @@
 .roundedShadowDiv {
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+  }
+
+  .name{
+    font-size: 35px;
+  }
+  .pencil{
+    padding-left: 15px;
+    color: grey;
+  }
+  .iconPadding{
+    padding-bottom: 13px;
+    padding-right:10px ;
+  }
+
+  .vertical-line {
+    border-left: 1px solid rgb(181, 169, 169); /* Adjust color and width as needed */
+    height: 80px; /* Adjust height as needed */
+    
+  }
+
+  .paddingMargin{
+    padding: 0px;
+    margin: 0px;
+
   }
