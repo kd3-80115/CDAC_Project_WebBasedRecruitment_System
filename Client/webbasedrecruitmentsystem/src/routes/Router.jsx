@@ -16,7 +16,7 @@ import Register from "../components/auth/Register";
 import LogIn from "../components/auth/Login";
 import { jwtDecode } from "jwt-decode";
 import ApplicantWelcomePage from "../components/applicant/ApplicantWelcomePage/ApplicantWelcomePage";
-import ProfilePage from "../components/applicant/ProfilePage/applicantprofilepage";
+import ProfilePage from "../components/applicant/ProfilePage/Applicantprofilepage";
 import RegisterHr from "../components/Admin/RegisterHr";
 import HrList from "../components/Admin/HrList"
 import JobList from "../components/Admin/JobList";

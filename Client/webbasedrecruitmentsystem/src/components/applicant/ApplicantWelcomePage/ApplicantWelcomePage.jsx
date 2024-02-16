@@ -1,5 +1,6 @@
 import "./ApplicantWelcomePage.css";
 import { Link, useNavigate } from "react-router-dom";
+import {logout} from "../../../services/helper"
 function ApplicantWelcomePage() {
   /*use to navigate the function*/
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function ApplicantWelcomePage() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item ">
-              <button className="nav-link items">Log out</button>
+            <button className="nav-link items" onClick={()=>{logout(navigate)}}>Log out</button>
             </li>
           </ul>
         </div>
