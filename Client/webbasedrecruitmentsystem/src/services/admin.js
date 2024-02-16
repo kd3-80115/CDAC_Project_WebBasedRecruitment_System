@@ -2,7 +2,7 @@ import axios from "axios";
 import {BASE_URL} from './helper'
 export const registerHR = (hrDetails) =>{
     return axios.post(BASE_URL+'/admin/register-hr',hrDetails).then((response)=>{
-        return  response.json();
+        return response.data;
     });
 }
 
@@ -55,3 +55,14 @@ export const getReport=()=>{
         return response.data;
     })
 }
+
+// deactivate the hr account
+export const deactivateHr = (id) => {
+  return axios.put(BASE_URL + `/admin/deactivate-hr/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error; 
+    });
+};

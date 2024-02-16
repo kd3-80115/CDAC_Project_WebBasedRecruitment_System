@@ -64,23 +64,29 @@ function RegisterHr() {
         toast.success("HR registered successfully!");
 
         // Reset hrDetail state after successful registration
-        setHrDetail({
-          firstName: "",
-          lastName: "",
-          gender: "",
-          email: "",
-          phoneNumber: "",
-          password: "",
-          dob: "",
-          officeLocation: "",
-          department: "",
-          qualification: "",
-        });
+        resetFileds();
       })
       .catch((err) => {
-        toast.error(err.response);
+        toast.error("Error ocurred"+err["message"]);
+        console.log("error called:"+err);
       });
   }
+
+  const resetFileds=()=>{
+    setHrDetail({
+      firstName: "",
+      lastName: "",
+      gender: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      dob: "",
+      officeLocation: "",
+      department: "",
+      qualification: "",
+    })
+  }
+
 
   return (
     <>
@@ -269,6 +275,7 @@ function RegisterHr() {
               type="button"
               className="btn shadow-sm"
               style={{ backgroundColor: "#F28E13" }}
+              onClick={()=>{resetFileds()}}
             >
               Reset
             </button>
