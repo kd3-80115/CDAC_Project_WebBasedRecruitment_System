@@ -20,7 +20,7 @@ function JobList() {
       <h1>Job List</h1>
       <hr />
       <div className="container-fluid">
-        <table class="table table-striped table-hover">
+        <table className="table table-striped table-hover">
           <thead>
             <tr>
               <th scope="col">Id</th>
@@ -43,7 +43,7 @@ function JobList() {
                 <td>{job.applicationDeadline}</td>
                 <td>{job.location}</td>
                 <td>{job.vacancies}</td>
-                <td><td>{job["status"] ? "Active" : "Inactive"}</td></td>
+                <td>{job["status"] ? "Active" : "Inactive"}</td>
               </tr>
             ))}
           </tbody>
