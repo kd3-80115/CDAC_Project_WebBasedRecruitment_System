@@ -19,6 +19,8 @@ import ApplicantWelcomePage from "../components/applicant/ApplicantWelcomePage/A
 import ProfilePage from "../components/applicant/ProfilePage/applicantprofilepage";
 import RegisterHr from "../components/Admin/RegisterHr";
 import HrList from "../components/Admin/HrList"
+import JobList from "../components/Admin/JobList";
+import Report from "../components/Admin/Report";
 const Routes = () => {
   /*
   useAuth hook is called to retrieve the token value from the authentication context
@@ -45,9 +47,9 @@ const Routes = () => {
     <Route id="admin1" path="/" element={<ProtectedRoute/>}>
       <Route id="admin2" path="admin" element={<AdminDashboard/>}>
       <Route id="admin3" path="register-hr" element={<RegisterHr/>}></Route>
-      <Route id="admin4" path="job-list" element={<HrList/>}></Route>
+      <Route id="admin4" path="job-list" element={<JobList/>}></Route>
       <Route id="admin5" path="hr-list" element={<HrList/>}></Route>
-      <Route id="admin6" path="report" element={<AdminDashboard/>}></Route></Route>
+      <Route id="admin6" path="report" element={<Report/>}></Route></Route>
     </Route>
   );
 
