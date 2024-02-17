@@ -3,6 +3,7 @@ import axios from "axios";
 import "../auth/Register.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   let message = "message";
@@ -19,7 +20,8 @@ function Register() {
   "role": "ROLE_APPLICANT",
   "gender": "MALE"
 }*/
-
+  const [empty,setEmpty]=useState()
+  const navigate=useNavigate();
   const [sendData, setSendUpData] = useState({
     firstName: "",
     lastName: "",
@@ -43,16 +45,10 @@ function Register() {
 
       .then((resp) => {
         console.log("ReponseData :" + resp.data);
-
+        navigate("/signin")
         toast.success("Signed up succesfully.");
-
-        sendData.firstName = "";
-        sendData.lastName = "";
-        sendData.email = "";
-        sendData.password = "";
-        sendData.phoneNumber = "";
-        sendData.dob = "";
-        sendData.gender = "";
+        ResetInput()
+        
       })
 
       .catch((error) => {
@@ -79,6 +75,18 @@ function Register() {
           toast.error("Date of birth should be from past");
         }
       });
+  }
+
+  function ResetInput(){
+    setSendUpData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      dob: "",
+      gender: "",
+    })
   }
 
   function validateValues() {
@@ -310,6 +318,7 @@ function Register() {
             <br />
             <button
               type="button"
+              
               className="btn btn-primary"
               onClick={() => {
                 validateValues();
@@ -328,7 +337,7 @@ function Register() {
             >
               Already registered ?
             </b>
-            <a href="#signin" style={{ fontSize: "22px" }}>
+            <a href="/signin" style={{ fontSize: "22px" }}>
               Sign in
             </a>
             <b style={{ color: "#9B7ED9", fontSize: 22, marginLeft: "10px" }}>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 //base url for applicant contoller
 const baseurl = "https://localhost:7878/applicant/";
@@ -36,5 +37,17 @@ export function FetchProfileInfo(profileInfo,setProfileInfo){
     profileInfo.noticePeriod);
   }).catch((error)=>{
     console.log("ERROR :"+ error);
+  })
+}
+
+export function DeleteResume(){
+  axios.delete(baseurl+"remove-resume").then((response)=>{
+    if(response){
+      toast.warn("Resume deleted")
+    }
+  }).catch((error)=>{
+    if(error){
+      toast.error("Resume could not be deleted")
+    }
   })
 }
