@@ -52,6 +52,7 @@ public class AdminServiceImpl implements AdminService {
 
 	    // Create the HR entity and set the user details
 	    HREntity hrEntity = mapper.map(hr, HREntity.class);
+	    hrEntity.setImageURL("deleted");
 	    hrEntity.setUser(savedUser);
 
 	    // Use merge instead of persist to handle detached entities
