@@ -33,6 +33,10 @@ import AvailbleJobs from "../components/applicant/AvailableJobs"
 import SavedJobs from "../components/applicant/SavedJobs";
 import AppliedJobs from "../components/applicant/AppliedJobs";
 import ShortListedJobs from "../components/applicant/ShortListedJobs";
+import { HRJobList } from "../components/Hr/HrJobList";
+import { UpdateJob } from "../components/Hr/UpdateJob";
+import { Applicants } from "../components/Hr/Applicants";
+
 const Routes = () => {
   /*
   useAuth hook is called to retrieve the token value from the authentication context
@@ -89,10 +93,11 @@ const Routes = () => {
       {/* For HR Prfole and dashboard */}
       <Route id="hr2" path="/hr" element={<HrDashboard/>}>
         <Route id="hrChild1" path="update-profile" element={<EditHrProfile/>}></Route>
-        <Route id="hrChild2" path="jobs" element={<></>}></Route>
+        <Route id="hrChild2" path="jobs" element={<HRJobList/>}></Route>
         <Route id="hrChild3" path="create-job" element={<CreateJob/>}></Route>
-        <Route id="hrChild4" path="applicants" element={<></>}></Route>
+        <Route id="hrChild4" path="applicants" element={<Applicants/>}></Route>
         <Route id="hrChild5" path="" element={<HrProfile/>}></Route>
+        <Route id="hrChild6" path="update-job" element={<UpdateJob/>}></Route>
       </Route>
     </Route>
   );

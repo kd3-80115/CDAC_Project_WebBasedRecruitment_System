@@ -1,15 +1,16 @@
 import { useState } from "react";
-
+import { createJobAndSave } from "../../services/hr";
+import { ToastContainer, toast } from "react-toastify";
 export const CreateJob = () => {
   const [job, setJob] = useState({
     jobTitle: "", //
     experienceRequired: 0,
-    workSchedule: "",//
+    workSchedule: "", //
     salary: 0, //
     applicationDeadline: "", //
     location: "", //
     qualification: "", //
-    depId: 0,//
+    depId: 0, //
     vacancies: 0, //
     status: true,
   });
@@ -22,13 +23,43 @@ export const CreateJob = () => {
   };
 
   //create job
-  const createJob=()=>{
-    console.log(job);
-  }
+  const createJob = () => {
+    /*Check if all fields are filled*/
+    const isEmptyField = Object.values(job).some((value) => value === "");
+    if (isEmptyField) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    createJobAndSave(job)
+      .then((response) => {
+        toast.success("Job created successfully!");
+        resetAllFields();
+      })
+      .catch((err) => {
+        toast.error("something bad happened");
+      });
+  };
 
+  const resetAllFields = () => {
+    console.log("Before:" + job);
+    setJob({
+      jobTitle: "",
+      experienceRequired: 0,
+      workSchedule: "",
+      salary: 0, //
+      applicationDeadline: "",
+      location: "",
+      qualification: "",
+      depId: 0,
+      vacancies: 0,
+      status: true,
+      description: "",
+    });
+    console.log("After:" + job);
+  };
   return (
     <div className={"m-3"}>
-      <h1>Edit profile</h1>
+      <h1>Create Job:</h1>
       <div className="row">
         <div className="col-6">
           <div className="mb-3">
@@ -152,7 +183,7 @@ export const CreateJob = () => {
           </div>
           <div className="mb-3 mt-3">
             <label htmlFor="experienceRequired" className="form-label">
-            Experience Required
+              Experience Required
             </label>
             <div>
               <select
@@ -164,6 +195,7 @@ export const CreateJob = () => {
                 onChange={OnTextChanged}
               >
                 <option selected>Experienced Required</option>
+                <option value="0">Fresher</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -177,6 +209,18 @@ export const CreateJob = () => {
           </div>
         </div>
       </div>
+      <div className="mb-3 mt-3">
+            <label htmlFor="description" className="form-label">
+              Description
+            </label>
+            <input
+              type="text"
+              name="description"
+              className="form-control"
+              placeholder=""
+              onChange={OnTextChanged}
+            />
+          </div>
       <div className="row">
         <div className="col-2">
           <button
@@ -184,7 +228,7 @@ export const CreateJob = () => {
             className="btn shadow-sm"
             style={{ backgroundColor: "#49A646" }}
             onClick={() => {
-                createJob();
+              createJob();
             }}
           >
             Create Job
@@ -195,12 +239,15 @@ export const CreateJob = () => {
             type="button"
             className="btn shadow-sm"
             style={{ backgroundColor: "#F28E13" }}
-            onClick={() => {}}
+            onClick={() => {
+              resetAllFields();
+            }}
           >
             Reset
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
