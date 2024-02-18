@@ -1,8 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { BASE_URL } from "./helper";
 //base url for applicant contoller
-const baseurl = "https://localhost:7878/";
+const baseurl = BASE_URL+"/";
 
 
 
@@ -261,6 +261,46 @@ export function EditEmployment(emp,employment,setEmployment,setEmploymentBit){
     
   })
   setEmploymentBit(true) 
+}
+
+
+/*Upload Image of hr*/
+export const uploadImage = (file) => {
+  const formData = new FormData();
+  formData.append("file", file); // 'image' should match the name expected by your server
+  return axios.post(BASE_URL + "/applicant/upload-image",formData,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((response) => {
+    return response.data;
+  });
+};
+
+/*Update Image*/
+export const upDateImage = (file) => {
+  const formData = new FormData();
+  formData.append("file", file); // 'image' should match the name expected by your server
+  return axios.put(BASE_URL + "/applicant/update-image",formData,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((response) => {
+    return response.data;
+  });
+};
+
+/*remove image*/
+export const removeImage=()=>{
+  return axios.delete(BASE_URL + "/applicant/remove-image").then((response)=>{
+    return response.data;
+  })
+}
+
+export const updateProfile=(sendData)=>{
+  return axios.post(BASE_URL+"/hr",sendData).then((response)=>{
+    return response.data;
+  })
 }
 
 

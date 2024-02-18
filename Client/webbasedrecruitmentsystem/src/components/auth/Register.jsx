@@ -163,7 +163,7 @@ function Register() {
   };
 
   return (
-    <div class="container " style={{ marginBottom: "120px" }}>
+    <div class="container " style={{ marginBottom: "120px" ,marginTop: "120px" }}>
       <div
         className=" row justify-content-center   my-5 "
         style={{

@@ -1,15 +1,15 @@
 
 import ProfilePicAlternate from "../../../assets/images/ProfilePicAlternate.png";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../services/helper";
 //Importing service methoda
 import {
   FetchUserDetailsInfo, FetchAddressDetails, FetchProfileInfo,
   FetchSkills, DeleteSkill, FetchSkillList, AddSkill, FetchEducations,
   ExtractYear, FetchSchoolingDetails, FetchProjectDetails,
   FetchEmploymentDetails, DeleteResume, EditProject, UpdateProject,
-  DeleteProject, UpdateEmployements, EditEmployment,DeleteEmployment
+  DeleteProject, UpdateEmployements, EditEmployment, DeleteEmployment, uploadImage, upDateImage, removeImage
 } from '../../../services/applicant'
 
 import { logout } from "../../../services/helper"
@@ -21,7 +21,7 @@ import '../ProfilePage/ApplicantProfilePage.css'
 
 function ProfilePage() {
   //base url for applicant contoller
-  const baseurl = "https://localhost:7878/";
+  const baseurl = BASE_URL+"/";
 
 
   //useState for User Details api
@@ -74,7 +74,40 @@ function ProfilePage() {
   )
   //usestate for status
   const [employmentBit, setEmploymentBit] = useState(false)
+  
+   //state to hold the image
+   const [image, setImage] = useState(null);
 
+   //upload image
+   const uploadProfileImage = () => {
+     uploadImage(image)
+       .then((response) => {
+         toast.success("Image uploaded successfully");
+       })
+       .catch(() => {
+         toast.error("something happened bad")
+       });
+   };
+ 
+    //upadate image
+    const updateProfileImage = () => {
+     upDateImage(image)
+       .then((response) => {
+         toast.success("Image updated successfully");
+       })
+       .catch(() => {
+         toast.error("something happened bad")
+       });
+   }
+ 
+   //remove image 
+   const removeProfilePic=()=>{
+     removeImage().then((response=>{
+       toast.success("image removed successfully")
+     })).catch(()=>{
+       toast.error("something happened bad")
+     })
+   }
 
   //for employment inputs
   const OnTextEmploymentChanged = (args) => {
@@ -150,7 +183,7 @@ function ProfilePage() {
 
   return (<>
     <nav className="navbar navbar-expand-lg  background">
-      <Link className="navbar-brand" href="/">
+      <Link className="navbar-brand" to="/home">
         Get Hired
       </Link>
       <button
@@ -167,7 +200,17 @@ function ProfilePage() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ms-auto">
           <li className="nav-item ">
-            <button className="nav-link items" onClick={() => { logout(navigate) }}>Log out</button>
+            <NavLink className="nav-link items" to={"/applicant"}>
+              HOME
+            </NavLink>
+          </li>
+          <li className="nav-item ">
+            <NavLink className="nav-link items" to={"/jobs"}>
+              JOBS
+            </NavLink>
+          </li>
+          <li className="nav-item ">
+            <button className="nav-link items" onClick={() => { logout(navigate) }}>LOG OUT</button>
           </li>
         </ul>
       </div>
@@ -185,20 +228,102 @@ function ProfilePage() {
             <div className="row">
 
               {/* this is IMAGE div */}
-              <div className=" col-3 imageDiv  justify-content-center mx-4 ">
-                {profileInfo.profilePictureLink === "deleted" ?
-                  <div>
-                    <img src={ProfilePicAlternate} className="alt-image " alt="" />
-                  </div> :
-                  <div>
-                    <img src={profileInfo.profilePictureLink} className="image " alt="" />
-                  </div>}
-
-              </div>
+              <div className={"col-md-4"}>
+            <div className={"border m-2 p-2 w-auto"}>
+              {profileInfo.profilePictureLink === "deleted" ? (
+                /*Upload image */
+                <div>
+                  <div className={"mb-4 d-flex justify-content-center"}>
+                    <img
+                      id="selectedImage"
+                      src={ProfilePicAlternate}
+                      alt="example placeholder"
+                      style={{ width: 300 }}
+                    />
+                  </div>
+                  <div class={"d-flex justify-content-center"}>
+                    <div className="">
+                      <label className={"form-label"}>Upload Image</label>
+                      <input
+                        type="file"
+                        className={"form-control btn btn-rounded"}
+                        onChange={(event) => {
+                          setImage(event.target.files[0]);
+                        }}
+                      />
+                    </div>
+                  </div> 
+                  {image !== null ? (
+                    <div className={"text-center"}>
+                      <button
+                        className={"btn m-2"}
+                        onClick={() => {
+                          uploadProfileImage();
+                        }}
+                      >
+                        Upload Image
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                    </>
+                  )}
+                </div>
+              ) : (
+                /*Update Image*/
+                <>
+                <div className={"mb-4 d-flex justify-content-center"}>
+                    <img
+                      id="selectedImage"
+                      src={profileInfo.profilePictureLink}
+                      alt="example placeholder"
+                      style={{ width: 300 }}
+                    />
+                  </div>
+                  <div class={"d-flex justify-content-center"}>
+                    <div className="">
+                      <label className={"form-label"}>Update Image</label>
+                      <input
+                        type="file"
+                        className={"form-control btn btn-rounded"}
+                        onChange={(event) => {
+                          setImage(event.target.files[0]);
+                        }}
+                      />
+                    </div>
+                    <div className={"text-center"}>
+                      <button
+                        className={"btn btn-danger m-2"}
+                        onClick={() => {
+                          removeProfilePic();
+                        }}
+                      >
+                        Remove Image
+                      </button>
+                    </div>  
+                  </div>
+                  {image !== null ? (
+                    <div className={"text-center"}>
+                      <button
+                        className={"btn m-2"}
+                        onClick={() => {
+                          updateProfileImage();
+                        }}
+                      >
+                        Upadte Image
+                      </button>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
 
               {/* this is user detail div */}
               {/* {userDetails.firstName}{userDetails.lastName} */}
-              <div className="col-9">
+              <div className="col-7">
                 <div className="px-3"><span className="name">{userDetails.firstName} {userDetails.lastName}</span><i style={{ cursor: "pointer" }} class="bi bi-pencil h4 pencil" ></i> </div>
                 <hr />
                 <div className="row">
@@ -622,7 +747,7 @@ function ProfilePage() {
                   <div className=" col-2 px-3"><span className="paddingMargin" style={{ color: "#9B7ED9", fontSize: "25px" }}>Employment</span> </div>
 
                 </div>
-                
+
                 {employments.map((emp) => {
                   return <>
                     <div className="mt-2">
@@ -632,9 +757,9 @@ function ProfilePage() {
                         </div>
                         <div className="col-2 py-">
                           <div className="row">
-                            <div className="col-1">
+                            {/* <div className="col-1">
                               <i style={{ cursor: "pointer" }} onClick={() => { DeleteEmployment(emp.id, employments, setEmployments); }} class="bi bi-trash"></i>
-                            </div>
+                            </div> */}
                             <div className="col-1">
                               <i style={{ cursor: "pointer" }} onClick={() => { EditEmployment(emp, employment, setEmployment, setEmploymentBit) }} class="bi bi-pencil h6 pencil" ></i>
                             </div>
@@ -702,7 +827,7 @@ function ProfilePage() {
                         </select>
                       </div>
                     </div>
-                  
+
 
                     {/* Department */}
                     <div className="col-6 py-1">
@@ -734,7 +859,7 @@ function ProfilePage() {
 
                           <option selected>Select Exp in years</option>
                           <option key={0} value={0}>0</option>
-                          
+
                           {[...Array(30).keys()].map(index => (
                             <option key={index + 1} value={index + 1}>{index + 1}</option>
                           ))}

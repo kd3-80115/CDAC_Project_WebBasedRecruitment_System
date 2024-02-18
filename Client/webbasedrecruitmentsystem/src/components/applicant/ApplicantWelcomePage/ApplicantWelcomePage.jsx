@@ -6,7 +6,7 @@ function ApplicantWelcomePage() {
   const navigate = useNavigate();
   return (<>
   <nav className="navbar navbar-expand-lg  background">
-        <Link className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/home">
           Get Hired
         </Link>
         <button
@@ -50,6 +50,9 @@ function ApplicantWelcomePage() {
           >
             <button
               className="btn btn-success "
+              onClick={()=>{
+                navigate("/jobs");
+              }}
               style={{ width: "280px", fontSize: "25px" }}
             >
               Jobs
