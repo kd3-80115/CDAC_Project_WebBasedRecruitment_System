@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.app.entities.WorkSchedule;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.core.JsonEncoding;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +34,8 @@ public class JobDetailsRequest {
 	private LocalDate applicationDeadline;
 	@NotBlank(message="location should not be empty")
 	private String location;
-	@NotNull
-	private LocalDate jobCreatedDate;
+	@JsonProperty(access = Access.READ_ONLY)
+	private LocalDate jobCreatedDate=LocalDate.now();
 	@NotBlank(message="qualification should not be empty")
 	private String qualification;
 	@NotNull(message = "enter department id")
