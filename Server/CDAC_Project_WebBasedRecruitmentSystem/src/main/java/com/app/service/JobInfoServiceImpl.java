@@ -18,6 +18,7 @@ import com.app.entities.JobInfoEntity;
 import com.app.entities.JobStatus;
 import com.app.exception.ResourceNotFoundException;
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.JobDetails;
 import com.app.payload.response.JobInfoDetailsResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.AppliedJobRepository;
@@ -240,6 +241,16 @@ public class JobInfoServiceImpl implements JobInfoService {
 		
 		return applicant.getJob().stream().
 				map(jobInfo->mapper.map(jobInfo, JobInfoDetailsResponse.class)).
+				collect(Collectors.toList());
+	}
+
+
+	@Override
+	public List<JobDetails> availableJobFun() {
+		List<JobInfoEntity> jobList =jobInfoRepo.findAll();
+			
+		return jobList.stream().
+				map(jobInfo->mapper.map(jobInfo, JobDetails.class)).
 				collect(Collectors.toList());
 	}
 	

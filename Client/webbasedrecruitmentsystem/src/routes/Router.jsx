@@ -27,6 +27,12 @@ import { HrDashboard } from "../components/Hr/HrDashboard";
 import { HrProfile } from "../components/Hr/HrProfile";
 import { EditHrProfile } from "../components/Hr/EditProfile";
 import { CreateJob } from "../components/Hr/CreateJob";
+import ApplicantJobs from "../components/applicant/ApplicantJobs/ApplicantJobs"
+import Applicantbg from "../assets/images/Applicantbg.jpg"
+import AvailbleJobs from "../components/applicant/AvailableJobs"
+import SavedJobs from "../components/applicant/SavedJobs";
+import AppliedJobs from "../components/applicant/AppliedJobs";
+import ShortListedJobs from "../components/applicant/ShortListedJobs";
 import { HRJobList } from "../components/Hr/HrJobList";
 import { UpdateJob } from "../components/Hr/UpdateJob";
 import { Applicants } from "../components/Hr/Applicants";
@@ -99,15 +105,20 @@ const Routes = () => {
   const routesForApplicant = createRoutesFromElements(
     <Route id="applicant" path="/" element={<ProtectedRoute />}>
       {/*Add your applicant component here element={<Applicant/>}*/}
-      <Route
-        id="applicant1"
-        path="/applicant"
-        element={<ApplicantWelcomePage />}
-      ></Route>
-      <Route id="applicant2" path="/profile" element={<ProfilePage />}></Route>
-      <Route id="applicant3" path="/jobs" element></Route>
-      <Route id="applicant4" path="/applied-jobs" element></Route>
-      <Route id="applicant5" path="/saved-jobs" element></Route>
+      <Route id="applicant1" path="applicant" element={<ApplicantWelcomePage />}></Route>
+      <Route id="applicant3" path="jobs" element={<ApplicantJobs />}>
+      <Route id="applicant8" path="" element={<>
+        
+              <div>
+                <img src={Applicantbg} className={"img-fluid"}></img>
+              </div>
+            </>}></Route>
+        <Route id="applicant4" path="available-jobs" element={<AvailbleJobs/>}></Route>
+        <Route id="applicant5" path="applied-jobs" element={<AppliedJobs/>}></Route>
+        <Route id="applicant6" path="saved-jobs" element={<SavedJobs/>}></Route>
+        <Route id="applicant7" path="shortlisted-jobs" element={<ShortListedJobs/>}></Route>
+      </Route>
+      <Route id="applicant2" path="profile" element={<ProfilePage />}></Route>
     </Route>
   );
 

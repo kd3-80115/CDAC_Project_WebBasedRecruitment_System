@@ -163,3 +163,24 @@
     border: 1px solid #ccc; /* Add a border for better visibility */
     border-radius: 5px; /* Optional: Add border radius for rounded corners */
   }
+  .save-icon {
+    position: absolute;
+    bottom: 10px; /* Adjust bottom spacing */
+    right: 10px; /* Adjust right spacing */
+    cursor: pointer;
+  }
+
+  .icon {
+    position: absolute;
+    bottom: 10px; /* Adjust bottom spacing */
+    right: 10px; /* Adjust right spacing */
+    cursor: pointer; /* Color of the icon */
+    margin: 4px;
+  }
+
+  .container-nav {
+    position: relative;
+    
+    
+   
+  }

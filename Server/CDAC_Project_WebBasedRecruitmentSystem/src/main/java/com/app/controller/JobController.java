@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.entities.JobInfoEntity;
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.JobDetails;
 import com.app.payload.response.JobInfoDetailsResponse;
 import com.app.service.JobInfoService;
 
@@ -26,6 +27,18 @@ public class JobController {
 	@Autowired
 	private JobInfoService jobService;
 	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/job/available-jobs
+	// Method : GET
+	// Payload : appliedJobRequest
+	@GetMapping("/available-job")
+	public ResponseEntity<?> availableJob() {
+	
+		List<JobDetails> jobList=jobService.availableJobFun();
+		
+		return new ResponseEntity<>(jobList,HttpStatus.OK);
+	}	
 	
 	// Rest API end point
 	// URL : http://localhost:7878/job/apply-job
