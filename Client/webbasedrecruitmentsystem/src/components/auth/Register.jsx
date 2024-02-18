@@ -10,18 +10,9 @@ function Register() {
   let passwordError = "password";
   let dob = "date";
   const url = "https://localhost:7878/users/signup";
-  /* Response {
-  "id": 9,
-  "firstName": "Hero",
-  "lastName": "no one",
-  "email": "her0@gmail.com",
-  "phoneNumber": "876543211",
-  "dob": "2023-02-13",
-  "role": "ROLE_APPLICANT",
-  "gender": "MALE"
-}*/
-  const [empty,setEmpty]=useState()
-  const navigate=useNavigate();
+
+
+  const navigate = useNavigate();
   const [sendData, setSendUpData] = useState({
     firstName: "",
     lastName: "",
@@ -48,7 +39,7 @@ function Register() {
         navigate("/signin")
         toast.success("Signed up succesfully.");
         ResetInput()
-        
+
       })
 
       .catch((error) => {
@@ -77,7 +68,7 @@ function Register() {
       });
   }
 
-  function ResetInput(){
+  function ResetInput() {
     setSendUpData({
       firstName: "",
       lastName: "",
@@ -318,7 +309,7 @@ function Register() {
             <br />
             <button
               type="button"
-              
+
               className="btn btn-primary"
               onClick={() => {
                 validateValues();

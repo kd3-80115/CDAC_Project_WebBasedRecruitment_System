@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -160,13 +161,26 @@ public class ApplicantController {
 	// Method : GET
 	// Res : SkillResponse
 	@GetMapping("/skills")
-	public ResponseEntity<?> getSkills(Authentication auth) {
+	public ResponseEntity<?> getSkills() {
 
-		System.out.println("inside getSkills endpoint with email : "+(String)auth.getPrincipal());
+		System.out.println("inside getSkills of applicant");
 
 		List<SkillResponse> skillResponseList = applicantService.getAllSkills();
 
 		return new ResponseEntity<>(skillResponseList, HttpStatus.OK);
+		// send response as skill list to be displayed on profile section of applicant
+	}
+	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/skills
+	// Method : GET
+	// Res : SkillResponse
+	@PutMapping("/add-skill/{skillId}")
+	public ResponseEntity<?> addSkills(@PathVariable Long skillId) {
+			System.out.println("inside addSkills endpoint");
+			ApiResponse apiResponse = applicantService.addSkill(skillId);
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		// send response as skill list to be displayed on profile section of applicant
 	}
 
@@ -242,13 +256,13 @@ public class ApplicantController {
 	
 	
 	// Rest API end point
-	// URL : http://localhost:7878/applicant/skills
-	// Method : PUT
-	// Payload : List<String>
-	@PutMapping("/skills")
-	public ResponseEntity<ApiResponse> updateSkills(@RequestBody @Valid List<String> skills) {
+	// URL : http://localhost:7878/applicant/skills/{skillId}
+	// Method : Delete
+	// Payload : Long
+	@DeleteMapping("/skills/{skillId}")
+	public ResponseEntity<ApiResponse> updateSkills(@PathVariable @Valid Long skillId) {
 	
-		ApiResponse apiResponse=applicantService.updateSkills(skills);
+		ApiResponse apiResponse=applicantService.updateSkills(skillId);
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}
@@ -284,7 +298,7 @@ public class ApplicantController {
 	// Payload : EmployementRequest
 	@PostMapping("/employment")
 	public ResponseEntity<ApiResponse> addEmployment(@RequestBody @Valid EmploymentRequest employment ) {
-	
+		System.out.println("Inside emp post methos");
 		ApiResponse apiResponse=employmentService.addEmployementFun(employment);
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
@@ -297,8 +311,21 @@ public class ApplicantController {
 	// Payload : EmployementRequest
 	@PutMapping("/employment")
 	public ResponseEntity<ApiResponse> UpdateEmployment(@RequestBody @Valid EmploymentRequest employment ) {
-	
+		System.out.println("Inside emp post methos");
 		ApiResponse apiResponse=employmentService.UpdateEmployementFun(employment);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+	
+
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/employment
+	// Method : DELETE
+	// Payload : EmployementRequest
+	@DeleteMapping("/employment/{empID}")
+	public ResponseEntity<ApiResponse> UpdateEmployment(@PathVariable Long empID ) {
+		System.out.println("Inside emp delete methos");
+		ApiResponse apiResponse=employmentService.deleteEmployementFun(empID);
 		
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}
@@ -330,6 +357,19 @@ public class ApplicantController {
 		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 	}
 	
+	
+	// Rest API end point
+	// URL : http://localhost:7878/applicant/project
+	// Method : Delete
+	// Payload : ProjectRequest
+	@DeleteMapping("/project/{projectId}")
+	public ResponseEntity<ApiResponse> deleteProject(@PathVariable Long projectId ) {
+	
+		ApiResponse apiResponse=projectService.deleteProjectFun(projectId);
+		
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+	}
+		
 	
 	// Rest API end point
 	// URL : http://localhost:7878/applicant/education

@@ -63,6 +63,9 @@ public class ApplicantEntityRepositoryTest {
 		SkillEntity skill2= skillRepo.findById(2l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
 		SkillEntity skill3= skillRepo.findById(3l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
 		SkillEntity skill4= skillRepo.findById(4l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		SkillEntity skill5= skillRepo.findById(12l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		SkillEntity skill6= skillRepo.findById(13l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
+		SkillEntity skill7= skillRepo.findById(14l).orElseThrow(() -> new UsernameNotFoundException("Email not found!!!!"));
 		
 
 		ApplicantEntity applicant1= applicantRepo.findById(4l).orElseThrow();
@@ -73,6 +76,9 @@ public class ApplicantEntityRepositoryTest {
 		applicant1.addSkill(skill1);
 		applicant1.addSkill(skill2);
 		applicant1.addSkill(skill3);
+		applicant1.addSkill(skill6);
+		applicant1.addSkill(skill7);
+		applicant1.addSkill(skill6);
 		applicant2.addSkill(skill2);
 		applicant3.addSkill(skill3);
 		applicant4.addSkill(skill4);

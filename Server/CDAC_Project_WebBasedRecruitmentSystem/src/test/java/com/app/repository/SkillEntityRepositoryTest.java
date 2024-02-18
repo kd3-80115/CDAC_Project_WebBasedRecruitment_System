@@ -36,7 +36,10 @@ public class SkillEntityRepositoryTest {
 				new SkillEntity("Java Script"),
 				new SkillEntity("Node js"),
 				new SkillEntity("Express js"),
-				new SkillEntity("Spring Boot")
+				new SkillEntity("Spring Boot"),
+				new SkillEntity("React js"),
+				new SkillEntity("Express js"),
+				new SkillEntity("JWT")
 				
 				
 				
