@@ -23,7 +23,7 @@ public class EmailUtil {
 		mimeMessageHelper.setTo(email);
 
 		// Set the subject of the email
-		mimeMessageHelper.setSubject("Verify otp from Get Hired");
+		mimeMessageHelper.setSubject("Otp from Get Hired");
 
 		// HTML content with inline CSS for styling
 		String htmlContent = "<div style='border: 2px solid #007BFF; padding: 20px;'>"

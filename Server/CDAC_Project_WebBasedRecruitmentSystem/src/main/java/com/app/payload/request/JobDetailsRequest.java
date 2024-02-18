@@ -44,4 +44,6 @@ public class JobDetailsRequest {
 	@Min(3)
 	private int vacancies;
 	private boolean status;
+	@NotBlank
+	private String description;
 }

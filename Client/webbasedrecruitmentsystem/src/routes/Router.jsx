@@ -27,6 +27,9 @@ import { HrDashboard } from "../components/Hr/HrDashboard";
 import { HrProfile } from "../components/Hr/HrProfile";
 import { EditHrProfile } from "../components/Hr/EditProfile";
 import { CreateJob } from "../components/Hr/CreateJob";
+import { HRJobList } from "../components/Hr/HrJobList";
+import { UpdateJob } from "../components/Hr/UpdateJob";
+import { Applicants } from "../components/Hr/Applicants";
 
 const Routes = () => {
   /*
@@ -84,10 +87,11 @@ const Routes = () => {
       {/* For HR Prfole and dashboard */}
       <Route id="hr2" path="/hr" element={<HrDashboard/>}>
         <Route id="hrChild1" path="update-profile" element={<EditHrProfile/>}></Route>
-        <Route id="hrChild2" path="jobs" element={<></>}></Route>
+        <Route id="hrChild2" path="jobs" element={<HRJobList/>}></Route>
         <Route id="hrChild3" path="create-job" element={<CreateJob/>}></Route>
-        <Route id="hrChild4" path="applicants" element={<></>}></Route>
+        <Route id="hrChild4" path="applicants" element={<Applicants/>}></Route>
         <Route id="hrChild5" path="" element={<HrProfile/>}></Route>
+        <Route id="hrChild6" path="update-job" element={<UpdateJob/>}></Route>
       </Route>
     </Route>
   );
