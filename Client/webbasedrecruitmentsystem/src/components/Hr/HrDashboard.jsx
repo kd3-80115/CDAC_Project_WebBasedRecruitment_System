@@ -60,15 +60,6 @@ export const HrDashboard=()=>{
           </NavLink>
         </div>
         <br></br>
-        <div className="border border-2 text-center shadow-sm m-2"
-        style={{backgroundColor:"#BBADD9"}}>
-          <NavLink
-            to="/hr/applicants"
-            className=" link-underline link-underline-opacity-0">
-            <h4 className="m-2" style={{color:"black"}}>Applicants</h4>
-          </NavLink>
-        </div>
-        
       </div>
       {/* For dashboard cards */}
       <div className="col-10"> <Outlet /></div>
