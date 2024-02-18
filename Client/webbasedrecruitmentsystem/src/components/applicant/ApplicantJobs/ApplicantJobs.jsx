@@ -1,11 +1,11 @@
-import { Link, NavLink, Navigate, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { logout } from "../../../services/helper"
 import { useEffect, useState } from "react";
 import { FetchUserDetailsInfo } from "../../../services/applicant";
 function ApplicantJobs() {
   //useState for User Details api
   const [userDetails, setUserDetails] = useState({ firstName: "", lastName: "", gender: "", email: "", phoneNumber: "", dob: "" })
-
+  const navigate=useNavigate();
   useEffect(() => {
     FetchUserDetailsInfo(userDetails, setUserDetails);
   }, [])
@@ -34,7 +34,7 @@ function ApplicantJobs() {
           </li>
           
           <li className="nav-item ">
-            <button className="nav-link items" onClick={() => { logout(Navigate) }}>LOG OUT</button>
+            <button className="nav-link items" onClick={() => { logout(navigate) }}>Log out</button>
           </li>
         </ul>
       </div>

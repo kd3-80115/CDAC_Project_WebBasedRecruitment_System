@@ -83,7 +83,7 @@ public class JobController {
 	// URL : http://localhost:7878/job/get-sortlisted-job
 	// Method : GET
 	// Payload : JobInfoDetailsResponse
-	@GetMapping("/get-sortlisted-job")
+	@GetMapping("/get-shortlisted-job")
 	public ResponseEntity<?> getSortListedJob() {
 	
 		List<JobInfoDetailsResponse> jobList=jobService.getSortListedJobFun();
