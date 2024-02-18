@@ -23,7 +23,7 @@ public interface ApplicantService {
 
 	public ApiResponse updateHeadLine( String headLine);
 
-	public ApiResponse updateSkills( List<String> skills);
+	public ApiResponse updateSkills(Long skillId);
 
 	public ApiResponse updateLanguage( List<LanguageResponse> languages);
 
@@ -43,5 +43,7 @@ public interface ApplicantService {
 	public ApiResponse updateResume(MultipartFile file);
 	//remove resume
 	public ApiResponse removeResume();
+	//add skill
+	public ApiResponse addSkill(Long skillId);
 		
 }

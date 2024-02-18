@@ -166,9 +166,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 	 * Updating Applicant Skills
 	 * */
 	@Override
-	public ApiResponse updateSkills(List<String> skillList) {
+	public ApiResponse updateSkills(Long skillId) {
 		Long userId=findUser.getUserId();
-
+		System.out.println("SKill id :" + skillId);
 		//statically imported method from ApplicantHelper class
 		//to find persistent ApplicantEntity by userId
 		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
@@ -176,17 +176,15 @@ public class ApplicantServiceImpl implements ApplicantService {
 		// Returns the value in case of non empty Optional
 		// OR throws supplied exception
 		
-		for (String skill : skillList) {
-			SkillEntity skillEntity=skillRepo.findByName(skill).
-					orElseThrow(()-> new ResourceNotFoundException
-							("Skill", "name", skill));
-			applicant.getSkills().add(skillEntity);
-		}
+		SkillEntity skillEntity=skillRepo.findById(skillId). 
+				orElseThrow(()-> new ResourceNotFoundException
+						("Skill", "name", skillId));
 		
+		applicant.removeSkill(skillEntity);
 
 		applicantRepo.save(applicant);
 		
-		return new ApiResponse("Applicant Skills updated with id "+applicant.getId());
+		return new ApiResponse("Applicant Skills updated with id "+applicant.getId()+" with Skill id :" +skillId);
 	}
 
 	
@@ -327,5 +325,26 @@ public class ApplicantServiceImpl implements ApplicantService {
 		applicant.setResumeLink("deleted");
 		return new ApiResponse("resume removed");
 	}
+
+
+	@Override
+	public ApiResponse addSkill(Long skillId) {
+		Long userId=findUser.getUserId();
+
+		//statically imported method from ApplicantHelper class
+		//to find persistent ApplicantEntity by userId
+		ApplicantEntity applicant=findApplicantByUserId(userId, applicantRepo);
+		
+		// Returns the value in case of non empty Optional
+		// OR throws supplied exception
+		SkillEntity skillEntity=skillRepo.findById(skillId). 
+				orElseThrow(()-> new ResourceNotFoundException
+						("Skill", "name", skillId));
+		applicant.getSkills().add(skillEntity);
+		applicantRepo.save(applicant);
+		return new ApiResponse("Skill added to applicant skill list wit applicant id : "+ applicant.getId());
+	}
+	
+	
 
 }

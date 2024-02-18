@@ -14,4 +14,6 @@ public interface ProjectService {
 
 	ApiResponse updateProjectFun(ProjectRequest project);
 
+	ApiResponse deleteProjectFun(Long projectId);
+
 }

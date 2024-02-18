@@ -40,12 +40,12 @@ public class EmploymentRequest {
 	@Size(min = 3,max =40,message = "Previous Designation name is not valid")
 	private String previousDesignation;
 	
-	@Size(min = 10,message = "Designation name is not valid")
+	
 	private String jobProfile;
 	
-	@Size(min = 3,max =40,message = "Designation name is not valid")
+	@Size(min = 3,max =40,message = "department name is not valid")
 	private String department;
-	
+		
 	
 	private int currentSalary;
 	

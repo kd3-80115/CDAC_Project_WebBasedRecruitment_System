@@ -13,6 +13,8 @@ public interface EmploymentService {
 	ApiResponse addEmployementFun(EmploymentRequest employment);
 
 	ApiResponse UpdateEmployementFun(EmploymentRequest employment);
+
+	ApiResponse deleteEmployementFun(Long empID);
 	
 }
 	
