@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.payload.response.AddressResp;
 import com.app.payload.response.SkillListRequest;
-import com.app.service.AddressService;
 import com.app.service.SkillService;
 
 @RestController

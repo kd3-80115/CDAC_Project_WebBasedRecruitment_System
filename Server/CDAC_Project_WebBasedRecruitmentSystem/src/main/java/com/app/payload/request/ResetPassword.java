@@ -3,7 +3,6 @@ package com.app.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

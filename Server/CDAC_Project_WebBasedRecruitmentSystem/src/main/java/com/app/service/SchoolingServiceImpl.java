@@ -1,8 +1,6 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUserId;
-import static com.app.utils.ApplicantHelper.findApplicantByUserId;
-import static com.app.utils.UserHelper.findUserById;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.entities.ApplicantEntity;
 import com.app.entities.SchoolingEntity;
-import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
 import com.app.payload.request.SchoolingRequest;
 import com.app.payload.response.ApiResponse;

@@ -2,15 +2,12 @@ package com.app.repository;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.app.entities.ApplicantEntity;
-import com.app.entities.ApplicantJobId;
 import com.app.entities.JobInfoEntity;
 import com.app.payload.response.JobDetailsWithUsernameResponse;
 import com.app.payload.response.JobInfoDetailsResponse;

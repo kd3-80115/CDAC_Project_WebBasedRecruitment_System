@@ -1,24 +1,20 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUserId;
-import static com.app.utils.UserHelper.findUserById;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.entities.ApplicantEntity;
 import com.app.entities.EducationEntity;
-import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
 import com.app.payload.request.EducationRequest;
 import com.app.payload.response.ApiResponse;
-import com.app.payload.response.ApplicantResponse;
 import com.app.payload.response.EducationResponse;
 import com.app.repository.ApplicantRepository;
 import com.app.repository.EducationEntityRepository;

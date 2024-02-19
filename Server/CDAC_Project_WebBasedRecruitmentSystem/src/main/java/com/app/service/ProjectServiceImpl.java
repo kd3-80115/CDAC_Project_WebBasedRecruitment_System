@@ -1,7 +1,6 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUserId;
-import static com.app.utils.UserHelper.findUserById	;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.entities.ApplicantEntity;
 import com.app.entities.ProjectEntity;
-import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
 import com.app.payload.request.ProjectRequest;
 import com.app.payload.response.ApiResponse;

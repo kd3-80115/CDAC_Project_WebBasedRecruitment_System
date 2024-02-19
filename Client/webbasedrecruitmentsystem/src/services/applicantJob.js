@@ -59,7 +59,7 @@ export function FetchAppliedJobs(appliedJobs,setAppliedJobs){
 }
 
 export function FetchShortlistedJobs(shortListedJobs,setShortListedJobs){
-    axios.get(baseurl+"job/get-sortlisted-job").then((resp)=>{
+    axios.get(baseurl+"job/get-shortlisted-job").then((resp)=>{
         setShortListedJobs(resp.data)
        
     }).catch((err)=>{console.log(err);})

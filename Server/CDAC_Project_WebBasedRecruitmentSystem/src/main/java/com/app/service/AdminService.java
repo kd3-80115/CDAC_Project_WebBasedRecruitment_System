@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+
 import com.app.payload.request.HrRegistrationDetailsRequest;
 import com.app.payload.response.AnalysisResponseAdmin;
 import com.app.payload.response.ApiResponse;

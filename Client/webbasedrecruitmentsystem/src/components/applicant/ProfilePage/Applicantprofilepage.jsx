@@ -549,7 +549,7 @@ function ProfilePage() {
                   <span style={{ color: "black", fontSize: "20px", paddingLeft: "5px", paddingRight: "5px" }} className="" >Class XII</span> <br />
                   <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} className="" >{schooling?.class12Board ?? 'Enter class XII board name  |  '}</span>
                   <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} >{ExtractYear(schooling?.class12PassingYear ?? "Enter class XII passing year")} </span> <br />
-                  <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} className="" >{schooling?.class12Marks ?? "Enter class XII marks"}</span>
+                  <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} className="" >{schooling?.class12Marks +"%"?? "Enter class XII marks"}</span>
                 </div>
                 <hr />
                 {/* class 10 div */}
@@ -557,7 +557,7 @@ function ProfilePage() {
                   <span style={{ color: "black", fontSize: "20px", paddingLeft: "5px", paddingRight: "5px" }} className="" >Class X</span> <br />
                   <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} className="" >{schooling?.class10Board ?? "Enter class X board name   | "}</span>
                   <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} >{ExtractYear(schooling?.class10PassingYear ?? "Enter class X passing year")} </span> <br />
-                  <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} className="" >{schooling?.class10Marks ?? "Enter class X marks"}</span>
+                  <span style={{ color: "black", fontSize: "16px", paddingLeft: "5px", paddingRight: "5px" }} className="" >{schooling?.class10Marks +"%"?? "Enter class X marks"}</span>
                 </div>
               </div>
             </div>

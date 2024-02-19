@@ -14,7 +14,6 @@ import com.app.payload.request.AddressRequest;
 import com.app.payload.response.AddressResp;
 import com.app.payload.response.ApiResponse;
 import com.app.repository.AddressRepository;
-import com.app.repository.ApplicantRepository;
 import com.app.repository.UserEntityRepository;
 import com.app.security.FindAuthenticationDetails;
 

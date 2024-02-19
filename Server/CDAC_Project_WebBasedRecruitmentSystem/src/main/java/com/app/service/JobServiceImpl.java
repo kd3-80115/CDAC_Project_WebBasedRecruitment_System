@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.app.entities.DepartmentEntity;
 import com.app.entities.HREntity;
 import com.app.entities.JobInfoEntity;
-import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
 import com.app.exception.UnauthorizedAccessException;
 import com.app.payload.request.JobDetailsRequest;
@@ -22,7 +21,6 @@ import com.app.repository.AppliedJobRepository;
 import com.app.repository.DepartmentEntityRepository;
 import com.app.repository.HREntityRepository;
 import com.app.repository.JobInfoRepository;
-import com.app.repository.UserEntityRepository;
 import com.app.security.FindAuthenticationDetails;
 
 @Service

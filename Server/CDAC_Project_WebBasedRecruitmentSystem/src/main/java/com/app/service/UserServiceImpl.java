@@ -2,17 +2,10 @@ package com.app.service;
 import static com.app.utils.ApplicantHelper.findApplicantByUserId;
 import static com.app.utils.UserHelper.findUserById;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.mail.MessagingException;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

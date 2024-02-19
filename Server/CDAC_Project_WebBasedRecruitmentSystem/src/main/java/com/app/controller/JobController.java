@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.entities.JobInfoEntity;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.JobDetails;
 import com.app.payload.response.JobInfoDetailsResponse;

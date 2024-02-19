@@ -14,7 +14,6 @@ import com.app.entities.HREntity;
 import com.app.entities.UserEntity;
 import com.app.entities.UserRole;
 import com.app.payload.request.HrRequest;
-import com.app.payload.request.Signup;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.HrResponse;
 import com.app.repository.HREntityRepository;
