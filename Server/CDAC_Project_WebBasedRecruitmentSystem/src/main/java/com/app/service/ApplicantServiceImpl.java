@@ -1,7 +1,6 @@
 package com.app.service;
 
 import static com.app.utils.ApplicantHelper.findApplicantByUserId;
-import static com.app.utils.UserHelper.findUserById;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,15 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.app.entities.ApplicantEntity;
-import com.app.entities.EmploymentEntity;
-import com.app.entities.HREntity;
 import com.app.entities.LanguageEntity;
 import com.app.entities.SkillEntity;
-import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
-import com.app.payload.response.EmploymentResponse;
 import com.app.payload.response.LanguageResponse;
 import com.app.payload.response.SkillResponse;
 import com.app.repository.ApplicantRepository;

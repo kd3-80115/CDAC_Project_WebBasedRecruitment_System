@@ -2,14 +2,10 @@ package com.app.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.web.multipart.MultipartFile;
 
-import com.app.entities.LanguageEntity;
 import com.app.payload.response.ApiResponse;
 import com.app.payload.response.ApplicantResponse;
-import com.app.payload.response.EmploymentResponse;
 import com.app.payload.response.LanguageResponse;
 import com.app.payload.response.SkillResponse;
 

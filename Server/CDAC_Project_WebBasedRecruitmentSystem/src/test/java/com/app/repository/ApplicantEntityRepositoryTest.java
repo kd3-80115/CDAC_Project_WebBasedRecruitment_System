@@ -13,12 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.Rollback;
 
 import com.app.entities.ApplicantEntity;
-import com.app.entities.Gender;
 import com.app.entities.LanguageEntity;
 import com.app.entities.NoticePeriod;
 import com.app.entities.SkillEntity;
 import com.app.entities.UserEntity;
-import com.app.entities.UserRole;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)

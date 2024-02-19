@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 import com.app.entities.Gender;
 import com.app.entities.UserRole;
 import com.fasterxml.jackson.annotation.JsonProperty;

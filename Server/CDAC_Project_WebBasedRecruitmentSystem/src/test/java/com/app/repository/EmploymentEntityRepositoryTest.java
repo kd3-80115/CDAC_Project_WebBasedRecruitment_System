@@ -2,7 +2,6 @@ package com.app.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.app.entities.ApplicantEntity;
-import com.app.entities.EducationEntity;
 import com.app.entities.EmploymentEntity;
 
 @DataJpaTest

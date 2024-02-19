@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.app.payload.request.HrRequest;
 import com.app.payload.request.JobDetailsRequest;
 import com.app.payload.request.UpdateStatusRequest;

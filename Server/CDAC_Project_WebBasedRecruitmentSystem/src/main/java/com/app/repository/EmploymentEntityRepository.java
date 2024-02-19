@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.app.entities.ApplicantEntity;
-
 import com.app.entities.EmploymentEntity;
-import com.app.entities.LanguageEntity;
 
 public interface EmploymentEntityRepository extends JpaRepository<EmploymentEntity, Long> {
 	

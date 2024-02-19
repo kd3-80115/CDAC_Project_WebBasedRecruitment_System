@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.Rollback;
 
-import com.app.entities.ApplicantEntity;
 import com.app.entities.SkillEntity;
-import com.app.entities.UserEntity;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)

@@ -2,8 +2,6 @@ package com.app.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
-import com.app.entities.NoticePeriod;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 import com.app.entities.WorkSchedule;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import com.fasterxml.jackson.core.JsonEncoding;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

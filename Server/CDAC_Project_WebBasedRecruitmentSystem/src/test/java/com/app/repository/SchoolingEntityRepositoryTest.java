@@ -13,7 +13,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.app.entities.ApplicantEntity;
-import com.app.entities.EducationEntity;
 import com.app.entities.SchoolingEntity;
 
 @DataJpaTest

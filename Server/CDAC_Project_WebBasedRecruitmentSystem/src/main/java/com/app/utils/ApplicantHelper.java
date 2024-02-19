@@ -1,7 +1,6 @@
 package com.app.utils;
 
 import com.app.entities.ApplicantEntity;
-import com.app.entities.UserEntity;
 import com.app.exception.ResourceNotFoundException;
 import com.app.repository.ApplicantRepository;
 
