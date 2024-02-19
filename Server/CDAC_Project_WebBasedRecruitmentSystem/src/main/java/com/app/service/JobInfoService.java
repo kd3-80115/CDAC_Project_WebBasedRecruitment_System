@@ -3,6 +3,7 @@ package com.app.service;
 import java.util.List;
 
 import com.app.payload.response.ApiResponse;
+import com.app.payload.response.JobDetails;
 import com.app.payload.response.JobInfoDetailsResponse;
 
 public interface JobInfoService {
@@ -46,5 +47,11 @@ public interface JobInfoService {
 	 * Get SortListed jobs
 	 * **/
 	List<JobInfoDetailsResponse> getSortListedJobFun();
+
+	
+	/**
+	 * Get avalable jobs
+	 * **/
+	List<JobDetails> availableJobFun();
 
 }

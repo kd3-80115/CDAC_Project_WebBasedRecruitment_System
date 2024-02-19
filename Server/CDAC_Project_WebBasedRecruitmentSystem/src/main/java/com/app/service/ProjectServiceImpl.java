@@ -124,6 +124,15 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return new ApiResponse("Applicant Project added with id "+applicant.getId());
 	}
+
+
+	@Override
+	public ApiResponse deleteProjectFun(Long projectId) {
+		projectRepo.deleteById(projectId);
+		return new ApiResponse("Applicant project deleted with project id : "+projectId);
+	}
+	
+	
 	
 	
 	

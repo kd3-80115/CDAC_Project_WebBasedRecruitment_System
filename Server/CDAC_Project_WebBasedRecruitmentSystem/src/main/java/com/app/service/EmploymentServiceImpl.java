@@ -113,7 +113,7 @@ public class EmploymentServiceImpl implements EmploymentService {
 		setEmployment.setCurrentDesignation(employment.getCurrentDesignation());
 		setEmployment.setCurrentSalary(employment.getCurrentSalary());
 		setEmployment.setDepartment(employment.getDepartment());
-		setEmployment.setEmployementType(employment.getDepartment());
+		setEmployment.setEmployementType(employment.getEmployementType());
 		setEmployment.setExperienceMonths(employment.getExperienceMonths());
 		setEmployment.setExperienceYears(employment.getExperienceYears());
 		setEmployment.setJobProfile(employment.getJobProfile());
@@ -125,6 +125,15 @@ public class EmploymentServiceImpl implements EmploymentService {
 		return new ApiResponse("Applicant Employment updated with applicant id "+applicant.getId()+"and employment id " +employment.getId());
 		
 	}
+
+	@Override
+	public ApiResponse deleteEmployementFun(Long empID) {
+		
+		employmentRepo.deleteById(empID);
+		return new ApiResponse("Applicant Employment deleted with id " +empID);
+	}
+	
+	
 	
 	
 	

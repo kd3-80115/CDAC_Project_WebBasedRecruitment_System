@@ -7,9 +7,14 @@
     width: 250px;
     padding-left: 200px;
 }
+#signUpBar{
+    background-color: #9B7ED9;
+    color: white;
+}
+
 
 .mainDiv {
-    height: 100vh;
+    
     background-color: #F5F5F5;
 }
 
@@ -149,3 +154,33 @@
 .rounded-button:hover {
     background-color: #93aebb;
 }
+#myTextarea {
+    width: 100%; /* Set width to fill its container */
+    height: auto; /* Allow height to adjust based on content */
+    min-height: 100px; /* Set a minimum height */
+    resize: vertical; /* Allow vertical resizing only */
+    padding: 10px; /* Add padding for better appearance */
+    border: 1px solid #ccc; /* Add a border for better visibility */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+  }
+  .save-icon {
+    position: absolute;
+    bottom: 10px; /* Adjust bottom spacing */
+    right: 10px; /* Adjust right spacing */
+    cursor: pointer;
+  }
+
+  .icon {
+    position: absolute;
+    bottom: 10px; /* Adjust bottom spacing */
+    right: 10px; /* Adjust right spacing */
+    cursor: pointer; /* Color of the icon */
+    margin: 4px;
+  }
+
+  .container-nav {
+    position: relative;
+    
+    
+   
+  }
