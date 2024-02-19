@@ -19,4 +19,4 @@ server.port=7878
 - - bootstrap v5
 - - recharts (for bar graph on admin dashboard)
 - - bootstrap icons
-- - axios for 
+- - Axios 
