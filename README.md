@@ -20,3 +20,10 @@ server.port=7878
 - - recharts (for bar graph on admin dashboard)
 - - bootstrap icons
 - - Axios 
+
+## Deployment Link 
+- http://get-hired-deploy-bucket.s3-website.ap-south-1.amazonaws.com
+- Deployed on AWS S3 bucket as static website.
+- Backend deployed on EC2.
+- Used RDS MySQL for database.
+- Used S3 bucket to store user images and resume.
